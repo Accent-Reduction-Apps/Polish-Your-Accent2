@@ -13,8 +13,5 @@ public interface LessonMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Lesson partialUpdate(LessonDto lessonDto, @MappingTarget Lesson lesson);
 
-    @AfterMapping
-    default void linkTasks(@MappingTarget Lesson lesson) {
-        lesson.getTasks().forEach(task -> task.setLesson(lesson));
-    }
+
 }

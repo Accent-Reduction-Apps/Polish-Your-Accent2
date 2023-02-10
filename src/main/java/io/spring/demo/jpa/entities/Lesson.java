@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "lessons", indexes = {
-        @Index(name = "idx_lesson_topic", columnList = "topic")
-})
+@Table(name = "lessons")
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,16 +22,7 @@ public class Lesson {
     @Column(name = "topic")
     private String topic;
 
-    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
-    private List<Task> tasks = new ArrayList<>();
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
 
 
     public Long getId() {

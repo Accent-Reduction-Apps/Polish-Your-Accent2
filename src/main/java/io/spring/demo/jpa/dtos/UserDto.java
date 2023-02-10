@@ -1,5 +1,6 @@
 package io.spring.demo.jpa.dtos;
 
+import io.spring.demo.jpa.entities.UserStudent;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
@@ -7,7 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link io.spring.demo.jpa.entities.User} entity
+ * A DTO for the {@link UserStudent} entity
  */
 public class UserDto implements Serializable {
     private final Long id;

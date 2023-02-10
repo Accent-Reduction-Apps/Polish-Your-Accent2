@@ -1,1 +1,0 @@
-CREATE INDEX idx_lesson_topic ON lessons (topic);

@@ -1,7 +1,6 @@
 package io.spring.demo.jpa.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
 import java.util.LinkedHashSet;
@@ -10,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserStudent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
@@ -34,17 +33,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "user_lessons_lesson_id"))
     private Set<Lesson> lessons = new LinkedHashSet<>();
 
-    @Email(message = "Incorrect email")
-    @Column(name = "email_name", unique = true)
-    private String emailName;
 
-    public String getEmailName() {
-        return emailName;
-    }
 
-    public void setEmailName(String emailName) {
-        this.emailName = emailName;
-    }
+
 
     public Long getId() {
         return id;

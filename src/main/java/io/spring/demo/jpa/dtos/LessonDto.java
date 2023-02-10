@@ -15,13 +15,13 @@ public class LessonDto implements Serializable {
     private final String text;
     @Size(max = 255)
     private final String topic;
-    private final List<TaskDto> tasks;
 
-    public LessonDto(Long id, String text, String topic, List<TaskDto> tasks) {
+
+    public LessonDto(Long id, String text, String topic) {
         this.id = id;
         this.text = text;
         this.topic = topic;
-        this.tasks = tasks;
+
     }
 
     public Long getId() {
@@ -36,9 +36,7 @@ public class LessonDto implements Serializable {
         return topic;
     }
 
-    public List<TaskDto> getTasks() {
-        return tasks;
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -47,13 +45,12 @@ public class LessonDto implements Serializable {
         LessonDto entity = (LessonDto) o;
         return Objects.equals(this.id, entity.id) &&
                 Objects.equals(this.text, entity.text) &&
-                Objects.equals(this.topic, entity.topic) &&
-                Objects.equals(this.tasks, entity.tasks);
+                Objects.equals(this.topic, entity.topic);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, text, topic, tasks);
+        return Objects.hash(id, text, topic);
     }
 
     @Override
@@ -61,7 +58,6 @@ public class LessonDto implements Serializable {
         return getClass().getSimpleName() + "(" +
                 "id = " + id + ", " +
                 "text = " + text + ", " +
-                "topic = " + topic + ", " +
-                "tasks = " + tasks + ")";
+                "topic = " + topic + ")";
     }
 }
