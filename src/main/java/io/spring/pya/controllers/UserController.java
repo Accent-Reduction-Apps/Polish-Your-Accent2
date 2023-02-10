@@ -3,6 +3,7 @@ package io.spring.pya.controllers;
 
 import io.spring.pya.entities.UserStudent;
 import io.spring.pya.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +51,7 @@ public class UserController {
         return userService.deleteUserById(id);
     }
 
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
     @PostMapping("/registerStudent")
     public ResponseEntity<UserStudent> sendRequestNewStudentAccountCreate(@RequestParam("password") String password,
                                                                           @RequestParam("email") String email,
