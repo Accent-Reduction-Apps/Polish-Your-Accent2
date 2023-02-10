@@ -39,7 +39,16 @@ public class UserStudent {
         this.password = password;
     }
 
+    public UserStudent(Long id, String emailAddress, String name, String password, Set<Lesson> lessons) {
+        this.id = id;
+        this.emailAddress = emailAddress;
+        this.name = name;
+        this.password = password;
+        this.lessons = lessons;
+    }
 
+    public UserStudent() {
+    }
 
     public Long getId() {
         return id;
