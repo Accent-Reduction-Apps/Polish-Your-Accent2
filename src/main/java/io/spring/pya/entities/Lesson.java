@@ -1,10 +1,7 @@
-package io.spring.demo.jpa.entities;
+package io.spring.pya.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "lessons")

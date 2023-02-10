@@ -1,8 +1,8 @@
-package io.spring.demo.jpa.controllers;
+package io.spring.pya.controllers;
 
 
-import io.spring.demo.jpa.entities.Lesson;
-import io.spring.demo.jpa.services.LessonService;
+import io.spring.pya.entities.Lesson;
+import io.spring.pya.services.LessonService;
 
 
 import org.springframework.web.bind.annotation.*;

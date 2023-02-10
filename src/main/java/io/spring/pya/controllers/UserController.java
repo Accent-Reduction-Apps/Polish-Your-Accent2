@@ -1,8 +1,8 @@
-package io.spring.demo.jpa.controllers;
+package io.spring.pya.controllers;
 
 
-import io.spring.demo.jpa.entities.UserStudent;
-import io.spring.demo.jpa.services.UserService;
+import io.spring.pya.entities.UserStudent;
+import io.spring.pya.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package io.spring.demo.jpa;
+package io.spring.pya;
 
 
 import org.springframework.boot.test.context.SpringBootTest;

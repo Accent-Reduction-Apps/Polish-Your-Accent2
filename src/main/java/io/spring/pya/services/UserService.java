@@ -1,9 +1,9 @@
-package io.spring.demo.jpa.services;
+package io.spring.pya.services;
 
 
 
-import io.spring.demo.jpa.entities.UserStudent;
-import io.spring.demo.jpa.repositories.UserRepository;
+import io.spring.pya.entities.UserStudent;
+import io.spring.pya.repositories.UserRepository;
 
 import org.springframework.stereotype.Service;
 

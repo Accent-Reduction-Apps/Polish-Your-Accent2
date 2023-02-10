@@ -1,9 +1,9 @@
-package io.spring.demo.jpa.services;
+package io.spring.pya.services;
 
 
 
-import io.spring.demo.jpa.entities.Lesson;
-import io.spring.demo.jpa.repositories.LessonRepository;
+import io.spring.pya.entities.Lesson;
+import io.spring.pya.repositories.LessonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

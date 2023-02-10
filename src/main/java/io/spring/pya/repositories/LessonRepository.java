@@ -1,6 +1,6 @@
-package io.spring.demo.jpa.repositories;
+package io.spring.pya.repositories;
 
-import io.spring.demo.jpa.entities.Lesson;
+import io.spring.pya.entities.Lesson;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

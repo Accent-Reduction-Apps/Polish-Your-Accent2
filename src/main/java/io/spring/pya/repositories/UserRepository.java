@@ -1,6 +1,6 @@
-package io.spring.demo.jpa.repositories;
+package io.spring.pya.repositories;
 
-import io.spring.demo.jpa.entities.UserStudent;
+import io.spring.pya.entities.UserStudent;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

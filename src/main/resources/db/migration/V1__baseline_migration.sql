@@ -28,8 +28,5 @@ CREATE TABLE users_user_lessons
     CONSTRAINT users_user_lessons_pkey PRIMARY KEY (user_student_user_id, user_lessons_lesson_id)
 );
 
-ALTER TABLE users_user_lessons
-    ADD CONSTRAINT fkbiukn51sakfln5exhy4glwvx5 FOREIGN KEY (user_lessons_lesson_id) REFERENCES lessons (lesson_id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-ALTER TABLE users_user_lessons
-    ADD CONSTRAINT fkmhnfqovj1pt6bepqskq4vlcdx FOREIGN KEY (user_student_user_id) REFERENCES users (user_id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE users_user_lessons ADD CONSTRAINT fkbiukn51sakfln5exhy4glwvx5 FOREIGN KEY (user_lessons_lesson_id) REFERENCES lessons (lesson_id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE users_user_lessons ADD CONSTRAINT fkmhnfqovj1pt6bepqskq4vlcdx FOREIGN KEY (user_student_user_id) REFERENCES users (user_id) ON UPDATE NO ACTION ON DELETE NO ACTION;
