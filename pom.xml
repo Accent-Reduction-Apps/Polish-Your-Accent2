@@ -81,7 +81,7 @@
 <!--            </exclusions>-->
         </dependency>
 
-<!--Solution for MapStructure and Lombok incompatibility to be considered after main design is finalized.-->
+<!--Solution for MapStructure and Lombok incompatibility to be considered after main design is finalized. Lombok  -->
 <!--        https://stackoverflow.com/questions/47676369/mapstruct-and-lombok-not-working-together-->
         <dependency>
             <groupId>org.projectlombok</groupId>

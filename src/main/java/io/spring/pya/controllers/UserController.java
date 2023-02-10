@@ -3,6 +3,7 @@ package io.spring.pya.controllers;
 
 import io.spring.pya.entities.UserStudent;
 import io.spring.pya.services.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,6 +48,15 @@ public class UserController {
     @DeleteMapping("/{userID}")
     public boolean deleteUser(@PathVariable("userID") Long id){
         return userService.deleteUserById(id);
+    }
+
+    @PostMapping("/registerStudent")
+    public ResponseEntity<UserStudent> sendRequestNewStudentAccountCreate(@RequestParam("password") String password,
+                                                                          @RequestParam("email") String email,
+                                                                          @RequestParam("name") String name)
+    {
+        UserStudent newStudent = userService.createNewStudent(email, password, name);
+        return ResponseEntity.ok(newStudent);
     }
 
 }

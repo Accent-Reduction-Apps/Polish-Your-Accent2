@@ -47,4 +47,10 @@ public class UserService {
         }
         return false;
     }
+
+
+    public UserStudent createNewStudent(String emailAddress, String password, String name) {
+        UserStudent userStudent = new UserStudent(name,emailAddress,password);
+        return userRepository.saveAndFlush(userStudent);
+    }
 }

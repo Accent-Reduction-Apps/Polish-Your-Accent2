@@ -33,7 +33,11 @@ public class UserStudent {
             inverseJoinColumns = @JoinColumn(name = "user_lessons_lesson_id"))
     private Set<Lesson> lessons = new LinkedHashSet<>();
 
-
+    public UserStudent(String name, String emailAddress, String password) {
+        this.name = name;
+        this.emailAddress = emailAddress;
+        this.password = password;
+    }
 
 
 
