@@ -1,8 +1,11 @@
-package io.spring.pya.controllers;
+package io.spring.pya.controllers.lessonController;
 
+import io.spring.pya.controllers.LessonController;
 import io.spring.pya.services.LessonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.mockito.Mock;
 
 import static org.mockito.Mockito.*;
@@ -27,8 +30,11 @@ class LessonControllerTest {
         verify(lessonService, times(1)).getAllLessons();
     }
 
-    @Test
-    void getLessonById() {
+    @ParameterizedTest
+    @ArgumentsSource(LessonIdProvider.class)
+    void getLessonById(long lessonId) {
+        lessonController.getLessonById(lessonId);
+        verify(lessonService, times(1)).getLessonById(lessonId);
     }
 
     @Test
