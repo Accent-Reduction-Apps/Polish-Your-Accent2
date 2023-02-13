@@ -1,7 +1,9 @@
 package io.spring.pya.controllers.lessonController;
 
+import io.spring.pya.UtilRandomNumber;
 import io.spring.pya.controllers.LessonController;
 import io.spring.pya.entities.Lesson;
+import io.spring.pya.exceptions.lesson.LessonNotFoundException;
 import io.spring.pya.services.LessonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.mockito.Mock;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class LessonControllerTest {
@@ -46,7 +49,14 @@ class LessonControllerTest {
     }
 
     @Test
-    void addIngredientToPotion() {
+    void updateLesson_updateNotExistingLesson_LessonNotFoundException() {
+        Lesson lessonToUpdateWith = LessonProvider.createRandomLesson();
+        Long lessonIdToUpdate = UtilRandomNumber.getRandomLong();
+
+        when(lessonService.getLessonById(lessonIdToUpdate)).thenReturn(null);
+
+        verify(lessonService, never()).updateLesson(LessonProvider.createRandomLesson(), lessonToUpdateWith);
+        assertThrows(LessonNotFoundException.class, () -> lessonController.updateLesson(lessonIdToUpdate, LessonProvider.createRandomLesson()));
     }
 
     @Test
