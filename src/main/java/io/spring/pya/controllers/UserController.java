@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PutMapping("/{userID}")
-    public Object addIngredientToPotion(@PathVariable("userID") Long id, @RequestBody UserStudent userStudentNew){
+    public Object updateUser(@PathVariable("userID") Long id, @RequestBody UserStudent userStudentNew){
             UserStudent userStudentOld = userService.getUserById(id);
             if(userStudentOld!= null){
                 userService.updateUser(userStudentOld, userStudentNew);
