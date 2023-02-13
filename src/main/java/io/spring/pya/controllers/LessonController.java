@@ -35,7 +35,7 @@ public class LessonController {
     }
 
     @PutMapping("/{lessonId}")
-    public Object addIngredientToPotion(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew){
+    public Object updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew){
             Lesson lessonOld = lessonService.getLessonById(id);
             if(lessonOld!= null){
                 lessonService.updateLesson(lessonOld, lessonNew);
@@ -45,8 +45,8 @@ public class LessonController {
             }
     }
 
-    @DeleteMapping("/{lessonID}")
-    public boolean deleteLesson(@PathVariable("lessonID") Long id){
+    @DeleteMapping("/{lessonId}")
+    public boolean deleteLesson(@PathVariable("lessonId") Long id){
         return lessonService.deleteLessonById(id);
     }
 
