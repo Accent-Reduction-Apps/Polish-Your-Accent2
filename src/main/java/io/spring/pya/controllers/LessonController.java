@@ -2,9 +2,8 @@ package io.spring.pya.controllers;
 
 
 import io.spring.pya.entities.Lesson;
+import io.spring.pya.exceptions.lesson.LessonNotFoundException;
 import io.spring.pya.services.LessonService;
-
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,14 +34,14 @@ public class LessonController {
     }
 
     @PutMapping("/{lessonId}")
-    public Object updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew){
-            Lesson lessonOld = lessonService.getLessonById(id);
-            if(lessonOld!= null){
-                lessonService.updateLesson(lessonOld, lessonNew);
-                return lessonOld;
-            }else{
-                return String.format("No lesson found with id %d", id);
-            }
+    public Lesson updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew) throws LessonNotFoundException {
+        Lesson lessonOld = lessonService.getLessonById(id);
+        if (lessonOld != null) {
+            lessonService.updateLesson(lessonOld, lessonNew);
+            return lessonOld;
+        } else {
+            throw new LessonNotFoundException(id);
+        }
     }
 
     @DeleteMapping("/{lessonId}")
