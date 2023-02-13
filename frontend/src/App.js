@@ -10,26 +10,32 @@ import Contact from "./Pages/Contact";
 import NoPage from "./Pages/NoPage";
 import RegisterHere from "./Pages/RegisterHere";
 import ErrorPage from "./Pages/ErrorPage";
+import GetLessonById from "./Pages/GetLessonById";
+import GetLessonsTable from "./Pages/GetLessons";
 
 
 export default function App() {
-    return (
-        <Router>
-            <Routes>
+    return (<Router>
+        <Routes>
 
-                <Route path="/" element={<Layout/>}>
-                    <Route index element={<Home/>}/>
-                    <Route path="about" element={<About/>}/>
-                    <Route path="contact" element={<Contact/>}/>
-                    <Route path="registration" element={<RegisterHere/>}/>
-                    <Route path="registration" element={<RegisterHere/>}/>
-                    <Route path="demo" element={<Demo/>}/>
-                    <Route path="*" element={<NoPage/>}/>
-                    <Route errorElement={<ErrorPage/>}/>
-                </Route>
-            </Routes>
-        </Router>
-    );
+            <Route path="/" element={<Layout/>}>
+                <Route index element={<Home/>}/>
+                <Route path="about" element={<About/>}/>
+                <Route path="contact" element={<Contact/>}/>
+                <Route path="registration" element={<RegisterHere/>}/>
+                <Route path="registration" element={<RegisterHere/>}/>
+                <Route path="demo" element={<Demo/>}/>
+                <Route exact path="/" element={GetLessonsTable} />
+                <Route path="/lesson/:lessonId" render={({ match }) => (
+                    <GetLessonById match={match} />
+                )} />
+                {/*<Route path="/lesson/:lessonId" element={<GetLessonById/>} />*/}
+                <Route path="*" element={<NoPage/>}/>
+                <Route errorElement={<ErrorPage/>}/>
+
+            </Route>
+        </Routes>
+    </Router>);
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

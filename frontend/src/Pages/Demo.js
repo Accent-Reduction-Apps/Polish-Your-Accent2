@@ -1,7 +1,7 @@
 import React from "react";
-import Lessons from "../Lessons";
+import GetLessons from "./GetLessons";
 
 export default function Demo() {
-    return (<Lessons/>
+    return (<GetLessons/>
     );
 }
