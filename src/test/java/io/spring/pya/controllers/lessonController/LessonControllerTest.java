@@ -1,6 +1,7 @@
 package io.spring.pya.controllers.lessonController;
 
 import io.spring.pya.controllers.LessonController;
+import io.spring.pya.entities.Lesson;
 import io.spring.pya.services.LessonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,9 @@ class LessonControllerTest {
 
     @Test
     void addLesson() {
+        Lesson dummyLesson = new Lesson();
+        lessonController.addLesson(dummyLesson);
+        verify(lessonService, times(1)).addLesson(dummyLesson);
     }
 
     @Test
