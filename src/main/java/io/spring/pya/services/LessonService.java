@@ -33,7 +33,7 @@ public class LessonService {
 
     public void updateLesson(Lesson lessonOld, Lesson lessonNew) {
         lessonOld.setTopic(lessonNew.getTopic());
-        lessonOld.setText(lessonNew.getText());
+        lessonOld.setLessonContent(lessonNew.getLessonContent());
     }
 
 
