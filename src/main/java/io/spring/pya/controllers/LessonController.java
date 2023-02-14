@@ -4,6 +4,8 @@ package io.spring.pya.controllers;
 import io.spring.pya.entities.Lesson;
 import io.spring.pya.exceptions.lesson.LessonNotFoundException;
 import io.spring.pya.services.LessonService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,14 +36,15 @@ public class LessonController {
     }
 
     @PutMapping("/{lessonId}")
-    public Lesson updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew) throws LessonNotFoundException {
+    public ResponseEntity<Lesson> updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew) throws LessonNotFoundException {
         Lesson lessonOld = lessonService.getLessonById(id);
         if (lessonOld != null) {
             lessonService.updateLesson(lessonOld, lessonNew);
-            return lessonOld;
+            return new ResponseEntity<>(lessonOld, HttpStatus.OK);
         } else {
             throw new LessonNotFoundException(id);
         }
+        //kazdy error opakowany w informacje zwrotna opsijuja ca przypadek
     }
 
     @DeleteMapping("/{lessonId}")
