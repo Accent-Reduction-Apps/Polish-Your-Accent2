@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import './GetLessons.css';
 
 const GetLessonsTable = () => {
     const [data, setData] = useState([]);
@@ -12,7 +12,7 @@ const GetLessonsTable = () => {
             setError(null);
 
             try {
-                const response = await fetch("http://localhost:8080/lessons");
+                const response = await fetch('http://localhost:8080/lessons'); //todo: wydzielić komponenty/obszary - funkcja js wołająca fetch - odwoł
 
                 if (!response.ok) {
                     throw new Error(response.statusText);
@@ -20,7 +20,6 @@ const GetLessonsTable = () => {
 
                 const json = await response.json();
                 setData(json);
-                console.log(json)
             } catch (e) {
                 setError(e.message);
             } finally {
@@ -39,7 +38,7 @@ const GetLessonsTable = () => {
     }
 
     return (
-        <table>
+        <table className="table">
             <thead>
             <tr>
                 <th>Lesson Id</th>
@@ -48,11 +47,9 @@ const GetLessonsTable = () => {
             </tr>
             </thead>
             <tbody>
-            {data.map((item) => (
+            {data.map(item => (
                 <tr key={item.id}>
-                    <td>
-                        <Link to={`/lesson/${item.id}`}>{item.id}</Link>
-                    </td>
+                    <td>{item.id}</td>
                     <td>{item.topic}</td>
                     <td>{item.text}</td>
                 </tr>
