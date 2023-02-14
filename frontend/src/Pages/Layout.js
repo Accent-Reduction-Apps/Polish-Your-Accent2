@@ -9,7 +9,7 @@ const Layout = () => {
                 <p>to by byla czesc nawigacyjna apki</p>
                 <ul>
                     <li>
-                        <Link to="/">HOME</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
                         <Link to="/about">About</Link>
@@ -18,10 +18,10 @@ const Layout = () => {
                         <Link to="/contact">Team</Link>
                     </li>
                     <li>
-                        <Link to="/registration">Register here</Link>
+                        <Link to="/registration">Login</Link>
                     </li>
                     <li>
-                        <Link to="/demo">Demo</Link>
+                        <Link to="/demo">Lessons</Link>
                     </li>
                 </ul>
             </nav>

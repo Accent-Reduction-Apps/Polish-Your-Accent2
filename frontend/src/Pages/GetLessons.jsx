@@ -66,11 +66,11 @@ const GetLessons = () => {
 
             {lessons.map((item) => (
                 <tr key={item.id}>
-                    <Link to={`/lesson/${item.id}`} state={item}>
-                        <td>{item.id}</td>
-                        <td>{item.topic}</td>
-                        <td>{item.text}</td>
-                    </Link>
+
+                        <td><Link to={`/lesson/${item.id}`} state={item}>{item.id}</Link></td>
+                        <td><Link to={`/lesson/${item.id}`} state={item}>{item.topic}</Link></td>
+                        <td><Link to={`/lesson/${item.id}`} state={item}>{item.text}</Link></td>
+
                 </tr>
             ))}
             </tbody>
