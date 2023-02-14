@@ -1,10 +1,12 @@
-import { Outlet, Link } from "react-router-dom";
+import {Outlet, Link, Route} from "react-router-dom";
+import GetLessonById from "./GetLessonById";
+import React from "react";
 
 const Layout = () => {
     return (
         <>
             <nav>
-                <p>to by byla strona glowna z logo apki</p>
+                <p>to by byla czesc nawigacyjna apki</p>
                 <ul>
                     <li>
                         <Link to="/">HOME</Link>

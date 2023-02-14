@@ -1,0 +1,58 @@
+/*table {*/
+/*    width: 100%;*/
+/*    border-collapse: collapse;*/
+/*    background-color: #333;*/
+/*}*/
+
+/*thead tr {*/
+/*    background-color: #666;*/
+/*}*/
+
+/*th {*/
+/*    padding: 10px;*/
+/*    border: 1px solid #999;*/
+/*    color: #fff;*/
+/*}*/
+
+/*td {*/
+/*    padding: 10px;*/
+/*    border: 1px solid #999;*/
+/*    color: #fff;*/
+/*    text-align: center;*/
+/*}*/
+table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+/*thead, tbody, tr, td, th {*/
+/*    display: block;*/
+/*}*/
+
+tr {
+    width: 100%;
+    float: left;
+}
+
+thead tr {
+    width: 100%;
+    background-color: #f9f9f9;
+}
+
+tbody {
+    height: calc(100vh - 125px);
+    overflow-y: auto;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+td, th {
+    padding: 10px;
+    width: 25%;
+}
+ .details {
+     color: red;
+ }
