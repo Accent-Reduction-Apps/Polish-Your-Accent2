@@ -8,7 +8,10 @@ import io.spring.pya.util.UtilRandomNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -53,8 +56,24 @@ class LessonControllerTest {
 
         when(lessonService.getLessonById(lessonIdToUpdate)).thenReturn(null);
 
-        verify(lessonService, never()).updateLesson(LessonProvider.createRandomLesson(), lessonToUpdateWith);
+        verify(lessonService, never()).updateLesson(LessonProvider.getRandomId(), lessonToUpdateWith);
         assertThrows(LessonNotFoundException.class, () -> lessonController.updateLesson(lessonIdToUpdate, LessonProvider.createRandomLesson()));
+    }
+
+    @Test
+    void updateLesson_updateExistingLesson_updatedLessonAndStatus200() {
+        Lesson lessonToUpdateWith = LessonProvider.createRandomLesson();
+        Lesson lessonToUpdate = LessonProvider.createRandomLesson();
+        Lesson lessonUpdated = new Lesson(lessonToUpdate.getId(), lessonToUpdateWith.getLessonContent(), lessonToUpdateWith.getTopic());
+        Long lessonIdToUpdate = lessonToUpdate.getId();
+
+        when(lessonService.getLessonById(lessonIdToUpdate)).thenReturn(lessonToUpdate);
+        when(lessonService.updateLesson(lessonIdToUpdate, lessonToUpdateWith)).thenReturn(lessonUpdated);
+        ResponseEntity<Lesson> response = lessonController.updateLesson(lessonIdToUpdate, lessonToUpdateWith);
+
+        verify(lessonService, times(1)).updateLesson(lessonToUpdate.getId(), lessonToUpdateWith);
+        assertEquals(response.getBody(), lessonUpdated);
+        assertEquals(response.getStatusCode(), HttpStatusCode.valueOf(200));
     }
 
     @Test
