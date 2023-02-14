@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom/client";
 import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
@@ -11,8 +10,9 @@ import NoPage from "./Pages/NoPage";
 import RegisterHere from "./Pages/RegisterHere";
 import ErrorPage from "./Pages/ErrorPage";
 import GetLessonsTable from "./Pages/GetLessons";
+import GetUser from "./Pages/GetUser";
 
-
+document.title = "Polish Your Accent";
 
 
 export default function App() {
@@ -27,7 +27,7 @@ export default function App() {
                     <Route path="registration" element={<RegisterHere/>}/>
                     <Route path="registration" element={<RegisterHere/>}/>
                     <Route path="demo" element={<GetLessonsTable/>}/>
-                    <Route path="demon" element={<GetLessonsTable/>}/>
+                    <Route path="getUser" element={<GetUser/>}/>
                     <Route path="*" element={<NoPage/>}/>
                     <Route errorElement={<ErrorPage/>}/>
                 </Route>
@@ -35,6 +35,3 @@ export default function App() {
         </Router>
     );
 }
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App/>);
