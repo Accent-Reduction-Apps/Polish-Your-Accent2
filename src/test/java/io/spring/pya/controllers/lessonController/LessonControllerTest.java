@@ -76,12 +76,22 @@ class LessonControllerTest {
     }
 
     @Test
-    void deleteLesson_deleteNotExisting_False() {
+    void deleteLesson_deleteNotExisting_false() {
         Long lessonIdToDelete = LessonProvider.getRandomId();
 
         when(lessonService.deleteLessonById(lessonIdToDelete)).thenReturn(false);
-        
+
         assertFalse(lessonController.deleteLesson(lessonIdToDelete));
+        verify(lessonService, times(1)).deleteLessonById(lessonIdToDelete);
+    }
+
+    @Test
+    void deleteLesson_deleteExisting_true() {
+        Long lessonIdToDelete = LessonProvider.getRandomId();
+
+        when(lessonService.deleteLessonById(lessonIdToDelete)).thenReturn(true);
+
+        assertTrue(lessonController.deleteLesson(lessonIdToDelete));
         verify(lessonService, times(1)).deleteLessonById(lessonIdToDelete);
     }
 }
