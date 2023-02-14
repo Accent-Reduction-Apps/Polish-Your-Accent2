@@ -4,16 +4,19 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 @Entity
+@Table(name = "lessons")
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "lesson_id", nullable = false)
     private Long id;
 
     @Size(max = 255)
+    @Column(name = "text")
     private String lessonContent;
 
     @Size(max = 255)
+    @Column(name = "topic")
     private String topic;
 
     public Lesson() {
