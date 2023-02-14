@@ -44,7 +44,6 @@ public class LessonController {
         } else {
             throw new LessonNotFoundException(id);
         }
-        //kazdy error opakowany w informacje zwrotna opsijuja ca przypadek
     }
 
     @DeleteMapping("/{lessonId}")
