@@ -31,16 +31,17 @@ public class LessonService {
         return lesson.orElse(null);
     }
 
-    public void updateLesson(Lesson lessonOld, Lesson lessonNew) {
-        lessonOld.setTopic(lessonNew.getTopic());
-        lessonOld.setLessonContent(lessonNew.getLessonContent());
+    public Lesson updateLesson(Long oldLessonId, Lesson lessonNew) {
+        lessonRepository.deleteById(oldLessonId);
+        lessonNew.setId(oldLessonId);
+        lessonRepository.save(lessonNew);
+        return lessonRepository.getReferenceById(oldLessonId);
     }
-
 
 
     public boolean deleteLessonById(Long id) {
         Optional<Lesson> lesson = lessonRepository.findById(id);
-        if(lesson.isPresent()){
+        if (lesson.isPresent()) {
             lessonRepository.deleteById(id);
             return true;
         }
