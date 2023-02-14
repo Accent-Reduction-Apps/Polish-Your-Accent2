@@ -1,35 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
-import '../GetLessons.css';
+import './GetLessons.css';
 
 const GetLessons = () => {
-    const [data, setData] = useState([]);
+    const [lessons, setLessons] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
+
     useEffect(() => {
-        async function fetchData() {
-            setIsLoading(true);
-            setError(null);
-
-            try {
-                const response = await fetch("http://localhost:8080/lessons");
-
-                if (!response.ok) {
-                    throw new Error(response.statusText);
-                }
-
-                const json = await response.json();
-                setData(json);
-            } catch (e) {
-                setError(e.message);
-            } finally {
-                setIsLoading(false);
-            }
+        const getData = async () => {
+            const lessons = await fetchData();
+            setLessons(lessons);
         }
-        fetchData();
+        getData();
     }, []);
+
+    const fetchData = async () => {
+        // setIsLoading(true);
+        // setError(null);
+        //
+        // try {
+        //     const response = await fetch("http://localhost:8080/lessons");
+        //
+        //     if (!response.ok) {
+        //         throw new Error(response.statusText);
+        //     }
+        //
+        //     const json = await response.json();
+        //     setData(json)
+        //     console.log(json)
+        //     return json;
+        //
+        // } catch (e) {
+        //     setError(e.message);
+        // } finally {
+        //     setIsLoading(false);
+        // }
+
+        const response = await fetch('http://localhost:8080/lessons');
+        const data = await response.json();
+        return data;
+    }
+
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -41,22 +55,23 @@ const GetLessons = () => {
 
     return (
         <table className="table">
-            <thead>
-            <tr>
-                <th>Lesson Id</th>
-                <th>Topic</th>
-                <th>Text</th>
-            </tr>
-            </thead>
             <tbody>
-            {data.map(item => (
-                <Link to={`/lesson/${item.id}`} key={item.id}>
-                    <tr>
+            {/*<thead>*/}
+            {/*<tr>*/}
+            {/*    <th>Lesson Id</th>*/}
+            {/*    <th>Topic</th>*/}
+            {/*    <th>Text</th>*/}
+            {/*</tr>*/}
+            {/*</thead>*/}
+
+            {lessons.map((item) => (
+                <tr key={item.id}>
+                    <Link to={`/lesson/${item.id}`} state={item}>
                         <td>{item.id}</td>
                         <td>{item.topic}</td>
                         <td>{item.text}</td>
-                    </tr>
-                </Link>
+                    </Link>
+                </tr>
             ))}
             </tbody>
         </table>

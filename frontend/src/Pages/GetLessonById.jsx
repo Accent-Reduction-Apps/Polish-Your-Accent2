@@ -1,36 +1,68 @@
 import React, {useEffect, useState} from "react";
+import {useLocation} from "react-router";
+import '../GetLessons.css';
 
-const GetLessonById = ({match}) => {
-    console.log(match.params.lessonId);
+const GetLessonById = (props) => {
+    const lessonId = useLocation();
+    const id = lessonId.state.id;
     const [lesson, setLesson] = useState({});
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        async function fetchData() {
-            setIsLoading(true);
-            setError(null);
+        // async function fetchData() {
+        //     setIsLoading(true);
+        //     setError(null);
+        //
+        //     try {
+        //         const response = await fetch(
+        //             `http://localhost:8080/lessons/${id}`
+        //         );
+        //         console.log(response.json())
+        //
+        //         if (!response.ok) {
+        //             throw new Error(response.statusText);
+        //         }
+        //
+        //         const json = await response.json();
+        //         setLesson(json);
+        //     } catch (e) {
+        //         setError(e.message);
+        //     } finally {
+        //         setIsLoading(false);
+        //     }
+        // }
+        const getData = async () => {
+            const dataa = await fetchData();
+            setLesson(dataa);
+        }
+        getData();
+    }, []);
 
-            try {
-                const response = await fetch(
-                    `http://localhost:8080/lessons/${match.params.lessonId}`
-                );
 
-                if (!response.ok) {
-                    throw new Error(response.statusText);
-                }
+    const fetchData = async() => {
+        setIsLoading(true);
+        setError(null);
 
-                const json = await response.json();
-                setLesson(json);
-            } catch (e) {
-                setError(e.message);
-            } finally {
-                setIsLoading(false);
+        try {
+            const response = await fetch(
+                `http://localhost:8080/lessons/${id}`
+            );
+
+            if (!response.ok) {
+                throw new Error(response.statusText);
             }
+
+            const json = await response.json();
+            return json;
+            // setLesson(json);
+        } catch (e) {
+            setError(e.message);
+        } finally {
+            setIsLoading(false);
         }
 
-        fetchData();
-    }, [match.params.lessonId]);
+    }
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -39,10 +71,10 @@ const GetLessonById = ({match}) => {
     if (error) {
         return <p>An error occurred: {error}</p>;
     }
-    console.log(lesson.text);
+    //console.log(lesson.text);
     return (
         <div>
-            <h2>LESSON</h2>
+            <h2 className={'details'}>LESSON</h2>
             <p>Lesson Id: {lesson.id}</p>
             <p>Topic: {lesson.topic}</p>
             <p>Text: {lesson.text}</p>

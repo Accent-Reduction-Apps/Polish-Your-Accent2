@@ -11,7 +11,7 @@ import NoPage from "./Pages/NoPage";
 import RegisterHere from "./Pages/RegisterHere";
 import ErrorPage from "./Pages/ErrorPage";
 import GetLessonById from "./Pages/GetLessonById";
-import GetLessonsTable from "./Pages/GetLessons";
+import GetLessons from "./Pages/GetLessons";
 
 
 export default function App() {
@@ -25,11 +25,11 @@ export default function App() {
                 <Route path="registration" element={<RegisterHere/>}/>
                 <Route path="registration" element={<RegisterHere/>}/>
                 <Route path="demo" element={<Demo/>}/>
-                <Route exact path="/" element={GetLessonsTable} />
-                <Route path="/lesson/:lessonId" render={({ match }) => (
-                    <GetLessonById match={match} />
-                )} />
-                {/*<Route path="/lesson/:lessonId" element={<GetLessonById/>} />*/}
+                <Route exact path="/lessons" element={<GetLessons/>} />
+                {/*<Route path="/lesson/:lessonId" render={({ match }) => (*/}
+                {/*    <GetLessonById match={match} />*/}
+                {/*)} />*/}
+                <Route path="/lesson/:lessonId" element={<GetLessonById/>} />
                 <Route path="*" element={<NoPage/>}/>
                 <Route errorElement={<ErrorPage/>}/>
 
@@ -38,5 +38,40 @@ export default function App() {
     </Router>);
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App/>);
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(<App/>);
+
+
+// import React from "react";
+// import {
+//     Router,
+//     useRoutes,
+//     Route,
+//     Link,
+//     Navigate,
+//     Outlet,
+// } from "react-router-dom";
+// import GetLessonsTable from "./GetLessonsTable";
+// import GetLessonById from "./GetLessonById";
+//
+// function App() {
+//     return (
+//         <Router>
+//             <nav>
+//                 <ul>
+//                     <li>
+//                         <Link to="/">Home</Link>
+//                     </li>
+//                 </ul>
+//             </nav>
+//             <Outlet />
+//         </Router>
+//     );
+// }
+//
+// const routes = [
+//     { path: "/lessons", element: <GetLessonsTable /> },
+//     { path: "lesson/:lessonId", element: <GetLessonById /> },
+// ];
+//
+// export default App;

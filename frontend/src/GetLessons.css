@@ -36,6 +36,7 @@ tr {
 }
 
 thead tr {
+    width: 100%;
     background-color: #f9f9f9;
 }
 
@@ -52,3 +53,6 @@ td, th {
     padding: 10px;
     width: 25%;
 }
+ .details {
+     color: red;
+ }
