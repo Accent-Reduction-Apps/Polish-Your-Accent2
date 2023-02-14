@@ -36,14 +36,14 @@ class LessonControllerTest {
     }
 
     @Test
-    void getLessonById() {
+    void getLessonById_correctLesson() {
         Long lessonId = LessonProvider.getRandomId();
         lessonController.getLessonById(lessonId);
         verify(lessonService, times(1)).getLessonById(lessonId);
     }
 
     @Test
-    void addLesson() {
+    void addLesson_correctLesson() {
         Lesson dummyLesson = LessonProvider.createRandomLesson();
         lessonController.addLesson(dummyLesson);
         verify(lessonService, times(1)).addLesson(dummyLesson);
