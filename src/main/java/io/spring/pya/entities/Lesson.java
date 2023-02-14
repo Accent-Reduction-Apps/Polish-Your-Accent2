@@ -2,27 +2,29 @@ package io.spring.pya.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "lessons")
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "lesson_id", nullable = false)
+    @Column(nullable = false)
     private Long id;
 
     @Size(max = 255)
-    @Column(name = "text")
     private String lessonContent;
 
     @Size(max = 255)
-    @Column(name = "topic")
     private String topic;
 
+    public Lesson() {
+
+    }
+
+    public Lesson(Long id, String lessonContent, String topic) {
+        this.id = id;
+        this.lessonContent = lessonContent;
+        this.topic = topic;
+    }
 
     public Long getId() {
         return id;

@@ -1,14 +1,12 @@
 package io.spring.pya.controllers.lessonController;
 
-import io.spring.pya.UtilRandomNumber;
 import io.spring.pya.controllers.LessonController;
 import io.spring.pya.entities.Lesson;
 import io.spring.pya.exceptions.lesson.LessonNotFoundException;
 import io.spring.pya.services.LessonService;
+import io.spring.pya.util.UtilRandomNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -34,16 +32,16 @@ class LessonControllerTest {
         verify(lessonService, times(1)).getAllLessons();
     }
 
-    @ParameterizedTest
-    @ArgumentsSource(LessonIdProvider.class)
-    void getLessonById(long lessonId) {
+    @Test
+    void getLessonById() {
+        Long lessonId = LessonProvider.getRandomId();
         lessonController.getLessonById(lessonId);
         verify(lessonService, times(1)).getLessonById(lessonId);
     }
 
     @Test
     void addLesson() {
-        Lesson dummyLesson = new Lesson();
+        Lesson dummyLesson = LessonProvider.createRandomLesson();
         lessonController.addLesson(dummyLesson);
         verify(lessonService, times(1)).addLesson(dummyLesson);
     }
