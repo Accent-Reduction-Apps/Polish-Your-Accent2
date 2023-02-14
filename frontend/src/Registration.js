@@ -69,10 +69,7 @@ class Registration extends Component {
                             </Form.Label>
                             <Form.Control type="password" name="password"/>
                         </Form.Group>
-                        <br></br>
-                        <Button className={'RegistrationButton'} block size="lg" type="submit">
-                            Register
-                        </Button>
+                        <Button type="submit">Register</Button>
                     </Form>
                 </div>
                 <RegistrationAlert ref={this.registrationAlert}/>
