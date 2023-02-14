@@ -37,10 +37,9 @@ public class LessonController {
 
     @PutMapping("/{lessonId}")
     public ResponseEntity<Lesson> updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew) throws LessonNotFoundException {
-        Lesson lessonOld = lessonService.getLessonById(id);
-        if (lessonOld != null) {
-            lessonService.updateLesson(lessonOld, lessonNew);
-            return new ResponseEntity<>(lessonOld, HttpStatus.OK);
+        if (lessonService.getLessonById(id) != null) {
+            Lesson updatedLesson = lessonService.updateLesson(id, lessonNew);
+            return new ResponseEntity<>(updatedLesson, HttpStatus.OK);
         } else {
             throw new LessonNotFoundException(id);
         }
