@@ -1,32 +1,38 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import {useLocation} from "react-router";
 
 const GetUser = () => {
-    const [data, setData] = useState([]);
+    const userid = useLocation().state.id;
+    const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        async function fetchData() {
+
+        async function fetchUsers() {
             setIsLoading(true);
             setError(null);
 
-            try {
-                const response = await fetch('http://localhost:8080/users/{id}');
+            // try {
+            // const id = `2`;
+            const response = await fetch(`http://localhost:8080/users/${userid}`);
 
-                if (!response.ok) {
-                    throw new Error(response.statusText);
-                }
-
-                const json = await response.json();
-                setData(json);
-            } catch (e) {
-                setError(e.message);
-            } finally {
-                setIsLoading(false);
+            if (!response.ok) {
+                throw new Error(response.statusText);
             }
+            const json = await response.json();
+            setUsers(json)
+            return json;
+            // } catch (e) {
+            //     setError(e.message);
+            // } finally {
+            //     setIsLoading(false);
+            // }
         }
 
-        fetchData();
+        fetchUsers().then(json => console.log(json));
+        console.log(users);
     }, []);
 
     if (isLoading) {
@@ -39,15 +45,15 @@ const GetUser = () => {
 
     return (
         <div>
-            {data.map(user => (
-                <tr key={user.id}>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <td>{user.password}</td>
-                </tr>
+            {users.map((user) => (
+                <p key={user.id}>
+                    <p><Link to={`/users/${user.id}`} state={user}>{user.id}</Link></p>
+                    <p><Link to={`/users/${user.id}`} state={user}>{user.name}</Link></p>
+                    <p><Link to={`/users/${user.id}`} state={user}>{user.password}</Link></p>
+
+                </p>
             ))}
         </div>
     );
 };
-
 export default GetUser;

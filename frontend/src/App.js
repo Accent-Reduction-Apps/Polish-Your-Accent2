@@ -11,15 +11,14 @@ import RegisterHere from "./Pages/RegisterHere";
 import ErrorPage from "./Pages/ErrorPage";
 import GetLessonById from "./Pages/GetLessonById";
 import GetLessons from "./Pages/GetLessons";
-import GetLessonsTable from "./Pages/GetLessons";
 import GetUser from "./Pages/GetUser";
 
 document.title = "Polish Your Accent";
-
+const path = `/users/2`;
 
 export default function App() {
     return (<Router>
-        <Routes>
+            <Routes>
 
             <Route path="/" element={<Layout/>}>
                 <Route index element={<Home/>}/>
@@ -29,11 +28,12 @@ export default function App() {
                 <Route path="registration" element={<RegisterHere/>}/>
                 <Route path="demo" element={<Demo/>}/>
                 <Route exact path="/lessons" element={<GetLessons/>} />
-                {/*<Route path="/lesson/:lessonId" render={({ match }) => (*/}
-                {/*    <GetLessonById match={match} />*/}
+                {/*<Route path="/leIdsson/:lessonId" render={({ match }) => (*/}
+                {/*    <GetLessonBy match={match} />*/}
                 {/*)} />*/}
                 <Route path="/lesson/:lessonId" element={<GetLessonById/>} />
-                <Route path="getUser" element={<GetUser/>}/>
+                {/*<Route path="/users/:id" element={<GetUser/>}/>*/}
+                <Route path={path} element={<GetUser/>}/>
                 <Route path="*" element={<NoPage/>}/>
                 <Route errorElement={<ErrorPage/>}/>
 

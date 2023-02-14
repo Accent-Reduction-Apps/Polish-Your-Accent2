@@ -1,5 +1,4 @@
-import {Outlet, Link, Route} from "react-router-dom";
-import GetLessonById from "./GetLessonById";
+import {Outlet, Link} from "react-router-dom";
 import React from "react";
 
 const Layout = () => {
@@ -24,7 +23,7 @@ const Layout = () => {
                         <Link to="/demo">Demo</Link>
                     </li>
                     <li>
-                        <Link to="/getUser">My Account</Link>
+                        <Link to="/users">My Account</Link>
                     </li>
                 </ul>
             </nav>
