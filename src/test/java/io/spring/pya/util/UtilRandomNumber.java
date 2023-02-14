@@ -1,10 +1,9 @@
 package io.spring.pya.util;
 
-import java.util.Random;
-
 public class UtilRandomNumber {
     public static Long getRandomLong() {
-        Random r = new Random();
-        return (Long.MAX_VALUE) * r.nextLong();
+        long leftLimit = 0L;
+        long rightLimit = Long.MAX_VALUE;
+        return leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
     }
 }
