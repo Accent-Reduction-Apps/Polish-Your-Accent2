@@ -1,7 +1,8 @@
 import React from "react";
-import GetLessons from "./GetLessons";
+import GetLessonsTable from "./GetLessons";
 
 export default function Demo() {
-    return (<GetLessons/>
+    return (
+        <GetLessonsTable />
     );
 }

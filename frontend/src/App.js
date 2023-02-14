@@ -13,6 +13,8 @@ import ErrorPage from "./Pages/ErrorPage";
 import GetLessonsTable from "./Pages/GetLessons";
 
 
+
+
 export default function App() {
     return (
         <Router>
@@ -25,6 +27,7 @@ export default function App() {
                     <Route path="registration" element={<RegisterHere/>}/>
                     <Route path="registration" element={<RegisterHere/>}/>
                     <Route path="demo" element={<GetLessonsTable/>}/>
+                    <Route path="demon" element={<GetLessonsTable/>}/>
                     <Route path="*" element={<NoPage/>}/>
                     <Route errorElement={<ErrorPage/>}/>
                 </Route>
@@ -33,3 +36,5 @@ export default function App() {
     );
 }
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);

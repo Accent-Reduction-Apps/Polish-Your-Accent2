@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './GetLessons.css';
+import {Link} from "react-router-dom";
 
 const GetLessonsTable = () => {
     const [data, setData] = useState([]);
@@ -53,6 +54,7 @@ const GetLessonsTable = () => {
                     <td>{item.topic}</td>
                     <td>{item.text}</td>
                 </tr>
+
             ))}
             </tbody>
         </table>
