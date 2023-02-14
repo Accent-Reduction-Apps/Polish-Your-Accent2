@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './GetLessons.css';
+import '../GetLessons.css';
 
 const GetLessonsTable = () => {
     const [data, setData] = useState([]);

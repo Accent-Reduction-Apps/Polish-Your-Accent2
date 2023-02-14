@@ -36,6 +36,7 @@ tr {
 }
 
 thead tr {
+    width: 100%;
     background-color: #f9f9f9;
 }
 
