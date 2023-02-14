@@ -11,8 +11,7 @@ import org.mockito.Mock;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class LessonControllerTest {
@@ -77,6 +76,12 @@ class LessonControllerTest {
     }
 
     @Test
-    void deleteLesson() {
+    void deleteLesson_deleteNotExisting_False() {
+        Long lessonIdToDelete = LessonProvider.getRandomId();
+
+        when(lessonService.deleteLessonById(lessonIdToDelete)).thenReturn(false);
+        
+        assertFalse(lessonController.deleteLesson(lessonIdToDelete));
+        verify(lessonService, times(1)).deleteLessonById(lessonIdToDelete);
     }
 }
