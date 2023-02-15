@@ -82,10 +82,6 @@ class LessonServiceTest {
     }
 
     @Test
-    void updateLesson_lessonToUpdateDoesntExists_null() {
-    }
-
-    @Test
     void deleteLessonById_lessonToBeDeletedExists_true() {
     }
 
