@@ -70,14 +70,11 @@ class LessonControllerTest {
 
     @Test
     void addLesson_completeLesson_status201() {
-        Lesson dummyLesson = LessonProvider.createRandomLesson();
-        lessonController.addLesson(dummyLesson);
-        verify(lessonService, times(1)).addLesson(dummyLesson);
-    }
+        Lesson lessonToAdd = LessonProvider.createRandomLesson();
 
-    @Test
-    void addLesson_incompleteLesson_status400() {
+        lessonController.addLesson(lessonToAdd);
 
+        verify(lessonService, times(1)).addLesson(lessonToAdd);
     }
 
     @Test
