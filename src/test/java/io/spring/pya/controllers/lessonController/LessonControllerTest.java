@@ -43,9 +43,14 @@ class LessonControllerTest {
 
     @Test
     void getLessonById_lessonExists_200() {
-        Long lessonId = LessonProvider.getRandomId();
-        lessonController.getLessonById(lessonId);
-        verify(lessonService, times(1)).getLessonById(lessonId);
+        Lesson lessonShouldBeReceived = LessonProvider.createRandomLesson();
+
+        when(lessonService.getLessonById(lessonShouldBeReceived.getId())).thenReturn(lessonShouldBeReceived);
+
+        ResponseEntity<Lesson> getLessonByIdResponse = lessonController.getLessonById(lessonShouldBeReceived.getId());
+        verify(lessonService, times(1)).getLessonById(lessonShouldBeReceived.getId());
+        assertEquals(getLessonByIdResponse.getBody(), lessonShouldBeReceived);
+        assertEquals(getLessonByIdResponse.getStatusCode(), HttpStatusCode.valueOf(200));
     }
 
     @Test
