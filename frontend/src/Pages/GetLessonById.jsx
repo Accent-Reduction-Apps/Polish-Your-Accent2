@@ -53,7 +53,7 @@ const GetLessonById = (props) => {
     }
     //console.log(lesson.text);
     return (
-        <div>
+        <div className='bg-warning p-3'>
             <h2 className={'details'}>LESSON</h2>
             <p>Lesson Id: {lesson.id}</p>
             <p>Topic: {lesson.topic}</p>
