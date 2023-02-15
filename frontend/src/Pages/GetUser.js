@@ -3,7 +3,8 @@ import {Link} from "react-router-dom";
 import {useLocation} from "react-router";
 
 const GetUser = () => {
-    const userid = useLocation().state.id;
+    let userid = 2;
+    console.log(userid);
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -14,8 +15,7 @@ const GetUser = () => {
             setIsLoading(true);
             setError(null);
 
-            // try {
-            // const id = `2`;
+            try {
             const response = await fetch(`http://localhost:8080/users/${userid}`);
 
             if (!response.ok) {
@@ -24,11 +24,11 @@ const GetUser = () => {
             const json = await response.json();
             setUsers(json)
             return json;
-            // } catch (e) {
-            //     setError(e.message);
-            // } finally {
-            //     setIsLoading(false);
-            // }
+            } catch (e) {
+                setError(e.message);
+            } finally {
+                setIsLoading(false);
+            }
         }
 
         fetchUsers().then(json => console.log(json));
@@ -44,15 +44,14 @@ const GetUser = () => {
     }
 
     return (
-        <div>
-            {users.map((user) => (
-                <p key={user.id}>
-                    <p><Link to={`/users/${user.id}`} state={user}>{user.id}</Link></p>
-                    <p><Link to={`/users/${user.id}`} state={user}>{user.name}</Link></p>
-                    <p><Link to={`/users/${user.id}`} state={user}>{user.password}</Link></p>
+        <div className="my-account">
 
-                </p>
-            ))}
+
+                    <p>Name: {users.name}</p>
+                    <p>Email Address: {users.emailAddress}</p>
+                    <p>password: {users.password}</p>
+
+
         </div>
     );
 };
