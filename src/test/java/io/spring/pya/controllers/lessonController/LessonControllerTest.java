@@ -85,7 +85,10 @@ class LessonControllerTest {
         when(lessonService.getLessonById(lessonIdToUpdate)).thenReturn(null);
 
         verify(lessonService, never()).updateLesson(LessonProvider.getRandomId(), lessonToUpdateWith);
-        assertThrows(LessonNotFoundException.class, () -> lessonController.updateLesson(lessonIdToUpdate, LessonProvider.createRandomLesson()));
+        assertThrows(LessonNotFoundException.class, () -> {
+            ResponseEntity<Lesson> response = lessonController.updateLesson(lessonIdToUpdate, LessonProvider.createRandomLesson());
+            assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+        });
     }
 
     @Test
