@@ -14,7 +14,6 @@ import GetLessons from "./Pages/GetLessons";
 import GetUser from "./Pages/GetUser";
 
 document.title = "Polish Your Accent";
-const path = `/users/2`;
 
 export default function App() {
     return (<Router>
@@ -32,8 +31,7 @@ export default function App() {
                 {/*    <GetLessonBy match={match} />*/}
                 {/*)} />*/}
                 <Route path="/lesson/:lessonId" element={<GetLessonById/>} />
-                {/*<Route path="/users/:id" element={<GetUser/>}/>*/}
-                <Route path={path} element={<GetUser/>}/>
+                <Route   path={"/my-account"} element={<GetUser />} />
                 <Route path="*" element={<NoPage/>}/>
                 <Route errorElement={<ErrorPage/>}/>
 
