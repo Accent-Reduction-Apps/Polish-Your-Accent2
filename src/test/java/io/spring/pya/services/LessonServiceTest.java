@@ -60,6 +60,10 @@ class LessonServiceTest {
 
     @Test
     void addLesson_completeLesson_lessonSaved() {
+        Lesson lessonToAdd = LessonProvider.createRandomLesson();
+
+        lessonService.addLesson(lessonToAdd);
+        verify(lessonRepository, times(1)).saveAndFlush(lessonToAdd);
     }
 
     @Test
