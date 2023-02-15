@@ -6,4 +6,9 @@ public class UtilRandomNumber {
         long rightLimit = Long.MAX_VALUE;
         return leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
     }
+
+    public static int getRandomInt(int leftLimit, int rightLimit) {
+        return leftLimit + (int) (Math.random() * (rightLimit - leftLimit));
+    }
+
 }
