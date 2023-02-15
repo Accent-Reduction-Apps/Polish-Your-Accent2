@@ -21,8 +21,8 @@ public class LessonController {
     }
 
     @GetMapping
-    public List<Lesson> getAllLessons() {
-        return lessonService.getAllLessons();
+    public ResponseEntity<List<Lesson>> getAllLessons() {
+        return new ResponseEntity<>(lessonService.getAllLessons(), HttpStatus.OK);
     }
 
     @GetMapping("/{lessonId}")
