@@ -23,7 +23,7 @@ const Layout = () => {
                         <Link to="/demo">Demo</Link>
                     </li>
                     <li>
-                        <Link to="/users">My Account</Link>
+                        <Link to="/my-account">My Account</Link>
                     </li>
                 </ul>
             </nav>
