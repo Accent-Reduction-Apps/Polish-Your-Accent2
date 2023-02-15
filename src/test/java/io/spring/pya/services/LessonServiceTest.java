@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class LessonServiceTest {
@@ -83,6 +82,12 @@ class LessonServiceTest {
 
     @Test
     void deleteLessonById_lessonToBeDeletedExists_true() {
+        Lesson lessonToDelete = LessonProvider.createRandomLesson();
+        Long lessonIdToDelete = lessonToDelete.getId();
+        when(lessonRepository.findById(lessonIdToDelete)).thenReturn(Optional.of(lessonToDelete));
+
+        assertTrue(lessonService.deleteLessonById(lessonIdToDelete));
+        verify(lessonRepository, times(1)).findById(lessonIdToDelete);
     }
 
     @Test
