@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -28,8 +30,14 @@ class LessonControllerTest {
 
     @Test
     void getAllLessons_methodCalled_LessonsListAndStatus200() {
-        lessonController.getAllLessons();
+        List<Lesson> allLessons = LessonProvider.createRandomLessonsList(5);
+
+        when(lessonService.getAllLessons()).thenReturn(allLessons);
+
+        List<Lesson> allLessonsReceived = lessonController.getAllLessons();
+
         verify(lessonService, times(1)).getAllLessons();
+        assertEquals(allLessonsReceived, allLessons);
     }
 
     @Test
