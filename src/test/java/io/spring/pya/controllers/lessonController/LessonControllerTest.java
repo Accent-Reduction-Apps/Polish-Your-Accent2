@@ -7,8 +7,6 @@ import io.spring.pya.services.LessonService;
 import io.spring.pya.util.UtilRandomNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
@@ -20,7 +18,6 @@ import static org.mockito.Mockito.*;
 
 class LessonControllerTest {
 
-    @Mock
     private LessonService lessonService;
     private LessonController lessonController;
 
@@ -33,7 +30,6 @@ class LessonControllerTest {
     @Test
     void getAllLessons_methodCalled_LessonsListAndStatus200() {
         List<Lesson> allLessons = LessonProvider.createRandomLessonsList(UtilRandomNumber.getRandomInt(5, 50));
-
         when(lessonService.getAllLessons()).thenReturn(allLessons);
 
         ResponseEntity<List<Lesson>> allLessonsReceived = lessonController.getAllLessons();
@@ -46,25 +42,21 @@ class LessonControllerTest {
     @Test
     void getLessonById_lessonExists_200() {
         Lesson lessonShouldBeReceived = LessonProvider.createRandomLesson();
-
         when(lessonService.getLessonById(lessonShouldBeReceived.getId())).thenReturn(lessonShouldBeReceived);
 
         ResponseEntity<Lesson> getLessonByIdResponse = lessonController.getLessonById(lessonShouldBeReceived.getId());
+
         verify(lessonService, times(1)).getLessonById(lessonShouldBeReceived.getId());
         assertEquals(getLessonByIdResponse.getBody(), lessonShouldBeReceived);
         assertEquals(getLessonByIdResponse.getStatusCode(), HttpStatusCode.valueOf(200));
     }
 
     @Test
-    void getLessonById_lessonDoesntExist_404() {
+    void getLessonById_lessonDoesntExist_lessonNotFoundException() {
         Long requestedLessonId = LessonProvider.getRandomId();
-
         when(lessonService.getLessonById(requestedLessonId)).thenReturn(null);
 
-        assertThrows(LessonNotFoundException.class, () -> {
-            ResponseEntity<Lesson> response = lessonController.getLessonById(requestedLessonId);
-            assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
-        });
+        assertThrows(LessonNotFoundException.class, () -> lessonController.getLessonById(requestedLessonId));
         verify(lessonService, times(1)).getLessonById(requestedLessonId);
 
     }
@@ -74,22 +66,17 @@ class LessonControllerTest {
         Lesson lessonToAdd = LessonProvider.createRandomLesson();
 
         lessonController.addLesson(lessonToAdd);
-
         verify(lessonService, times(1)).addLesson(lessonToAdd);
     }
 
     @Test
-    void updateLesson_updateNotExistingLesson_LessonNotFoundExceptionAndStatus404() {
+    void updateLesson_updateNotExistingLesson_LessonNotFoundException() {
         Lesson lessonToUpdateWith = LessonProvider.createRandomLesson();
         Long lessonIdToUpdate = UtilRandomNumber.getRandomLong();
-
         when(lessonService.getLessonById(lessonIdToUpdate)).thenReturn(null);
 
+        assertThrows(LessonNotFoundException.class, () -> lessonController.updateLesson(lessonIdToUpdate, LessonProvider.createRandomLesson()));
         verify(lessonService, never()).updateLesson(LessonProvider.getRandomId(), lessonToUpdateWith);
-        assertThrows(LessonNotFoundException.class, () -> {
-            ResponseEntity<Lesson> response = lessonController.updateLesson(lessonIdToUpdate, LessonProvider.createRandomLesson());
-            assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
-        });
     }
 
     @Test
@@ -98,9 +85,9 @@ class LessonControllerTest {
         Lesson lessonToUpdate = LessonProvider.createRandomLesson();
         Lesson lessonUpdated = new Lesson(lessonToUpdate.getId(), lessonToUpdateWith.getLessonContent(), lessonToUpdateWith.getTopic());
         Long lessonIdToUpdate = lessonToUpdate.getId();
-
         when(lessonService.getLessonById(lessonIdToUpdate)).thenReturn(lessonToUpdate);
         when(lessonService.updateLesson(lessonIdToUpdate, lessonToUpdateWith)).thenReturn(lessonUpdated);
+
         ResponseEntity<Lesson> response = lessonController.updateLesson(lessonIdToUpdate, lessonToUpdateWith);
 
         verify(lessonService, times(1)).updateLesson(lessonToUpdate.getId(), lessonToUpdateWith);
@@ -110,22 +97,17 @@ class LessonControllerTest {
 
 
     @Test
-    void deleteLesson_deleteNotExisting_LessonNotFoundExceptionAndStatus404() {
+    void deleteLesson_deleteNotExisting_LessonNotFoundException() {
         Long lessonIdToDelete = LessonProvider.getRandomId();
-
         when(lessonService.deleteLessonById(lessonIdToDelete)).thenReturn(false);
 
-        assertThrows(LessonNotFoundException.class, () -> {
-            ResponseEntity<Lesson> response = lessonController.deleteLesson(lessonIdToDelete);
-            assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
-        });
+        assertThrows(LessonNotFoundException.class, () -> lessonController.deleteLesson(lessonIdToDelete));
         verify(lessonService, times(1)).deleteLessonById(lessonIdToDelete);
     }
 
     @Test
     void deleteLesson_deleteExisting_status204() {
         Long lessonIdToDelete = LessonProvider.getRandomId();
-
         when(lessonService.deleteLessonById(lessonIdToDelete)).thenReturn(true);
 
         ResponseEntity<Lesson> response = lessonController.deleteLesson(lessonIdToDelete);
