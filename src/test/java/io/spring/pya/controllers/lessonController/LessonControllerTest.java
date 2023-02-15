@@ -114,7 +114,10 @@ class LessonControllerTest {
 
         when(lessonService.deleteLessonById(lessonIdToDelete)).thenReturn(false);
 
-        assertFalse(lessonController.deleteLesson(lessonIdToDelete));
+        assertThrows(LessonNotFoundException.class, () -> {
+            ResponseEntity<Lesson> response = lessonController.deleteLesson(lessonIdToDelete);
+            assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+        });
         verify(lessonService, times(1)).deleteLessonById(lessonIdToDelete);
     }
 
