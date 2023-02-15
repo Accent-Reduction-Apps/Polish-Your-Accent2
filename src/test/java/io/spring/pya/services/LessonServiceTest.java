@@ -92,5 +92,11 @@ class LessonServiceTest {
 
     @Test
     void deleteLessonById_lessonToBeDeletedDoesntExists_false() {
+        Long lessonIdToDelete = LessonProvider.getRandomId();
+        when(lessonRepository.findById(lessonIdToDelete)).thenReturn(Optional.empty());
+
+        assertFalse(lessonService.deleteLessonById(lessonIdToDelete));
+        verify(lessonRepository, times(1)).findById(lessonIdToDelete);
+
     }
 }
