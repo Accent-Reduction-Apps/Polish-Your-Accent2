@@ -8,7 +8,7 @@ function TeamSlotherin() {
 
     return (
         <>
-            <Alert show={show} variant='success'>
+            <Alert show={show} variant='warning'>
                 <div className='d-flex align-items-center'>
                     <div className='col-md-4'>
                         <Alert.Heading>Team Slotherin</Alert.Heading>

@@ -11,34 +11,35 @@ const Layout = ({ children }) => {
         <Container fluid>
             <Navbar className='navi' expand='lg' variant='dark'>
                 <Navbar.Brand className='navbrand' href='/'>
-                    <Stack direction='horizontal' gap={3}>
+                    <Stack direction='horizontal' gap={3} className='navtitle'>
+                        <span className='me-1' />
                         <span className='border border-4 rounded'>
                     <img
 
                         src={smallLogo}
-                        width='26'
-                        height='30'
-                        className="d-inline-block align-top"
+                        width='29'
+                        height='39'
+                        className="d-inline-block align-items-center"
                         alt="logo"
                     />
                     </span>
-                    Polish Your Accent
+                    POLISH YOUR ACCENT
                     </Stack>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls='navbar-nav light' />
                 <Navbar.Collapse id='navbar-nav'>
                     <Nav className='mr-auto'>
                         <Nav.Link as={Link} to='/about'>
-                            <Button variant='outline-primary'>About</Button>
+                            <Button variant='outline-warning'>About</Button>
                         </Nav.Link>
                         <Nav.Link as={Link} to='/teaminfo'>
-                            <Button variant='outline-primary'>Team</Button>
+                            <Button variant='outline-warning'>Team</Button>
                         </Nav.Link>
                         <Nav.Link as={Link} to='/registration'>
-                            <Button variant='outline-primary'>Login</Button>
+                            <Button variant='outline-warning'>Login</Button>
                         </Nav.Link>
                         <Nav.Link as={Link} to='/demo'>
-                            <Button variant='outline-success'>Lessons</Button>
+                            <Button variant='outline-warning'>Lessons</Button>
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
