@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
             <Navbar className='navi' expand="lg" variant='dark'>
                 <Navbar.Brand className='navbrand' href="/">
                     <Stack direction="horizontal" gap={3}>
-                        .<span className="border border-4 rounded">
+                        <span className="border border-4 rounded">
                     <img
 
                         src={smallLogo}
@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
                         <Nav.Link as={Link} to="/about">
                             <Button variant="outline-primary">About</Button>
                         </Nav.Link>
-                        <Nav.Link as={Link} to="/contact">
+                        <Nav.Link as={Link} to="/teaminfo">
                             <Button variant="outline-primary">Team</Button>
                         </Nav.Link>
                         <Nav.Link as={Link} to="/registration">

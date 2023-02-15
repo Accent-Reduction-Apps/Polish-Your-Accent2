@@ -1,8 +1,8 @@
 import React from "react";
 import YouTube from "react-youtube";
-import "./Vid.css";
+import "../styles/YTVideo.css";
 
-const Vid = ({ videoId }) => {
+const YTVideo = ({ videoId }) => {
     const opts = {
         height: "360",
         width: "640",
@@ -18,4 +18,4 @@ const Vid = ({ videoId }) => {
     );
 };
 
-export default Vid;
+export default YTVideo;

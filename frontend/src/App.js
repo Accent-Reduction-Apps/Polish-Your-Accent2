@@ -4,9 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./Pages/Home";
 import Layout from "./Pages/Layout";
-import Demo from "./Pages/Demo";
+import Lessons from "./Pages/Lessons";
 import About from "./Pages/About";
-import Contact from "./Pages/Contact";
+import TeamSlotherin from "./Pages/TeamSlotherin";
 import NoPage from "./Pages/NoPage";
 import RegisterHere from "./Pages/RegisterHere";
 import ErrorPage from "./Pages/ErrorPage";
@@ -24,10 +24,10 @@ export default function App() {
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<Home/>}/>
                     <Route path="about" element={<About/>}/>
-                    <Route path="contact" element={<Contact/>}/>
+                    <Route path="teaminfo" element={<TeamSlotherin/>}/>
                     <Route path="registration" element={<RegisterHere/>}/>
                     <Route path="registration" element={<RegisterHere/>}/>
-                    <Route path="demo" element={<Demo/>}/>
+                    <Route path="demo" element={<Lessons/>}/>
                     <Route exact path="/lessons" element={<GetLessons/>}/>
                     {/*<Route path="/lesson/:lessonId" render={({ match }) => (*/}
                     {/*    <GetLessonById match={match} />*/}

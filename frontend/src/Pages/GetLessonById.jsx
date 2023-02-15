@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router";
-import Vid from "./Vid";
-import '../GetLessons.css';
+import YTVideo from "./YTVideo";
+import '../styles/GetLessons.css';
 
 const GetLessonById = (props) => {
     const videoId = "rGIJ8I3hPts";
@@ -82,7 +82,7 @@ const GetLessonById = (props) => {
             <p>Lesson Id: {lesson.id}</p>
             <p>Topic: {lesson.topic}</p>
             <p>Text: {lesson.text}</p>
-            <Vid videoId={videoId} />;
+            <YTVideo videoId={videoId} />;
         </div>
     );
 };
