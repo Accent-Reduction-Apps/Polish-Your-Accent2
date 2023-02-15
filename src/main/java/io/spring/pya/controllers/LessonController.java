@@ -46,6 +46,10 @@ public class LessonController {
     public ResponseEntity<Lesson> updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew) throws ResourceNotFoundException {
         if (lessonService.getLessonById(id) != null) {
             Lesson updatedLesson = lessonService.updateLesson(id, lessonNew);
+            if (updatedLesson == null) {
+                //only possible if save fail
+                throw new ResourceNotFoundException("Lesson", id);
+            }
             return new ResponseEntity<>(updatedLesson, HttpStatus.OK);
         } else {
             throw new ResourceNotFoundException("Lesson", id);
