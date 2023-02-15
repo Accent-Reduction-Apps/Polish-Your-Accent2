@@ -26,8 +26,8 @@ public class LessonController {
     }
 
     @GetMapping("/{lessonId}")
-    public Lesson getLessonById(@PathVariable("lessonId") Long id) {
-        return lessonService.getLessonById(id);
+    public ResponseEntity<Lesson> getLessonById(@PathVariable("lessonId") Long id) {
+        return new ResponseEntity<>(lessonService.getLessonById(id), HttpStatus.OK);
     }
 
     @PostMapping()
