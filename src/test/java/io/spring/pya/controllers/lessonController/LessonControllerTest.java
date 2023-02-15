@@ -8,6 +8,7 @@ import io.spring.pya.util.UtilRandomNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
@@ -55,6 +56,15 @@ class LessonControllerTest {
 
     @Test
     void getLessonById_lessonDoesntExist_404() {
+        Long requestedLessonId = LessonProvider.getRandomId();
+
+        when(lessonService.getLessonById(requestedLessonId)).thenReturn(null);
+
+        assertThrows(LessonNotFoundException.class, () -> {
+            ResponseEntity<Lesson> response = lessonController.getLessonById(requestedLessonId);
+            assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+        });
+        verify(lessonService, times(1)).getLessonById(requestedLessonId);
 
     }
 
