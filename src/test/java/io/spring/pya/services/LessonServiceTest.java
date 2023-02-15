@@ -68,6 +68,17 @@ class LessonServiceTest {
 
     @Test
     void updateLesson_lessonToUpdateExists_updatedLesson() {
+        Lesson lessonToUpdateWith = LessonProvider.createRandomLesson();
+        Lesson lessonToUpdate = LessonProvider.createRandomLesson();
+        Long lessonIdToUpdate = lessonToUpdate.getId();
+        Lesson lessonUpdated = new Lesson(lessonToUpdate.getId(), lessonToUpdateWith.getLessonContent(), lessonToUpdateWith.getTopic());
+        when(lessonRepository.findById(lessonIdToUpdate)).thenReturn(Optional.of(lessonUpdated));
+
+        Lesson response = lessonService.updateLesson(lessonIdToUpdate, lessonToUpdateWith);
+        verify(lessonRepository, times(1)).deleteById(lessonIdToUpdate);
+        verify(lessonRepository, times(1)).save(lessonToUpdateWith);
+        verify(lessonRepository, times(1)).findById(lessonIdToUpdate);
+        assertEquals(lessonUpdated, response);
     }
 
     @Test
