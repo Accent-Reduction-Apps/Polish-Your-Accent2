@@ -14,7 +14,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class LessonControllerTest {
@@ -127,7 +128,8 @@ class LessonControllerTest {
 
         when(lessonService.deleteLessonById(lessonIdToDelete)).thenReturn(true);
 
-        assertTrue(lessonController.deleteLesson(lessonIdToDelete));
+        ResponseEntity<Lesson> response = lessonController.deleteLesson(lessonIdToDelete);
+        assertEquals(response.getStatusCode(), HttpStatusCode.valueOf(204));
         verify(lessonService, times(1)).deleteLessonById(lessonIdToDelete);
     }
 }
