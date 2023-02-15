@@ -13,7 +13,6 @@ import java.util.Optional;
 public class LessonService {
     private final LessonRepository lessonRepository;
 
-
     public LessonService(LessonRepository lessonRepository) {
         this.lessonRepository = lessonRepository;
     }
@@ -35,9 +34,8 @@ public class LessonService {
         lessonRepository.deleteById(oldLessonId);
         lessonNew.setId(oldLessonId);
         lessonRepository.save(lessonNew);
-        return lessonRepository.getReferenceById(oldLessonId);
+        return getLessonById(oldLessonId);
     }
-
 
     public boolean deleteLessonById(Long id) {
         Optional<Lesson> lesson = lessonRepository.findById(id);

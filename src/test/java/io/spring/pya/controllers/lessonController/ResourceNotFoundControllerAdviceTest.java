@@ -2,6 +2,7 @@ package io.spring.pya.controllers.lessonController;
 
 import io.spring.pya.controllers.ResourceNotFoundControllerAdvice;
 import io.spring.pya.exceptions.ResourceNotFoundException;
+import io.spring.pya.providers.LessonProvider;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

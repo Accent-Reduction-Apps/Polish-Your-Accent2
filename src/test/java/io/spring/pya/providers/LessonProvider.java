@@ -1,4 +1,4 @@
-package io.spring.pya.controllers.lessonController;
+package io.spring.pya.providers;
 
 import io.spring.pya.entities.Lesson;
 import io.spring.pya.util.UtilRandomNumber;

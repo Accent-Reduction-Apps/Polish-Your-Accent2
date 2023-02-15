@@ -3,6 +3,7 @@ package io.spring.pya.controllers.lessonController;
 import io.spring.pya.controllers.LessonController;
 import io.spring.pya.entities.Lesson;
 import io.spring.pya.exceptions.ResourceNotFoundException;
+import io.spring.pya.providers.LessonProvider;
 import io.spring.pya.services.LessonService;
 import io.spring.pya.util.UtilRandomNumber;
 import org.junit.jupiter.api.BeforeEach;
@@ -94,7 +95,6 @@ class LessonControllerTest {
         assertEquals(response.getBody(), lessonUpdated);
         assertEquals(response.getStatusCode(), HttpStatusCode.valueOf(200));
     }
-
 
     @Test
     void deleteLesson_deleteNotExisting_LessonNotFoundException() {
