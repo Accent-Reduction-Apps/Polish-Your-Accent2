@@ -8,23 +8,23 @@ function TeamSlotherin() {
 
     return (
         <>
-            <Alert show={show} variant="success">
-                <div className="d-flex align-items-center">
-                    <div className="col-md-4">
+            <Alert show={show} variant='success'>
+                <div className='d-flex align-items-center'>
+                    <div className='col-md-4'>
                         <Alert.Heading>Team Slotherin</Alert.Heading>
                         <p>Dawid</p>
                         <p>Mateusz</p>
                         <p>Sebastiam</p>
                         <p>Marcin</p>
                         <hr />
-                        <div className="d-flex justify-content-end">
-                            <Button onClick={() => setShow(false)} variant="outline-dark">
+                        <div className='d-flex justify-content-end'>
+                            <Button onClick={() => setShow(false)} variant='outline-dark'>
                                 no i super
                             </Button>
                         </div>
                     </div>
-                    <div className="col-md-8 d-flex justify-content-end">
-                        <img src={Slotherin} alt="Team logo" style={{ maxWidth: '100%', maxHeight: '200px' }} />
+                    <div className='col-md-8 d-flex justify-content-end'>
+                        <img src={Slotherin} alt='Team logo' style={{ maxWidth: '100%', maxHeight: '300px' }} />
                     </div>
                 </div>
             </Alert>
