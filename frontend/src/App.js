@@ -13,6 +13,7 @@ import RegisterHere from "./Pages/RegisterHere";
 import ErrorPage from "./Pages/ErrorPage";
 import GetLessonById from "./Pages/GetLessonById";
 import GetLessons from "./Pages/GetLessons";
+import Footer from "./Pages/Footer";
 
 
 export default function App() {
@@ -36,7 +37,9 @@ export default function App() {
 
             </Route>
         </Routes>
+        {/*<Footer />*/}
     </Router>);
+
 }
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -52,7 +52,7 @@ class Registration extends Component {
     
     render() {
         return (<>
-                <div className="Register">
+                <div className='Register bg-warning '>
                     <p style={{fontSize: `0.9rem`, color: `orange`}}>   -   I'm working here!</p>
                     <h1 className="RegisterHeader">Register</h1>
 
