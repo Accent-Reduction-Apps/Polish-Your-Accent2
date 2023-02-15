@@ -3,6 +3,8 @@ import Registration from "../Registration";
 
 export default function RegisterHere() {
     return (
-        <Registration />
+        <div  className='bg-warning p-3'>
+        <Registration  />
+        </div>
     );
 }

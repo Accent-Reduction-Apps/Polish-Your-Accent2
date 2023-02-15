@@ -1,14 +1,18 @@
 import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router";
+import Vid from "./Vid";
 import '../GetLessons.css';
 
 const GetLessonById = (props) => {
+    const videoId = "rGIJ8I3hPts";
     const lessonId = useLocation();
     const id = lessonId.state.id;
     const [lesson, setLesson] = useState({});
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
+    // console.log(`useLocation: ${lessonId}`);
+    // console.log(props);
+    // console.log(lessonId.state);
     useEffect(() => {
         // async function fetchData() {
         //     setIsLoading(true);
@@ -78,6 +82,7 @@ const GetLessonById = (props) => {
             <p>Lesson Id: {lesson.id}</p>
             <p>Topic: {lesson.topic}</p>
             <p>Text: {lesson.text}</p>
+            <Vid videoId={videoId} />;
         </div>
     );
 };

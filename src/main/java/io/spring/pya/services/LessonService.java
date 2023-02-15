@@ -13,7 +13,6 @@ import java.util.Optional;
 public class LessonService {
     private final LessonRepository lessonRepository;
 
-
     public LessonService(LessonRepository lessonRepository) {
         this.lessonRepository = lessonRepository;
     }
@@ -31,16 +30,16 @@ public class LessonService {
         return lesson.orElse(null);
     }
 
-    public void updateLesson(Lesson lessonOld, Lesson lessonNew) {
-        lessonOld.setTopic(lessonNew.getTopic());
-        lessonOld.setText(lessonNew.getText());
+    public Lesson updateLesson(Long oldLessonId, Lesson lessonNew) {
+        lessonRepository.deleteById(oldLessonId);
+        lessonNew.setId(oldLessonId);
+        lessonRepository.save(lessonNew);
+        return getLessonById(oldLessonId);
     }
-
-
 
     public boolean deleteLessonById(Long id) {
         Optional<Lesson> lesson = lessonRepository.findById(id);
-        if(lesson.isPresent()){
+        if (lesson.isPresent()) {
             lessonRepository.deleteById(id);
             return true;
         }
