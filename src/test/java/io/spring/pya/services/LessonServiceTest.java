@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -36,6 +37,13 @@ class LessonServiceTest {
 
     @Test
     void getLessonById_LessonExists_Lesson() {
+        Lesson lessonShouldBeReceived = LessonProvider.createRandomLesson();
+        when(lessonRepository.findById(lessonShouldBeReceived.getId())).thenReturn(Optional.of(lessonShouldBeReceived));
+
+        Lesson response = lessonService.getLessonById(lessonShouldBeReceived.getId());
+
+        verify(lessonRepository, times(1)).findById(lessonShouldBeReceived.getId());
+        assertEquals(lessonShouldBeReceived, response);
     }
 
     @Test
