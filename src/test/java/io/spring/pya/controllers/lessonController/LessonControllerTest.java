@@ -2,7 +2,7 @@ package io.spring.pya.controllers.lessonController;
 
 import io.spring.pya.controllers.LessonController;
 import io.spring.pya.entities.Lesson;
-import io.spring.pya.exceptions.lesson.LessonNotFoundException;
+import io.spring.pya.exceptions.ResourceNotFoundException;
 import io.spring.pya.services.LessonService;
 import io.spring.pya.util.UtilRandomNumber;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,7 +56,7 @@ class LessonControllerTest {
         Long requestedLessonId = LessonProvider.getRandomId();
         when(lessonService.getLessonById(requestedLessonId)).thenReturn(null);
 
-        assertThrows(LessonNotFoundException.class, () -> lessonController.getLessonById(requestedLessonId));
+        assertThrows(ResourceNotFoundException.class, () -> lessonController.getLessonById(requestedLessonId));
         verify(lessonService, times(1)).getLessonById(requestedLessonId);
 
     }
@@ -75,7 +75,7 @@ class LessonControllerTest {
         Long lessonIdToUpdate = UtilRandomNumber.getRandomLong();
         when(lessonService.getLessonById(lessonIdToUpdate)).thenReturn(null);
 
-        assertThrows(LessonNotFoundException.class, () -> lessonController.updateLesson(lessonIdToUpdate, LessonProvider.createRandomLesson()));
+        assertThrows(ResourceNotFoundException.class, () -> lessonController.updateLesson(lessonIdToUpdate, LessonProvider.createRandomLesson()));
         verify(lessonService, never()).updateLesson(LessonProvider.getRandomId(), lessonToUpdateWith);
     }
 
@@ -101,7 +101,7 @@ class LessonControllerTest {
         Long lessonIdToDelete = LessonProvider.getRandomId();
         when(lessonService.deleteLessonById(lessonIdToDelete)).thenReturn(false);
 
-        assertThrows(LessonNotFoundException.class, () -> lessonController.deleteLesson(lessonIdToDelete));
+        assertThrows(ResourceNotFoundException.class, () -> lessonController.deleteLesson(lessonIdToDelete));
         verify(lessonService, times(1)).deleteLessonById(lessonIdToDelete);
     }
 

@@ -2,7 +2,7 @@ package io.spring.pya.controllers;
 
 
 import io.spring.pya.entities.Lesson;
-import io.spring.pya.exceptions.lesson.LessonNotFoundException;
+import io.spring.pya.exceptions.ResourceNotFoundException;
 import io.spring.pya.services.LessonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -32,7 +32,7 @@ public class LessonController {
         if (foundLesson != null) {
             return new ResponseEntity<>(foundLesson, HttpStatus.OK);
         } else {
-            throw new LessonNotFoundException(id);
+            throw new ResourceNotFoundException("Lesson", id);
         }
 
     }
@@ -43,12 +43,12 @@ public class LessonController {
     }
 
     @PutMapping("/{lessonId}")
-    public ResponseEntity<Lesson> updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew) throws LessonNotFoundException {
+    public ResponseEntity<Lesson> updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew) throws ResourceNotFoundException {
         if (lessonService.getLessonById(id) != null) {
             Lesson updatedLesson = lessonService.updateLesson(id, lessonNew);
             return new ResponseEntity<>(updatedLesson, HttpStatus.OK);
         } else {
-            throw new LessonNotFoundException(id);
+            throw new ResourceNotFoundException("Lesson", id);
         }
     }
 
@@ -57,7 +57,7 @@ public class LessonController {
         if (lessonService.deleteLessonById(id)) {
             return new ResponseEntity<>(HttpStatusCode.valueOf(204));
         } else {
-            throw new LessonNotFoundException(id);
+            throw new ResourceNotFoundException("Lesson", id);
         }
     }
 
