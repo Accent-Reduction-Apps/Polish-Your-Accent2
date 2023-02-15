@@ -96,7 +96,6 @@ class LessonControllerTest {
         assertEquals(response.getStatusCode(), HttpStatusCode.valueOf(200));
     }
 
-
     @Test
     void deleteLesson_deleteNotExisting_LessonNotFoundException() {
         Long lessonIdToDelete = LessonProvider.getRandomId();
