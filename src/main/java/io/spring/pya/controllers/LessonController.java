@@ -2,9 +2,11 @@ package io.spring.pya.controllers;
 
 
 import io.spring.pya.entities.Lesson;
+import io.spring.pya.exceptions.ResourceNotFoundException;
 import io.spring.pya.services.LessonService;
-
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +23,19 @@ public class LessonController {
     }
 
     @GetMapping
-    public List<Lesson> getAllLessons() {
-        return lessonService.getAllLessons();
+    public ResponseEntity<List<Lesson>> getAllLessons() {
+        return new ResponseEntity<>(lessonService.getAllLessons(), HttpStatus.OK);
     }
 
     @GetMapping("/{lessonId}")
-    public Lesson getLessonById(@PathVariable("lessonId") Long id) {
-        return lessonService.getLessonById(id);
+    public ResponseEntity<Lesson> getLessonById(@PathVariable("lessonId") Long id) {
+        Lesson foundLesson = lessonService.getLessonById(id);
+        if (foundLesson != null) {
+            return new ResponseEntity<>(foundLesson, HttpStatus.OK);
+        } else {
+            throw new ResourceNotFoundException("Lesson", id);
+        }
+
     }
 
     @PostMapping()
@@ -36,19 +44,26 @@ public class LessonController {
     }
 
     @PutMapping("/{lessonId}")
-    public Object updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew){
-            Lesson lessonOld = lessonService.getLessonById(id);
-            if(lessonOld!= null){
-                lessonService.updateLesson(lessonOld, lessonNew);
-                return lessonOld;
-            }else{
-                return String.format("No lesson found with id %d", id);
+    public ResponseEntity<Lesson> updateLesson(@PathVariable("lessonId") Long id, @RequestBody Lesson lessonNew) throws ResourceNotFoundException {
+        if (lessonService.getLessonById(id) != null) {
+            Lesson updatedLesson = lessonService.updateLesson(id, lessonNew);
+            if (updatedLesson == null) {
+                //only possible if save fail
+                throw new ResourceNotFoundException("Lesson", id);
             }
+            return new ResponseEntity<>(updatedLesson, HttpStatus.OK);
+        } else {
+            throw new ResourceNotFoundException("Lesson", id);
+        }
     }
 
     @DeleteMapping("/{lessonId}")
-    public boolean deleteLesson(@PathVariable("lessonId") Long id){
-        return lessonService.deleteLessonById(id);
+    public ResponseEntity<Lesson> deleteLesson(@PathVariable("lessonId") Long id) {
+        if (lessonService.deleteLessonById(id)) {
+            return new ResponseEntity<>(HttpStatusCode.valueOf(204));
+        } else {
+            throw new ResourceNotFoundException("Lesson", id);
+        }
     }
 
 
