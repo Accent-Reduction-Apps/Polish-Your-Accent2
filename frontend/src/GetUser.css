@@ -1,0 +1,11 @@
+.my-account{
+ background-color: blueviolet;
+ min-height: 300px;
+ /*display: flex;*/
+ /*display: table-column;*/
+ text-align: center;
+ align-items: center;
+ gap: 2rem;
+ padding: 0 0.5rem;
+
+}
