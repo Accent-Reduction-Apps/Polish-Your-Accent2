@@ -27,7 +27,13 @@ public class LessonController {
 
     @GetMapping("/{lessonId}")
     public ResponseEntity<Lesson> getLessonById(@PathVariable("lessonId") Long id) {
-        return new ResponseEntity<>(lessonService.getLessonById(id), HttpStatus.OK);
+        Lesson foundLesson = lessonService.getLessonById(id);
+        if (foundLesson != null) {
+            return new ResponseEntity<>(foundLesson, HttpStatus.OK);
+        } else {
+            throw new LessonNotFoundException(id);
+        }
+
     }
 
     @PostMapping()
