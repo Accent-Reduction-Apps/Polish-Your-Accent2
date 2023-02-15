@@ -30,7 +30,7 @@ class LessonControllerTest {
 
     @Test
     void getAllLessons_methodCalled_LessonsListAndStatus200() {
-        List<Lesson> allLessons = LessonProvider.createRandomLessonsList(5);
+        List<Lesson> allLessons = LessonProvider.createRandomLessonsList(UtilRandomNumber.getRandomInt(5, 50));
 
         when(lessonService.getAllLessons()).thenReturn(allLessons);
 
