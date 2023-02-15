@@ -34,10 +34,11 @@ class LessonControllerTest {
 
         when(lessonService.getAllLessons()).thenReturn(allLessons);
 
-        List<Lesson> allLessonsReceived = lessonController.getAllLessons();
+        ResponseEntity<List<Lesson>> allLessonsReceived = lessonController.getAllLessons();
 
         verify(lessonService, times(1)).getAllLessons();
-        assertEquals(allLessonsReceived, allLessons);
+        assertEquals(allLessonsReceived.getBody(), allLessons);
+        assertEquals(allLessonsReceived.getStatusCode(), HttpStatusCode.valueOf(200));
     }
 
     @Test
