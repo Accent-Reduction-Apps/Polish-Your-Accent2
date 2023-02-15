@@ -5,6 +5,7 @@ import io.spring.pya.entities.Lesson;
 import io.spring.pya.exceptions.lesson.LessonNotFoundException;
 import io.spring.pya.services.LessonService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,8 +53,12 @@ public class LessonController {
     }
 
     @DeleteMapping("/{lessonId}")
-    public boolean deleteLesson(@PathVariable("lessonId") Long id){
-        return lessonService.deleteLessonById(id);
+    public ResponseEntity<Lesson> deleteLesson(@PathVariable("lessonId") Long id) {
+        if (lessonService.deleteLessonById(id)) {
+            return new ResponseEntity<>(HttpStatusCode.valueOf(204));
+        } else {
+            throw new LessonNotFoundException(id);
+        }
     }
 
 
