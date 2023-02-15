@@ -3,6 +3,7 @@ package io.spring.pya.controllers.lessonController;
 import io.spring.pya.controllers.LessonController;
 import io.spring.pya.entities.Lesson;
 import io.spring.pya.exceptions.ResourceNotFoundException;
+import io.spring.pya.providers.LessonProvider;
 import io.spring.pya.services.LessonService;
 import io.spring.pya.util.UtilRandomNumber;
 import org.junit.jupiter.api.BeforeEach;
