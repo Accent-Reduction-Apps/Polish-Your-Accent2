@@ -12,6 +12,7 @@ import RegisterHere from "./Pages/RegisterHere";
 import ErrorPage from "./Pages/ErrorPage";
 import GetLessonById from "./Pages/GetLessonById";
 import GetLessons from "./Pages/GetLessons";
+import GetUser from "./Pages/GetUser";
 
 document.title = "Polish Your Accent";
 
