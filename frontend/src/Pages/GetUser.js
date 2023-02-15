@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {useForm} from 'react-hook-form'
 import '../GetUser.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import RegistrationAlert from "../RegistrationAlert";
+import {useForm} from "react-hook-form";
 
 const GetUser = () => {
     let userid = 2;
@@ -11,6 +10,11 @@ const GetUser = () => {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const {register,handleSubmit, watch, errors } = useForm()
+    const onSubmit = data => {
+        editUser(data)
+        console.log(data)
+    }
 
     useEffect(() => {
 
@@ -48,10 +52,9 @@ const GetUser = () => {
     }
 
     function editUser(username, emailAddress, password) {
-        fetch("http://localhost:8080/users", {
+        const putNewUserDetails = {
             method: "PUT",
             headers: {
-                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -59,66 +62,62 @@ const GetUser = () => {
                 emailAddress: emailAddress,
                 password: password,
             })
-        }).then(function (response) {
-            if (response.status === 200) {
-                this.showRegistrationAlert("success", "User changed???!", "Your ' ' are changed.")
-            } else if (response.status === 422) {
-                this.showRegistrationAlert("danger", "User already exists", "Please choose a different name.");
-            } else {
-                this.showRegistrationAlert("danger", "User not registered!", "Something went wrong.");
-            }
-        }.bind(this)).catch(function (error) {
-            this.showRegistrationAlert("danger", "Error", "Something went wrong.");
-        }.bind(this));
+        };
+        fetch("http://localhost:8080/users", putNewUserDetails)
+            .then(response => response.json())
+            // .then(data => this.SetState({userid, data.id}))//TODO repair
+
+        // }).then(function (response) {
+        //     if (response.status === 200) {
+        //         this.showRegistrationAlert("success", "User changed???!", "Your ' ' are changed.")
+        //     } else if (response.status === 422) {
+        //         this.showRegistrationAlert("danger", "User already exists", "Please choose a different name.");
+        //     } else {
+        //         this.showRegistrationAlert("danger", "User not registered!", "Something went wrong.");
+        //     }
+        // }.bind(this)).catch(function (error) {
+        //     this.showRegistrationAlert("danger", "Error", "Something went wrong.");
+        // }.bind(this));
     }
 
-    let  handleSubmit = event => {
-        // event.preventDefault();
-        console.log(event.target.username.value);
-        console.log(event.target.emailAddress.value);
-        console.log(event.target.password.value);
-        return editUser(event.target.username.value,event.target.emailAddress.value,  event.target.password.value);
-    }
+    // let  handleSubmit = event => {
+    //     // event.preventDefault();
+    //     console.log(event.target.username.value);
+    //     console.log(event.target.emailAddress.value);
+    //     console.log(event.target.password.value);
+    //     return editUser(event.target.username.value,event.target.emailAddress.value,  event.target.password.value);
+    // }
 
 
     return (
         <div className="my-account">
 
-            <h1 className="My Account">Register</h1>
-            <div className="name">Name: <br/>
-                {users.name}
-            </div>
-            <div className="emailAddress">Email Address: <br/>
-                {users.emailAddress}
-            </div>
-            <div className="password">password: <br/>
-                {users.password}
-            </div>
+            <h1 className="My Account">My Account</h1>
 
-            {/*<Form onSubmit={editUser(name,emailAddress,password)}>*/}
+            <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group controlId="name" size="lg">
                     <Form.Label>
                         Name
                     </Form.Label>
-                    <Form.Control autoFocus name="name"/>
+                    <Form.Control defaultValue={users.name} name="name" />
                 </Form.Group>
                 <Form.Group controlId="emailAddress" size="lg">
                     <Form.Label>
                         Email Address
                     </Form.Label>
-                    <Form.Control autoFocus name="emailAddress"/>
+                    <Form.Control defaultValue={users.emailAddress} name="emailAddress" />
                 </Form.Group>
                 <Form.Group controlId="password" size="lg">
                     <Form.Label>
                         Password
                     </Form.Label>
-                    <Form.Control type="password" name="password"/>
+                    <Form.Control defaultValue={users.password} type="password" name="password" />
                 </Form.Group>
 
 
 
                 <Button type="submit">Save account edition</Button>
-            {/*</Form>*/}
+            </Form>
 
 
 
