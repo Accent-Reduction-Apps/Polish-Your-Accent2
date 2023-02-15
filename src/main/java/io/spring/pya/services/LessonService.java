@@ -34,7 +34,7 @@ public class LessonService {
         lessonRepository.deleteById(oldLessonId);
         lessonNew.setId(oldLessonId);
         lessonRepository.save(lessonNew);
-        return lessonRepository.getReferenceById(oldLessonId);
+        return getLessonById(oldLessonId);
     }
 
     public boolean deleteLessonById(Long id) {
