@@ -1,5 +1,17 @@
 .footer {
     background-color: maroon;
-    color: gold;
+    color: darkgoldenrod;
     margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+}
+.clock {
+    text-align: center;
+}
+
+.link-icons {
+    text-align: right;
 }
