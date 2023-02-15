@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 class LessonServiceTest {
@@ -48,7 +49,13 @@ class LessonServiceTest {
 
     @Test
     void getLessonById_LessonDoesntExists_null() {
+        Long searchedLessonId = LessonProvider.getRandomId();
+        when(lessonRepository.findById(searchedLessonId)).thenReturn(Optional.empty());
 
+        Lesson response = lessonService.getLessonById(searchedLessonId);
+
+        verify(lessonRepository, times(1)).findById(searchedLessonId);
+        assertNull(response);
     }
 
     @Test
