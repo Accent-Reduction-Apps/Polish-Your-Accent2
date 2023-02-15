@@ -1,6 +1,7 @@
 body {
   background-color: burlywood;
   color: maroon;
+  font-family: "Montserrat", sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {
