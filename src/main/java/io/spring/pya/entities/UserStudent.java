@@ -90,4 +90,14 @@ public class UserStudent {
         this.lessons = lessons;
     }
 
+    @Override
+    public String toString() {
+        return "UserStudent{" +
+                "id=" + id +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", lessons=" + lessons +
+                '}';
+    }
 }
