@@ -1,12 +1,28 @@
 import {Outlet, Link} from 'react-router-dom';
-import React from 'react';
+import React, {useState} from 'react';
 import {Navbar, Nav, Container, Button, Stack} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import smallLogo from '../resources/rsmouth2.png';
 import '../styles/Layout.css';
 import Footer from './Footer';
+import {isAuthorized} from '../auth';
 
 const Layout = ({ children }) => {
+  //  let buttonChange;
+    const [isLoggedIn, setIsLoggedIn] = useState(isAuthorized);
+    const buttonChange = isAuthorized ? 'Log out' : 'Log in';
+    const loginLink = isAuthorized ? '/logout' : '/registration';
+    const extraButtons = isAuthorized ? (
+        <>
+            <Nav.Link as={Link} to='/demo'>
+                <Button variant='outline-warning'>Lessons</Button>
+            </Nav.Link>
+            <Nav.Link as={Link} to='/teaminfo'>
+                <Button variant='outline-warning'>My account</Button>
+            </Nav.Link>
+        </>
+    ) : null;
+
     return (
         <Container fluid>
             <Navbar className='navi' expand='lg' variant='dark'>
@@ -35,12 +51,10 @@ const Layout = ({ children }) => {
                         <Nav.Link as={Link} to='/teaminfo'>
                             <Button variant='outline-warning'>Team</Button>
                         </Nav.Link>
-                        <Nav.Link as={Link} to='/registration'>
-                            <Button variant='outline-warning'>Login</Button>
+                        <Nav.Link as={Link} to={loginLink}>
+                            <Button variant='outline-warning'>{buttonChange}</Button>
                         </Nav.Link>
-                        <Nav.Link as={Link} to='/demo'>
-                            <Button variant='outline-warning'>Lessons</Button>
-                        </Nav.Link>
+                        {extraButtons}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

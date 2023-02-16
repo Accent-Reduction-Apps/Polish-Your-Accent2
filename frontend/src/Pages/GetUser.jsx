@@ -4,14 +4,17 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {useForm} from "react-hook-form";
 
+
 const GetUser = () => {
     let userid = 2;
-    console.log(userid);
+    // console.log(userid);
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [state, setState] = useState();
     const {register,handleSubmit, watch, errors } = useForm()
     const onSubmit = data => {
+        setUsers(data);
         editUser(data)
         console.log(data)
     }
@@ -29,6 +32,7 @@ const GetUser = () => {
                 throw new Error(response.statusText);
             }
             const json = await response.json();
+            console.log(json)
             setUsers(json)
             return json;
             } catch (e) {
@@ -51,21 +55,28 @@ const GetUser = () => {
         return <p>An error occurred: {error}</p>;
     }
 
-    function editUser(username, emailAddress, password) {
+    function editUser(data){
+        console.log(data);
+    console.log(data.name);
+    console.log(data.emailAddress);
+    console.log(data.password);
         const putNewUserDetails = {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                name: username,
-                emailAddress: emailAddress,
-                password: password,
+                user_id: users.id,
+                name: data.name,
+                email_address: data.emailAddress,
+                password: data.password,
+                lessons: users.lessons
             })
         };
-        fetch("http://localhost:8080/users", putNewUserDetails)
+        fetch(`http://localhost:8080/users/${userid}`, putNewUserDetails)
             .then(response => response.json())
-            // .then(data => this.SetState({userid, data.id}))//TODO repair
+            .then(state => setState(state))//TODO
+        console.log(state);
 
         // }).then(function (response) {
         //     if (response.status === 200) {
@@ -99,24 +110,24 @@ const GetUser = () => {
                     <Form.Label>
                         Name
                     </Form.Label>
-                    <Form.Control defaultValue={users.name} name="name" />
+                    <Form.Control defaultValue={users.name}   results="value"  className="name" />
                 </Form.Group>
                 <Form.Group controlId="emailAddress" size="lg">
                     <Form.Label>
                         Email Address
                     </Form.Label>
-                    <Form.Control defaultValue={users.emailAddress} name="emailAddress" />
+                    <Form.Control defaultValue={users.emailAddress}   name="emailAddress" />
                 </Form.Group>
                 <Form.Group controlId="password" size="lg">
                     <Form.Label>
                         Password
                     </Form.Label>
-                    <Form.Control defaultValue={users.password} type="password" name="password" />
+                    <Form.Control defaultValue={users.password} type="password"   name="password" />
                 </Form.Group>
 
 
 
-                <Button type="submit">Save account edition</Button>
+                <Button className="save-button" type="submit">Save account edition</Button>
             </Form>
 
 
