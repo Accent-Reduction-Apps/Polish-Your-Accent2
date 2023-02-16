@@ -33,10 +33,16 @@ public class UserService {
         return user.orElse(null);
     }
 
-    public void updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
+    public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
+        if(userStudentNew.getName().equals("") || userStudentNew.getName() == null || userStudentNew.getEmailAddress().equals("") || userStudentNew.getEmailAddress() == null){
+            throw new IllegalArgumentException("The argument for Topic cannot be 'null' when updating lesson");
+        }
         userStudentOld.setName(userStudentNew.getName());
         userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
         userStudentOld.setPassword(userStudentNew.getPassword());
+        userStudentOld.setLessons(userStudentNew.getLessons());
+        userRepository.save(userStudentOld);
+        return userRepository.getReferenceById(userStudentOld.getId());
     }
 
     public boolean deleteUserById(Long id) {
