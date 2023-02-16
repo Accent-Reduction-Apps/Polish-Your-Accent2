@@ -1,1 +1,3 @@
-export let isAuthorized = true;
+export let isAuthorized = true
+
+;

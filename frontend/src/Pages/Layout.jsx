@@ -10,8 +10,18 @@ import {isAuthorized} from '../auth';
 const Layout = ({ children }) => {
   //  let buttonChange;
     const [isLoggedIn, setIsLoggedIn] = useState(isAuthorized);
-    const buttonChange = isLoggedIn ? 'Log out' : 'Log in';
+    const buttonChange = isAuthorized ? 'Log out' : 'Log in';
     const loginLink = isAuthorized ? '/logout' : '/registration';
+    const extraButtons = isAuthorized ? (
+        <>
+            <Nav.Link as={Link} to='/demo'>
+                <Button variant='outline-warning'>Lessons</Button>
+            </Nav.Link>
+            <Nav.Link as={Link} to='/teaminfo'>
+                <Button variant='outline-warning'>My account</Button>
+            </Nav.Link>
+        </>
+    ) : null;
 
     return (
         <Container fluid>
@@ -44,9 +54,7 @@ const Layout = ({ children }) => {
                         <Nav.Link as={Link} to={loginLink}>
                             <Button variant='outline-warning'>{buttonChange}</Button>
                         </Nav.Link>
-                        <Nav.Link as={Link} to='/demo'>
-                            <Button variant='outline-warning'>Lessons</Button>
-                        </Nav.Link>
+                        {extraButtons}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
