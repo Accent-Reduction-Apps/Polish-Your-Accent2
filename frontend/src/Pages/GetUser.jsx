@@ -6,7 +6,7 @@ import {useForm} from "react-hook-form";
 
 const GetUser = () => {
     let userid = 2;
-    console.log(userid);
+    // console.log(userid);
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +29,7 @@ const GetUser = () => {
                 throw new Error(response.statusText);
             }
             const json = await response.json();
+            console.log(json)
             setUsers(json)
             return json;
             } catch (e) {
@@ -51,21 +52,24 @@ const GetUser = () => {
         return <p>An error occurred: {error}</p>;
     }
 
-    function editUser(username, emailAddress, password) {
+    function editUser(name, emailAddress, password) {
         const putNewUserDetails = {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                name: username,
+                id: userid,
+                name: name,
                 emailAddress: emailAddress,
                 password: password,
+                lessons: users.lessons
             })
         };
-        fetch("http://localhost:8080/users", putNewUserDetails)
+        fetch(`http://localhost:8080/users/${userid}`, putNewUserDetails)
             .then(response => response.json())
-            // .then(data => this.SetState({userid, data.id}))//TODO repair
+            .then(data => setUsers(data))//TODO
+        console.log(users);
 
         // }).then(function (response) {
         //     if (response.status === 200) {
@@ -116,7 +120,7 @@ const GetUser = () => {
 
 
 
-                <Button type="submit">Save account edition</Button>
+                <Button className="save-button" type="submit">Save account edition</Button>
             </Form>
 
 
