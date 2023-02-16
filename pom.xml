@@ -67,23 +67,22 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.33</version>
 
-<!--            SnakeYaml vulnerability was manifesting itself due to SnakeYaml being a transitive dependency of <artifactId>spring-boot-starter-validation at this stage we are not sure whether SnakeYaml will be needed therefore instead of excluding it from <artifactId>spring-boot-starter-validation we created direct SnakeYaml dependency to better monitor the problem and to simplify the updated when SnakeYaml 2.0 is available. Direct dependencies always take precedence over transitive dependencies.  -->
-<!--            SnakeYAML 1.33 still has a vulnerability. Since that is the last version (SnakeYAML 2.x is not compatible with 1.x), that's something you can't discard until the SnakeYAML team fixes that.-->
-<!--            https://stackoverflow.com/questions/74781733/vulnerable-dependency-mavenorg-yamlsnakeyaml-->
+            <!--            SnakeYaml vulnerability was manifesting itself due to SnakeYaml being a transitive dependency of <artifactId>spring-boot-starter-validation at this stage we are not sure whether SnakeYaml will be needed therefore instead of excluding it from <artifactId>spring-boot-starter-validation we created direct SnakeYaml dependency to better monitor the problem and to simplify the updated when SnakeYaml 2.0 is available. Direct dependencies always take precedence over transitive dependencies.  -->
+            <!--            SnakeYAML 1.33 still has a vulnerability. Since that is the last version (SnakeYAML 2.x is not compatible with 1.x), that's something you can't discard until the SnakeYAML team fixes that.-->
+            <!--            https://stackoverflow.com/questions/74781733/vulnerable-dependency-mavenorg-yamlsnakeyaml-->
 
 
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.yaml</groupId>-->
-<!--                    <artifactId>snakeyaml</artifactId>-->
+            <!--            <exclusions>-->
+            <!--                <exclusion>-->
+            <!--                    <groupId>org.yaml</groupId>-->
+            <!--                    <artifactId>snakeyaml</artifactId>-->
 
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
         </dependency>
 
-<!--Solution for MapStructure and Lombok incompatibility to be considered after main design is finalized. Lombok  -->
-<!--        https://stackoverflow.com/questions/47676369/mapstruct-and-lombok-not-working-together-->
-
+        <!--Solution for MapStructure and Lombok incompatibility to be considered after main design is finalized. Lombok  -->
+        <!--        https://stackoverflow.com/questions/47676369/mapstruct-and-lombok-not-working-together-->
     </dependencies>
     <build>
         <plugins>
@@ -93,24 +92,23 @@
             </plugin>
 
 
-
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.1</version>
-            <configuration>
-                <source>17</source> <!-- depending on your project -->
-                <target>17</target> <!-- depending on your project -->
-                <annotationProcessorPaths>
-                    <path>
-                        <groupId>org.mapstruct</groupId>
-                        <artifactId>mapstruct-processor</artifactId>
-                        <version>1.4.2.Final</version>
-                    </path>
-                    <!-- other annotation processors -->
-                </annotationProcessorPaths>
-            </configuration>
-        </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>17</source> <!-- depending on your project -->
+                    <target>17</target> <!-- depending on your project -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>1.4.2.Final</version>
+                        </path>
+                        <!-- other annotation processors -->
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
 
         </plugins>
     </build>
