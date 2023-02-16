@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/lessons")
 public class LessonController {
 
@@ -53,10 +54,6 @@ public class LessonController {
         Lesson oldLesson = lessonService.getLessonById(id);
         if (oldLesson != null) {
             Lesson updatedLesson = lessonService.updateLesson(id, lessonNew);
-            if (updatedLesson == null) {
-                //only possible if save fail
-                throw new ResourceNotFoundException("Lesson", id);
-            }
             LOGGER.info("Update lesson " + oldLesson + "\nwith\n" + lessonNew);
             return new ResponseEntity<>(updatedLesson, HttpStatus.OK);
         } else {
