@@ -1,11 +1,22 @@
 import React from 'react';
-import {isAuthorized} from '../auth';
+import { Link } from 'react-router-dom';
+import { setAuthorized } from '../auth';
+import { isAuthorized } from '../auth';
 
-const Logout = () => {
-    return <div className='bg-warning p-3'>
-        <h1>LOGGING OUT</h1>
-        <p>You are about to log out, are you sure?</p>
-    </div>
-};
+function Logout() {
+    function logoutAction() {
+        console.log(`before: ${isAuthorized()}`);
+        setAuthorized(false);
+        console.log(`after: ${isAuthorized()}`);
+    }
+
+    return (
+        <div className='bg-warning p-3'>
+            <h1>Logout</h1>
+            <p>Are you sure you want to log out?</p>
+            <Link to="/" onClick={logoutAction}>Log out</Link>
+        </div>
+    );
+}
 
 export default Logout;

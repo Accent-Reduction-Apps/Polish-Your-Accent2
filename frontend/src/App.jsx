@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
@@ -13,18 +13,27 @@ import ErrorPage from './Pages/ErrorPage';
 import GetLessonById from './Pages/GetLessonById';
 import GetLessons from './Pages/GetLessons';
 import GetUser from './Pages/GetUser';
-import {isAuthorized} from './auth';
 import Login from "./Login";
 import Logout from "./Pages/Logout";
+import { isAuthorized, setAuthorized } from './auth';
 
 document.title = 'Polish Your Accent';
 
 export default function App() {
+
+    const [isAuthorizedState, setIsAuthorizedState] = useState(isAuthorized());
+
+    function handleLogout() {
+        setAuthorized(false);
+        setIsAuthorizedState(false);
+    }
+
+
     return (
         <Router>
             <Routes>
 
-                <Route path='/' element={<Layout/>}>
+                <Route path='/' element={<Layout isAuthorized={isAuthorizedState} onLogout={handleLogout} />}>
                     <Route index element={<Home/>}/>
                     <Route path='about' element={<About/>}/>
                     <Route path='teaminfo' element={<TeamSlotherin/>}/>
