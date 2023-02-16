@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+
 import './Registration.css';
 import RegistrationAlert from "./RegistrationAlert";
 
@@ -14,8 +15,9 @@ class Registration extends Component {
     handleSubmit = event => {
         event.preventDefault();
         console.log(event.target.username.value);
+        console.log(event.target.addressEmail.value);
         console.log(event.target.password.value);
-        this.registerUser(event.target.username.value, event.target.password.value);
+        this.registerUser(event.target.username.value, event.target.addressEmail.value, event.target.password.value);
     }
 
     showRegistrationAlert(variant, heading, message) {
@@ -25,7 +27,7 @@ class Registration extends Component {
         this.registrationAlert.current.setVisible(true);
     }
 
-    registerUser(username, password) {
+    registerUser(username, addressEmail, password) {
         fetch("http://localhost:8080/users", {
             method: "POST",
             headers: {
@@ -34,7 +36,7 @@ class Registration extends Component {
             },
             body: JSON.stringify({
                 name: username,
-
+                emailAddress: addressEmail,
                 password: password,
             })
         }).then(function (response) {
@@ -62,6 +64,12 @@ class Registration extends Component {
                                 Username
                             </Form.Label>
                             <Form.Control autoFocus name="username"/>
+                        </Form.Group>
+                        <Form.Group controlId="addressEmail" size="lg">
+                            <Form.Label>
+                                Address Email
+                            </Form.Label>
+                            <Form.Control autoFocus name="addressEmail"/>
                         </Form.Group>
                         <Form.Group controlId="password" size="lg">
                             <Form.Label>
