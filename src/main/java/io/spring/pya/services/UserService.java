@@ -34,7 +34,7 @@ public class UserService {
     }
 
     public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
-        if(userStudentNew.getName().equals("") || userStudentNew.getName() == null || userStudentNew.getEmailAddress().equals("") || userStudentNew.getEmailAddress() == null){
+        if(userStudentNew.getName().trim().equals("") || userStudentNew.getName() == null || userStudentNew.getEmailAddress().equals("") || userStudentNew.getEmailAddress() == null){
             throw new IllegalArgumentException("The argument for Topic cannot be 'null' when updating lesson");
         }
         userStudentOld.setName(userStudentNew.getName());
