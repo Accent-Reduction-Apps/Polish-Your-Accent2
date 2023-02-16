@@ -13,6 +13,9 @@ import ErrorPage from './Pages/ErrorPage';
 import GetLessonById from './Pages/GetLessonById';
 import GetLessons from './Pages/GetLessons';
 import GetUser from './Pages/GetUser';
+import {isAuthorized} from './auth';
+import Login from "./Login";
+import Logout from "./Pages/Logout";
 
 document.title = 'Polish Your Accent';
 
@@ -26,7 +29,7 @@ export default function App() {
                     <Route path='about' element={<About/>}/>
                     <Route path='teaminfo' element={<TeamSlotherin/>}/>
                     <Route path='registration' element={<RegisterHere/>}/>
-                    <Route path='registration' element={<RegisterHere/>}/>
+                    <Route path='logout' element={<Logout/>}/>
                     <Route path='demo' element={<Lessons/>}/>
                     <Route exact path='/lessons' element={<GetLessons/>}/>
                     <Route path='/lesson/:lessonId' element={<GetLessonById/>}/>
