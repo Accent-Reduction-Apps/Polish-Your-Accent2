@@ -1,10 +1,8 @@
 package io.spring.pya.services;
 
 
-
 import io.spring.pya.entities.UserStudent;
 import io.spring.pya.repositories.UserRepository;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,8 +34,8 @@ public class UserService {
     public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
 
         if(stringDataUpdated(userStudentNew.getName())) userStudentOld.setName(userStudentNew.getName());
-        if(stringDataUpdated(userStudentNew.getEmailAddress())) userStudentOld.setName(userStudentNew.getEmailAddress());
-        if(stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setName(userStudentNew.getPassword());
+        if(stringDataUpdated(userStudentNew.getEmailAddress())) userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
+        if(stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
 
         userRepository.save(userStudentOld);
         return userRepository.getReferenceById(userStudentOld.getId());
