@@ -33,15 +33,15 @@ public class UserService {
         return user.orElse(null);
     }
 
-    public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
-        if(userStudentNew.getEmailAddress() == null || userStudentNew.getName() == null || userStudentNew.getName().trim().equals("") || userStudentNew.getEmailAddress().equals("") ){
-            throw new IllegalArgumentException("The argument for Name and Email Address cannot be 'null' when updating lesson");
-        }
+    public boolean updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
+        if(areAllUserValuesPresent(userStudentNew)){
         userStudentOld.setName(userStudentNew.getName());
         userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
         userStudentOld.setPassword(userStudentNew.getPassword());
         userRepository.save(userStudentOld);
-        return userRepository.getReferenceById(userStudentOld.getId());
+        return true;
+        }
+        return false;
     }
 
     public boolean deleteUserById(Long id) {
@@ -57,5 +57,21 @@ public class UserService {
     public UserStudent createNewStudent(String emailAddress, String password, String name) {
         UserStudent userStudent = new UserStudent(name,emailAddress,password);
         return userRepository.saveAndFlush(userStudent);
+    }
+
+    private boolean areAllUserValuesPresent(UserStudent userStudentNew){
+        if(userStudentNew.getEmailAddress() == null || userStudentNew.getEmailAddress().equals("") ){
+            throw new IllegalArgumentException("Email cannot  be 'null' empty when updating lesson");
+        }
+
+        if(userStudentNew.getPassword() == null ||userStudentNew.getPassword().equals("") ){
+            throw new IllegalArgumentException("Password cannot  be 'null' empty when updating lesson");
+        }
+
+        if(userStudentNew.getName() == null ||userStudentNew.getName().equals("") ){
+            throw new IllegalArgumentException("Name cannot  be 'null' empty when updating lesson");
+        }
+
+        return true;
     }
 }
