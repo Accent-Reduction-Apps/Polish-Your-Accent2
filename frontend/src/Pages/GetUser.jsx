@@ -13,10 +13,14 @@ const GetUser = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [state, setState] = useState();
     const {register,handleSubmit, watch, errors } = useForm()
-    const onSubmit = data => {
+    const onSubmit = (data) => {
+        console.log(users)
         setUsers(data);
         editUser(data)
-        console.log(data)
+        console.log(users)
+    }
+    const onChange = data => {
+        setUsers(data);
     }
 
     useEffect(() => {
@@ -66,11 +70,11 @@ const GetUser = () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                user_id: users.id,
+                // user_id: users.id,
+                emailAddress: data.emailAddress,
                 name: data.name,
-                email_address: data.emailAddress,
                 password: data.password,
-                lessons: users.lessons
+                // lessons: users.lessons
             })
         };
         fetch(`http://localhost:8080/users/${userid}`, putNewUserDetails)
@@ -101,28 +105,28 @@ const GetUser = () => {
 
 
     return (
-        <div className="my-account">
+        <div className="bg-warning p-3">
 
             <h1 className="My Account">My Account</h1>
 
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group controlId="name" size="lg">
+                <Form.Group  controlId="name" size="lg">
                     <Form.Label>
                         Name
                     </Form.Label>
-                    <Form.Control defaultValue={users.name}   results="value"  className="name" />
+                    <Form.Control defaultValue={users.name} placeholder={users.name}  {...register("name")}  className="name" />
                 </Form.Group>
-                <Form.Group controlId="emailAddress" size="lg">
+                <Form.Group  controlId="emailAddress" size="lg">
                     <Form.Label>
                         Email Address
                     </Form.Label>
-                    <Form.Control defaultValue={users.emailAddress}   name="emailAddress" />
+                    <Form.Control defaultValue={users.emailAddress} placeholder={users.emailAddress} {...register("emailAddress")}  name="emailAddress" />
                 </Form.Group>
-                <Form.Group controlId="password" size="lg">
+                <Form.Group  controlId="password" size="lg">
                     <Form.Label>
                         Password
                     </Form.Label>
-                    <Form.Control defaultValue={users.password} type="password"   name="password" />
+                    <Form.Control defaultValue={users.password} placeholder={users.password} {...register("password")} type="password"   name="password" />
                 </Form.Group>
 
 
