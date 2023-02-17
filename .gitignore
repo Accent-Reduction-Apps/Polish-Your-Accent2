@@ -36,3 +36,7 @@ build/
 /frontend/public/logo192.png
 /frontend/public/favicon.ico
 /frontend/src/logo.svg
+
+
+### log files ###
+*.log
