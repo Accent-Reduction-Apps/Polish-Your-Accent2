@@ -32,13 +32,11 @@ public class UserService {
     }
 
     public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
-        if (userStudentNew.getName() == null || userStudentNew.getEmailAddress() == null || userStudentNew.getEmailAddress().equals("") || userStudentNew.getName().trim().equals("")) {
-            throw new IllegalArgumentException("The argument for Topic cannot be 'null' when updating lesson");
-        }
-        userStudentOld.setName(userStudentNew.getName());
-        userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
-        userStudentOld.setPassword(userStudentNew.getPassword());
-        userStudentOld.setLessons(userStudentNew.getLessons());
+
+        if(stringDataUpdated(userStudentNew.getName())) userStudentOld.setName(userStudentNew.getName());
+        if(stringDataUpdated(userStudentNew.getEmailAddress())) userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
+        if(stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
+
         userRepository.save(userStudentOld);
         return userRepository.getReferenceById(userStudentOld.getId());
     }
@@ -57,4 +55,10 @@ public class UserService {
         UserStudent userStudent = new UserStudent(name,emailAddress,password);
         return userRepository.saveAndFlush(userStudent);
     }
+
+    private boolean stringDataUpdated (String string){
+        return string != null && !string.equals("");
+    }
+
+
 }

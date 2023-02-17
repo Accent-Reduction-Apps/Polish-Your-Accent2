@@ -31,7 +31,7 @@ public class LessonService {
     }
 
     public Lesson updateLesson(Long oldLessonId, Lesson newLesson) {
-        if(newLesson.getTopic().trim().equals("") || newLesson.getTopic() == null){
+        if( newLesson.getTopic() == null|| newLesson.getTopic().trim().equals("") ){
             throw new IllegalArgumentException("The argument for Topic cannot be 'null' when updating lesson");
         }
         Lesson oldLesson = lessonRepository.getReferenceById(oldLessonId);
