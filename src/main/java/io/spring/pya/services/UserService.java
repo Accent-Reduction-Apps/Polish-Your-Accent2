@@ -40,7 +40,6 @@ public class UserService {
         userStudentOld.setName(userStudentNew.getName());
         userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
         userStudentOld.setPassword(userStudentNew.getPassword());
-        userStudentOld.setLessons(userStudentNew.getLessons());
         userRepository.save(userStudentOld);
         return userRepository.getReferenceById(userStudentOld.getId());
     }
