@@ -1,12 +1,12 @@
-import {Outlet, Link} from 'react-router-dom';
+import {Link, Outlet} from 'react-router-dom';
 import React from 'react';
-import {Navbar, Nav, Container, Button, Stack} from 'react-bootstrap';
+import {Button, Container, Nav, Navbar, Stack} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import smallLogo from '../resources/rsmouth2.png';
 import '../styles/Layout.css';
 import Footer from './Footer';
 
-const Layout = ({ children }) => {
+const Layout = ({children}) => {
     return (
         <Container fluid>
             <Navbar className='navi' expand='lg' variant='dark'>

@@ -1,10 +1,8 @@
 package io.spring.pya.services;
 
 
-
 import io.spring.pya.entities.UserStudent;
 import io.spring.pya.repositories.UserRepository;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +32,7 @@ public class UserService {
     }
 
     public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
-        if(userStudentNew.getName().trim().equals("") || userStudentNew.getName() == null || userStudentNew.getEmailAddress().equals("") || userStudentNew.getEmailAddress() == null){
+        if (userStudentNew.getName() == null || userStudentNew.getEmailAddress() == null || userStudentNew.getEmailAddress().equals("") || userStudentNew.getName().trim().equals("")) {
             throw new IllegalArgumentException("The argument for Topic cannot be 'null' when updating lesson");
         }
         userStudentOld.setName(userStudentNew.getName());
