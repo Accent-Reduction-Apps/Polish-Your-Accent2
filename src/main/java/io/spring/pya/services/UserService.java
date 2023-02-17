@@ -33,15 +33,14 @@ public class UserService {
         return user.orElse(null);
     }
 
-    public boolean updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
-        if(areAllUserValuesPresent(userStudentNew)){
-        userStudentOld.setName(userStudentNew.getName());
-        userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
-        userStudentOld.setPassword(userStudentNew.getPassword());
+    public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
+
+        if(stringDataUpdated(userStudentNew.getName())) userStudentOld.setName(userStudentNew.getName());
+        if(stringDataUpdated(userStudentNew.getEmailAddress())) userStudentOld.setName(userStudentNew.getEmailAddress());
+        if(stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setName(userStudentNew.getPassword());
+
         userRepository.save(userStudentOld);
-        return true;
-        }
-        return false;
+        return userRepository.getReferenceById(userStudentOld.getId());
     }
 
     public boolean deleteUserById(Long id) {
@@ -59,19 +58,9 @@ public class UserService {
         return userRepository.saveAndFlush(userStudent);
     }
 
-    private boolean areAllUserValuesPresent(UserStudent userStudentNew){
-        if(userStudentNew.getEmailAddress() == null || userStudentNew.getEmailAddress().equals("") ){
-            throw new IllegalArgumentException("Email cannot  be 'null' empty when updating lesson");
-        }
-
-        if(userStudentNew.getPassword() == null ||userStudentNew.getPassword().equals("") ){
-            throw new IllegalArgumentException("Password cannot  be 'null' empty when updating lesson");
-        }
-
-        if(userStudentNew.getName() == null ||userStudentNew.getName().equals("") ){
-            throw new IllegalArgumentException("Name cannot  be 'null' empty when updating lesson");
-        }
-
-        return true;
+    private boolean stringDataUpdated (String string){
+        return string != null && !string.equals("");
     }
+
+
 }
