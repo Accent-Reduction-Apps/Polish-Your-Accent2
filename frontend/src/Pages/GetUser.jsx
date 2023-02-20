@@ -4,18 +4,18 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {useForm} from "react-hook-form";
 
+
 const GetUser = () => {
     let userid = 2;
-    console.log(userid);
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [state, setState] = useState();
     const {register,handleSubmit, watch, errors } = useForm()
-    const onSubmit = data => {
+    const onSubmit = (data) => {
+        setUsers(data);
         editUser(data)
-        console.log(data)
     }
-
     useEffect(() => {
 
         async function fetchUsers() {
@@ -29,6 +29,7 @@ const GetUser = () => {
                 throw new Error(response.statusText);
             }
             const json = await response.json();
+            console.log(json)
             setUsers(json)
             return json;
             } catch (e) {
@@ -37,10 +38,7 @@ const GetUser = () => {
                 setIsLoading(false);
             }
         }
-
         fetchUsers().then(json => console.log(json));
-        console.log(users);
-
     }, []);
 
     if (isLoading) {
@@ -51,46 +49,32 @@ const GetUser = () => {
         return <p>An error occurred: {error}</p>;
     }
 
-    function editUser(username, emailAddress, password) {
+
+    function editUser(data) {
         const putNewUserDetails = {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                name: username,
-                emailAddress: emailAddress,
-                password: password,
+                emailAddress: data.emailAddress,
+                name: data.name,
+                password: data.password,
             })
         };
-        fetch("http://localhost:8080/users", putNewUserDetails)
+        fetch(`http://localhost:8080/users/${userid}`, putNewUserDetails)
             .then(response => response.json())
-            // .then(data => this.SetState({userid, data.id}))//TODO repair
-
-        // }).then(function (response) {
-        //     if (response.status === 200) {
-        //         this.showRegistrationAlert("success", "User changed???!", "Your ' ' are changed.")
-        //     } else if (response.status === 422) {
-        //         this.showRegistrationAlert("danger", "User already exists", "Please choose a different name.");
-        //     } else {
-        //         this.showRegistrationAlert("danger", "User not registered!", "Something went wrong.");
-        //     }
-        // }.bind(this)).catch(function (error) {
-        //     this.showRegistrationAlert("danger", "Error", "Something went wrong.");
-        // }.bind(this));
+            .then(state => setState(state))//TODO Add event handle and error handle
+        console.log(state);
     }
 
-    // let  handleSubmit = event => {
-    //     // event.preventDefault();
-    //     console.log(event.target.username.value);
-    //     console.log(event.target.emailAddress.value);
-    //     console.log(event.target.password.value);
-    //     return editUser(event.target.username.value,event.target.emailAddress.value,  event.target.password.value);
-    // }
 
+    function deleteUser() {
+
+    }
 
     return (
-        <div className="my-account">
+        <div className="bg-warning p-3">
 
             <h1 className="My Account">My Account</h1>
 
@@ -99,26 +83,34 @@ const GetUser = () => {
                     <Form.Label>
                         Name
                     </Form.Label>
-                    <Form.Control defaultValue={users.name} name="name" />
+                    <Form.Control defaultValue={users.name}
+                                  placeholder={users.name}  {...register("name", {pattern: /^[a-zA-Z0-9]+$/i})}
+                                  className="name"/>
                 </Form.Group>
                 <Form.Group controlId="emailAddress" size="lg">
                     <Form.Label>
                         Email Address
                     </Form.Label>
-                    <Form.Control defaultValue={users.emailAddress} name="emailAddress" />
+                    <Form.Control defaultValue={users.emailAddress}
+                                  placeholder={users.emailAddress} {...register("emailAddress", {
+                        pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
+                    })} name="emailAddress"/>
                 </Form.Group>
                 <Form.Group controlId="password" size="lg">
                     <Form.Label>
                         Password
                     </Form.Label>
-                    <Form.Control defaultValue={users.password} type="password" name="password" />
+                    <Form.Control defaultValue={users.password}
+                                  placeholder={users.password} {...register("password")}
+                                  type="password" name="password"/>
                 </Form.Group>
 
 
+                <Button className="save-button" type="submit">Save account edition</Button>
 
-                <Button type="submit">Save account edition</Button>
             </Form>
-
+            <Button onSubmit={handleSubmit(deleteUser)} className="delete-button" type="submit">Delete My
+                Account</Button>
 
 
         </div>

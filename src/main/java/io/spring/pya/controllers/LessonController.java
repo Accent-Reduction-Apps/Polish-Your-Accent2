@@ -36,7 +36,7 @@ public class LessonController {
     public ResponseEntity<Lesson> getLessonById(@PathVariable("lessonId") Long id) {
         Lesson foundLesson = lessonService.getLessonById(id);
         if (foundLesson != null) {
-            LOGGER.info("get lesson : " + id);
+            LOGGER.info("get lesson with id: " + id);
             return new ResponseEntity<>(foundLesson, HttpStatus.OK);
         } else {
             throw new ResourceNotFoundException("Lesson", id);
@@ -45,7 +45,7 @@ public class LessonController {
 
     @PostMapping()
     public void addLesson(@RequestBody Lesson lesson) {
-        LOGGER.info("Add lesson :\n" + lesson);
+        LOGGER.info("Add lesson :\n" + lesson.toString());
         lessonService.addLesson(lesson);
     }
 

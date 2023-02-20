@@ -53,4 +53,12 @@ public class Lesson {
         this.topic = topic;
     }
 
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "id=" + id +
+                ", lessonContent='" + lessonContent + '\'' +
+                ", topic='" + topic + '\'' +
+                '}';
+    }
 }

@@ -160,4 +160,14 @@ public class UserStudent implements UserDetails {
     public void addAuthority(AppSimpleGrantedAuthority appSimpleGrantedAuthority) {
         this.authorities.add(appSimpleGrantedAuthority);
     }
+    @Override
+    public String toString() {
+        return "UserStudent{" +
+                "id=" + id +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", lessons=" + lessons +
+                '}';
+    }
 }

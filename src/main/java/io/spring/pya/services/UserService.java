@@ -34,10 +34,14 @@ public class UserService implements UserDetailsService {
         return user.orElse(null);
     }
 
-    public void updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
-        userStudentOld.setUsername(userStudentNew.getUsername());
-        userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
-        userStudentOld.setPassword(userStudentNew.getPassword());
+    public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
+
+        if(stringDataUpdated(userStudentNew.getName())) userStudentOld.setUsername(userStudentNew.getUsername());
+        if(stringDataUpdated(userStudentNew.getEmailAddress())) userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
+        if(stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
+
+        userRepository.save(userStudentOld);
+        return userRepository.getReferenceById(userStudentOld.getId());
     }
 
     public boolean deleteUserById(Long id) {
@@ -60,4 +64,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s notfound", username)));
     }
+
+    private boolean stringDataUpdated (String string){
+        return string != null && !string.equals("");
+    }
+
+
 }
