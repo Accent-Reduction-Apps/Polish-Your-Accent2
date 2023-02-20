@@ -5,10 +5,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -38,7 +35,7 @@ public class UserStudent implements UserDetails {
     private Set<Lesson> lessons = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "userStudent", fetch = FetchType.EAGER)
-    private List<AppSimpleGrantedAuthority> authorities;
+    private final List<AppSimpleGrantedAuthority> authorities = new ArrayList<>();
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
@@ -89,10 +86,6 @@ public class UserStudent implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    public void setAuthorities(List<AppSimpleGrantedAuthority> sonAuthorities) {
-        this.authorities = authorities;
     }
 
     public void setPassword(String password) {
@@ -165,7 +158,7 @@ public class UserStudent implements UserDetails {
         return "UserStudent{" +
                 "id=" + id +
                 ", emailAddress='" + emailAddress + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", lessons=" + lessons +
                 '}';

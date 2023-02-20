@@ -4,19 +4,17 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.Assert;
 
-import java.io.Serial;
-
 @Entity
+@Table(name = "app_simple_granted_authority")
 public class AppSimpleGrantedAuthority implements GrantedAuthority {
-    @Serial
-    private static final long serialVersionUID = 550L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "authority_id", nullable = false)
     private Long id;
     private String authority;
     @ManyToOne
-    @JoinColumn(name = "user_student_id")
+    @JoinColumn(name = "user_id")
     private UserStudent userStudent;
 
     public AppSimpleGrantedAuthority(String authority, UserStudent user) {
