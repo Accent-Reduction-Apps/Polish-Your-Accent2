@@ -3,7 +3,6 @@ package io.spring.pya.security;
 import io.spring.pya.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -32,17 +31,12 @@ public class securityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/", "/js/**", "/css/**", "/webjars/**").permitAll()
-                        .requestMatchers("/item/details/**").hasAuthority(UserPermission.DETAILS.getPermission())
-                        .requestMatchers("/home/privacy").hasAnyRole(UserRole.SON.name(), UserRole.MOM.name())
-                        .requestMatchers(HttpMethod.GET, "/management/**").hasAuthority(UserPermission.READER.getPermission())
-                        .requestMatchers(HttpMethod.POST, "/management/**").hasAuthority(UserPermission.EDITOR.getPermission())
-                        .requestMatchers(HttpMethod.GET, "/management/items").hasAuthority(UserPermission.EDITOR.getPermission())
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> {
                             try {
                                 form
-                                        .loginPage("/login").permitAll() // change basic login form.defaultSuccessUrl("/", true) //default redirect. I guess it might be getter without this
+                                        .permitAll() // change basic login form.defaultSuccessUrl("/", true) //default redirect. I guess it might be getter without this
                                         .usernameParameter("username") //can change parameters name from default
                                         .and()
                                         .rememberMe().rememberMeCookieName("remember-me");
@@ -52,7 +46,6 @@ public class securityConfig {
                         }
                 )
                 .logout((logout) -> logout
-                        .logoutUrl("/logout") //use POST to log out and HTTPS with csrf
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")) //use it if not using csrf
                         .clearAuthentication(true)
                         .invalidateHttpSession(true)
