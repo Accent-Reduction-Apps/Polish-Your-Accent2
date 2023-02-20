@@ -2,14 +2,18 @@ package io.spring.pya.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 
 @Entity
 @Table(name = "users")
-public class UserStudent {
+public class UserStudent implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
@@ -21,7 +25,7 @@ public class UserStudent {
 
     @Size(max = 255)
     @Column(name = "name")
-    private String name;
+    private String username;
 
     @Size(max = 255)
     @Column(name = "password")
@@ -33,21 +37,37 @@ public class UserStudent {
             inverseJoinColumns = @JoinColumn(name = "user_lessons_lesson_id"))
     private Set<Lesson> lessons = new LinkedHashSet<>();
 
-    public UserStudent(String name, String emailAddress, String password) {
-        this.name = name;
+    @OneToMany(mappedBy = "userStudent", fetch = FetchType.EAGER)
+    private List<AppSimpleGrantedAuthority> authorities;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+    private boolean enabled;
+    private String role;
+
+    public UserStudent(String username, String emailAddress, String password) {
+        this.username = username;
         this.emailAddress = emailAddress;
         this.password = password;
     }
 
-    public UserStudent(Long id, String emailAddress, String name, String password, Set<Lesson> lessons) {
+    public UserStudent(Long id, String emailAddress, String username, String password, Set<Lesson> lessons) {
         this.id = id;
         this.emailAddress = emailAddress;
-        this.name = name;
+        this.username = username;
         this.password = password;
         this.lessons = lessons;
     }
 
     public UserStudent() {
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Long getId() {
@@ -66,20 +86,67 @@ public class UserStudent {
         this.emailAddress = emailAddress;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
+    public void setAuthorities(List<AppSimpleGrantedAuthority> sonAuthorities) {
+        this.authorities = authorities;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String name) {
+        this.username = name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Set<Lesson> getLessons() {
@@ -90,4 +157,7 @@ public class UserStudent {
         this.lessons = lessons;
     }
 
+    public void addAuthority(AppSimpleGrantedAuthority appSimpleGrantedAuthority) {
+        this.authorities.add(appSimpleGrantedAuthority);
+    }
 }
