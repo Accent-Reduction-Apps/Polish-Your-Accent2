@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum UserRole {
-    DAD(List.of(UserPermission.DETAILS, UserPermission.READER)),
-    SON(List.of(UserPermission.PRIVACY, UserPermission.DETAILS, UserPermission.EDITOR, UserPermission.READER)),
-    MOM(List.of(UserPermission.PRIVACY));
+    ADMIN(List.of(UserPermission.values())),
+    STAFF(List.of(UserPermission.values())),
+    STUDENT(List.of(UserPermission.LESSONS_VIEW, UserPermission.LESSONS_CHANGE, UserPermission.USERS_VIEW, UserPermission.USERS_CHANGE));
 
     private final List<UserPermission> permissions;
 
@@ -22,11 +22,9 @@ public enum UserRole {
     }
 
     public List<AppSimpleGrantedAuthority> getGrantedAuthorities(UserStudent user) {
-        List<AppSimpleGrantedAuthority> permissions = getPermissions().stream()
+        return getPermissions().stream()
                 .map(permission -> new AppSimpleGrantedAuthority(permission.getPermission(), user))
                 .collect(Collectors.toList());
-//        permissions.add(new AppSimpleGrantedAuthority("ROLE_" + this.name(), user));//consider as table in db or leave as perm
-        return permissions;
     }
 
 }
