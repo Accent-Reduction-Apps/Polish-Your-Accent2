@@ -10,7 +10,7 @@ CREATE TABLE users
     account_non_locked      boolean,
     credentials_non_expired boolean,
     enabled                 boolean,
---     FOREIGN KEY (authorities) REFERENCES app_simple_granted_authority (authority_id),
+    user_authorities        BIGINT,
     role                    VARCHAR(255),
     CONSTRAINT users_pkey PRIMARY KEY (user_id)
 );
