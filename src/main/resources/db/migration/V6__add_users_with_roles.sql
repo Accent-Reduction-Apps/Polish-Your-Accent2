@@ -1,8 +1,3 @@
-delete
-from users_user_lessons;
-delete
-from users;
-
 INSERT INTO users
 (name, email_address, password, account_non_expired, account_non_locked, credentials_non_expired, enabled, role)
 VALUES ('user2', 'user2@gmail.com', '$2a$10$kXe8lnESi50/OSGyxzujpONjX.zFOcjLrO7HYsI/0pxXrd3bP6owe', true, true, true,
