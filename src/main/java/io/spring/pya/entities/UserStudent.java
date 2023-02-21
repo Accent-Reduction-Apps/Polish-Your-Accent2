@@ -35,7 +35,7 @@ public class UserStudent implements UserDetails {
     private Set<Lesson> lessons = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "userStudent", fetch = FetchType.EAGER)
-    private final List<AppSimpleGrantedAuthority> authorities = new ArrayList<>();
+    private List<AppSimpleGrantedAuthority> authorities = new ArrayList<>();
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
@@ -153,6 +153,7 @@ public class UserStudent implements UserDetails {
     public void addAuthority(AppSimpleGrantedAuthority appSimpleGrantedAuthority) {
         this.authorities.add(appSimpleGrantedAuthority);
     }
+
     @Override
     public String toString() {
         return "UserStudent{" +
@@ -162,5 +163,9 @@ public class UserStudent implements UserDetails {
                 ", password='" + password + '\'' +
                 ", lessons=" + lessons +
                 '}';
+    }
+
+    public void setAuthorities(List<AppSimpleGrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 }
