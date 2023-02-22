@@ -3,6 +3,7 @@ package io.spring.pya.security;
 import io.spring.pya.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,11 +32,20 @@ public class securityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/", "/js/**", "/css/**", "/webjars/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/users/**").hasAuthority(UserPermission.USERS_VIEW.getPermission())
+                        .requestMatchers(HttpMethod.POST, "/users/**").hasAuthority(UserPermission.USERS_ADD.getPermission())
+                        .requestMatchers(HttpMethod.PUT, "/users/**").hasAuthority(UserPermission.USERS_CHANGE.getPermission())
+                        .requestMatchers(HttpMethod.DELETE, "/users/**").hasAuthority(UserPermission.USERS_DELETE.getPermission())
+                        .requestMatchers(HttpMethod.GET, "/lessons/**").hasAuthority(UserPermission.LESSONS_VIEW.getPermission())
+                        .requestMatchers(HttpMethod.POST, "/lessons/**").hasAuthority(UserPermission.LESSONS_ADD.getPermission())
+                        .requestMatchers(HttpMethod.PUT, "/lessons/**").hasAuthority(UserPermission.LESSONS_CHANGE.getPermission())
+                        .requestMatchers(HttpMethod.DELETE, "/lessons/**").hasAuthority(UserPermission.LESSONS_DELETE.getPermission())
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> {
                             try {
                                 form
+                                        .successForwardUrl("/lessons")
                                         .permitAll() // change basic login form.defaultSuccessUrl("/", true) //default redirect. I guess it might be getter without this
                                         .usernameParameter("username") //can change parameters name from default
                                         .and()

@@ -5,7 +5,10 @@ import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -28,14 +31,14 @@ public class UserStudent implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_user_lessons",
             joinColumns = @JoinColumn(name = "user_student_user_id"),
             inverseJoinColumns = @JoinColumn(name = "user_lessons_lesson_id"))
     private Set<Lesson> lessons = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "userStudent", fetch = FetchType.EAGER)
-    private List<AppSimpleGrantedAuthority> authorities = new ArrayList<>();
+    private List<AppSimpleGrantedAuthority> authorities;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
