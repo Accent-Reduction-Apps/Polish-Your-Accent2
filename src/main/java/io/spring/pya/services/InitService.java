@@ -24,20 +24,24 @@ public class InitService {
     }
 
     public void addTestUser() {
+        UserStudent userTest;
         if (userRepository.findByUsername("userTest").isEmpty()) {
-            UserStudent userTest = new UserStudent();
-            userTest.setUsername("userTest");
-            userTest.setEmailAddress("userTest@email.com");
-            userTest.setPassword(passwordEncoder.encode("userTest"));
-            userTest.setEnabled(true);
-            userTest.setCredentialsNonExpired(true);
-            userTest.setAccountNonExpired(true);
-            userTest.setAccountNonLocked(true);
-            userTest.setRole(UserRole.ADMIN.name());
-            List<AppSimpleGrantedAuthority> sonAuthorities = UserRole.ADMIN.getGrantedAuthorities(userTest);
-            userTest.setAuthorities(sonAuthorities);
-            userRepository.saveAndFlush(userTest);
-            grantedAuthorityRepository.saveAll(sonAuthorities);
+            userTest = new UserStudent();
+        } else {
+            userTest = userRepository.findByUsername("userTest").get();
         }
+        userTest.setUsername("userTest");
+        userTest.setEmailAddress("userTest@email.com");
+        userTest.setPassword(passwordEncoder.encode("userTest"));
+        userTest.setEnabled(true);
+        userTest.setCredentialsNonExpired(true);
+        userTest.setAccountNonExpired(true);
+        userTest.setAccountNonLocked(true);
+        userTest.setRole(UserRole.ADMIN.name());
+        List<AppSimpleGrantedAuthority> userAuthorities = UserRole.ADMIN.getGrantedAuthorities(userTest);
+        userTest.setAuthorities(userAuthorities);
+        userRepository.saveAndFlush(userTest);
+        grantedAuthorityRepository.saveAll(userAuthorities);
+
     }
 }
