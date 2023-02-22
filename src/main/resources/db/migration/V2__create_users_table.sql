@@ -10,7 +10,6 @@ CREATE TABLE users
     account_non_locked      boolean,
     credentials_non_expired boolean,
     enabled                 boolean,
-    user_authorities        BIGINT,
     role                    VARCHAR(255),
     CONSTRAINT users_pkey PRIMARY KEY (user_id)
 );
