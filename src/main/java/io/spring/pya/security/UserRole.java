@@ -22,9 +22,11 @@ public enum UserRole {
     }
 
     public List<AppSimpleGrantedAuthority> getGrantedAuthorities(UserStudent user) {
-        return getPermissions().stream()
+        List<AppSimpleGrantedAuthority> permissions = getPermissions().stream()
                 .map(permission -> new AppSimpleGrantedAuthority(permission.getPermission(), user))
                 .collect(Collectors.toList());
+        permissions.add(new AppSimpleGrantedAuthority(this.name(), user));
+        return permissions;
     }
 
 }
