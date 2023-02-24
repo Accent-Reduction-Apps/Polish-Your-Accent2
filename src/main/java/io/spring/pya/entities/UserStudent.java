@@ -88,7 +88,7 @@ public class UserStudent implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     public void setPassword(String password) {
