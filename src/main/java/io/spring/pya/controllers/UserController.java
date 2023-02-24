@@ -5,12 +5,11 @@ import io.spring.pya.entities.UserStudent;
 import io.spring.pya.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/users")
 public class UserController {
