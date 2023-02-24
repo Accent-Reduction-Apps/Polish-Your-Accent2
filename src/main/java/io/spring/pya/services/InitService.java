@@ -24,7 +24,6 @@ public class InitService {
     }
 
     public void addTestUsers() {
-        grantedAuthorityRepository.deleteAll();
         addTestUser("testUser", UserRole.STUDENT);
     }
 
