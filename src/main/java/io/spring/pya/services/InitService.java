@@ -41,7 +41,8 @@ public class InitService {
         List<AppSimpleGrantedAuthority> userAuthorities = UserRole.ADMIN.getGrantedAuthorities(userTest);
         userTest.setAuthorities(userAuthorities);
         userRepository.saveAndFlush(userTest);
+        List<AppSimpleGrantedAuthority> previousRunUserTestAuthorities = grantedAuthorityRepository.findByUserStudentId(userTest.getId());
+        grantedAuthorityRepository.deleteAll(previousRunUserTestAuthorities);
         grantedAuthorityRepository.saveAll(userAuthorities);
-
     }
 }
