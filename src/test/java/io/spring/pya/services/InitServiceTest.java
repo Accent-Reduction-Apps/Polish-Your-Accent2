@@ -49,6 +49,7 @@ class InitServiceTest {
         testUserToAdd.setUsername("testUser");
         testUserToAdd.setRole(role.name());
         testUserToAdd.setAuthorities(role.getGrantedAuthorities(testUserToAdd));
+        when(userRepository.findByUsername(testUserToAdd.getUsername())).thenReturn(Optional.empty());
 
         initService.addTestUser(testUserToAdd.getUsername(), UserRole.valueOf(testUserToAdd.getRole()));
         verify(userRepository, times(1)).findByUsername(testUserToAdd.getUsername());
