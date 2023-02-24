@@ -20,7 +20,7 @@ public class Application {
 
 	@PostConstruct
 	public void addUsers() {
-		initService.addTestUser();
+		initService.addTestUsers();
 	}
 
 }

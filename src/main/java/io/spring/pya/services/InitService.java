@@ -23,25 +23,30 @@ public class InitService {
         this.grantedAuthorityRepository = grantedAuthorityRepository;
     }
 
-    public void addTestUser() {
-        UserStudent userTest;
-        if (userRepository.findByUsername("userTest").isEmpty()) {
-            userTest = new UserStudent();
+    public void addTestUsers() {
+        grantedAuthorityRepository.deleteAll();
+        addTestUser("testUser", UserRole.STUDENT);
+    }
+
+    public void addTestUser(String name, UserRole role) {
+        UserStudent testUser;
+        if (userRepository.findByUsername(name).isEmpty()) {
+            testUser = new UserStudent();
         } else {
-            userTest = userRepository.findByUsername("userTest").get();
+            testUser = userRepository.findByUsername(name).get();
         }
-        userTest.setUsername("userTest");
-        userTest.setEmailAddress("userTest@email.com");
-        userTest.setPassword(passwordEncoder.encode("userTest"));
-        userTest.setEnabled(true);
-        userTest.setCredentialsNonExpired(true);
-        userTest.setAccountNonExpired(true);
-        userTest.setAccountNonLocked(true);
-        userTest.setRole(UserRole.ADMIN.name());
-        List<AppSimpleGrantedAuthority> userAuthorities = UserRole.ADMIN.getGrantedAuthorities(userTest);
-        userTest.setAuthorities(userAuthorities);
-        userRepository.saveAndFlush(userTest);
-        List<AppSimpleGrantedAuthority> previousRunUserTestAuthorities = grantedAuthorityRepository.findByUserStudentId(userTest.getId());
+        testUser.setUsername(name);
+        testUser.setEmailAddress(name + "@email.com");
+        testUser.setPassword(passwordEncoder.encode(name));
+        testUser.setEnabled(true);
+        testUser.setCredentialsNonExpired(true);
+        testUser.setAccountNonExpired(true);
+        testUser.setAccountNonLocked(true);
+        testUser.setRole(role.name());
+        List<AppSimpleGrantedAuthority> userAuthorities = role.getGrantedAuthorities(testUser);
+        testUser.setAuthorities(userAuthorities);
+        userRepository.saveAndFlush(testUser);
+        List<AppSimpleGrantedAuthority> previousRunUserTestAuthorities = grantedAuthorityRepository.findByUserStudentId(testUser.getId());
         grantedAuthorityRepository.deleteAll(previousRunUserTestAuthorities);
         grantedAuthorityRepository.saveAll(userAuthorities);
     }
