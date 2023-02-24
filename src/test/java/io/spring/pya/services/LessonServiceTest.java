@@ -71,13 +71,13 @@ class LessonServiceTest {
         Lesson lessonToUpdate = LessonProvider.createRandomLesson();
         Long lessonIdToUpdate = lessonToUpdate.getId();
         Lesson lessonUpdated = new Lesson(lessonToUpdate.getId(), lessonToUpdateWith.getLessonContent(), lessonToUpdateWith.getTopic());
-        when(lessonRepository.getReferenceById(lessonIdToUpdate)).thenReturn(lessonUpdated);
+        when(lessonRepository.getReferenceById(lessonIdToUpdate)).thenReturn(lessonToUpdate);
 
         Lesson response = lessonService.updateLesson(lessonIdToUpdate, lessonToUpdateWith);
-        verify(lessonRepository, times(1)).deleteById(lessonIdToUpdate);
-        verify(lessonRepository, times(1)).save(lessonToUpdateWith);
-        verify(lessonRepository, times(1)).getReferenceById(lessonIdToUpdate);
-        assertEquals(lessonUpdated, response);
+        verify(lessonRepository, times(1)).save(lessonToUpdate);
+        assertEquals(lessonUpdated.getId(), response.getId());
+        assertEquals(lessonUpdated.getTopic(), response.getTopic());
+        assertEquals(lessonUpdated.getLessonContent(), response.getLessonContent());
     }
 
     @Test
