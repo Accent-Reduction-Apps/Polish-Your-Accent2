@@ -48,8 +48,8 @@ public class securityConfig {
                             try {
                                 form
                                         .successForwardUrl("/lessons")
-                                        .permitAll() // change basic login form.defaultSuccessUrl("/", true) //default redirect. I guess it might be getter without this
-                                        .usernameParameter("username") //can change parameters name from default
+                                        .permitAll()
+                                        .usernameParameter("username")
                                         .and()
                                         .rememberMe().rememberMeCookieName("remember-me");
                             } catch (Exception e) {
@@ -58,7 +58,7 @@ public class securityConfig {
                         }
                 )
                 .logout((logout) -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")) //use it if not using csrf
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                         .clearAuthentication(true)
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID", "remember-me")
