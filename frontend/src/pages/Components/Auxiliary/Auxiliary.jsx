@@ -19,7 +19,7 @@ export default function Auxiliary() {
             <h1 className='fade-in'>AUXILIARY</h1>
             <h4 className='slide-in'>dummy login/logoff button</h4>
             <h6 className='rotate-in'>for testing purpose only</h6>
-            <p>changes text&functione</p>
+            <p>changes text&f()</p>
             <Button onClick={handleClick}
                     variant={isUserAuthorized ? 'danger' : 'dark'}>{isUserAuthorized ? 'LOG OUT' : 'LOG IN'}</Button>
             <br /><br />

@@ -30,6 +30,9 @@ const Layout = ({children}) => {
 
     const extraButtons = isUserAuthorized ? (
         <>
+            <Nav.Link as={Link} to='/c'>
+                <Button variant='outline-warning'>?</Button>
+            </Nav.Link>
             <Nav.Link as={Link} to='/demo'>
                 <Button variant='outline-warning'>Lessons</Button>
             </Nav.Link>

@@ -14,6 +14,7 @@ import GetLessons from './pages/Components/LessonList/GetLessons';
 import GetUser from './pages/Components/User/GetUser';
 import Logout from "./pages/Components/Logout/Logout";
 import Auxiliary from "./pages/Components/Auxiliary/Auxiliary";
+import C from "./pages/Components/Auxiliary/C";
 import './styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -31,6 +32,7 @@ export default function App() {
                     <Route path='teaminfo' element={<TeamSlotherin/>}/>
                     <Route path='registration' element={<RegisterHere/>}/>
                     <Route path='logout' element={<Logout/>}/>
+                    <Route path='c' element={<C/>}/>
                     <Route path='demo' element={<Lessons/>}/>
                     <Route exact path='/lessons' element={<GetLessons/>}/>
                     <Route path='/lesson/:lessonId' element={<GetLessonById/>}/>
