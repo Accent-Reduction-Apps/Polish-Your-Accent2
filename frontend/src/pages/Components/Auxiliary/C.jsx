@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const API_KEY = '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';
+const API_KEY = 'ApiKeyWasHereAndHasBeenRevokedPromptlyLol';
 
 const instance = axios.create({
     baseURL: 'https://api.openai.com/v1',
