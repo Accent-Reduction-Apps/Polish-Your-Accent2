@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-import './Login.css';
+import '../../../styles/Login.css';
 
-import RegistrationAlert from './RegistrationAlert.js';
+import RegistrationAlert from '../Register/RegistrationAlert.js';
 
 class Login extends Component {
     constructor(props) {

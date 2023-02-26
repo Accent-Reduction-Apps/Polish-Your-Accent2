@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
-import Slotherin from '../resources/Slotherin.jpg'
+import Slotherin from '../../../resources/image/Slotherin.jpg'
 
 function TeamSlotherin() {
     const [show, setShow] = useState(true);

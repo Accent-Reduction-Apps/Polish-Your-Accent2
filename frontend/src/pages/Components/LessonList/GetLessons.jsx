@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
-import '../styles/GetLessons.css';
+import '../../../styles/GetLessons.css';
 
 const GetLessons = () => {
     const [lessons, setLessons] = useState([]);
@@ -15,7 +15,8 @@ const GetLessons = () => {
         }
         getData();
     }, []);
-
+// todo rozdzielić get i render
+    // serwis z adresami  / CICD - vide repo tasks od Konrada
     const fetchData = async () => {
 
         const response = await fetch('http://localhost:8080/lessons');

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import '../GetUser.css';
+import '../../../styles/GetUser.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {useForm} from "react-hook-form";
@@ -44,7 +44,7 @@ const GetUser = () => {
     if (isLoading) {
         return <p>Loading...</p>;
     }
-
+// todo : save na  account details -> walidacja -> komunikat co trzeba zmienić
     if (error) {
         return <p>An error occurred: {error}</p>;
     }

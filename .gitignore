@@ -35,7 +35,7 @@ build/
 /frontend/public/manifest.json
 /frontend/public/logo192.png
 /frontend/public/favicon.ico
-/frontend/src/logo.svg
+/src/main/resources/application.propertiesMS
 
 
 ### log files ###

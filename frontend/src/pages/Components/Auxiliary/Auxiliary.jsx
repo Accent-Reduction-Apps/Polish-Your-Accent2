@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {Button} from "react-bootstrap";
 import {AuthorizationContext} from "../../../auxiliary/AuthorizationContext";
+import AudioPlayer from '../../MediaControl/Audio/AudioPlayer';
 import '../../../styles/Common.css';
 
 export default function Auxiliary() {
@@ -10,8 +11,11 @@ export default function Auxiliary() {
         setIsUserAuthorized(!isUserAuthorized);
     };
 
+    const audioOpening = require('../../../resources/audio/hal_9000.wav');
+
     return (
         <div className='bg-warning p-3'>
+            <AudioPlayer src ={audioOpening} />
             <h1 className='fade-in'>AUXILIARY</h1>
             <h4 className='slide-in'>dummy login/logoff button</h4>
             <h6 className='rotate-in'>for testing purpose only</h6>

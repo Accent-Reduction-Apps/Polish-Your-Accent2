@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from 'react-router';
-import YTVideo from './YTVideo';
-import '../styles/GetLessons.css';
+import YTVideo from '../../MediaControl/Video/YouTube/YTVideo';
+import '../../../styles/GetLessons.css';
 
 const GetLessonById = (props) => {
     const videoId = 'rGIJ8I3hPts';
@@ -28,10 +28,13 @@ const GetLessonById = (props) => {
             const response = await fetch(
                 `http://localhost:8080/lessons/${id}`
             );
+            //todo - to samo co w getLessons
 
             if (!response.ok) {
                 throw new Error(response.statusText);
             }
+
+            // todo info o błędzie dla użytkownika apki
 
             const json = await response.json();
             return json;
@@ -41,7 +44,7 @@ const GetLessonById = (props) => {
         } finally {
             setIsLoading(false);
         }
-
+// todo osobny komponent do deskryptywnego renderowania info o błędzie
     }
 
     if (isLoading) {
