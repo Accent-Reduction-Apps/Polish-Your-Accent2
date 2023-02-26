@@ -1,10 +1,8 @@
 package io.spring.pya.services;
 
 
-
 import io.spring.pya.entities.UserStudent;
 import io.spring.pya.repositories.UserRepository;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,10 +31,14 @@ public class UserService {
         return user.orElse(null);
     }
 
-    public void updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
-        userStudentOld.setName(userStudentNew.getName());
-        userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
-        userStudentOld.setPassword(userStudentNew.getPassword());
+    public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
+
+        if(stringDataUpdated(userStudentNew.getName())) userStudentOld.setName(userStudentNew.getName());
+        if(stringDataUpdated(userStudentNew.getEmailAddress())) userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
+        if(stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
+
+        userRepository.save(userStudentOld);
+        return userRepository.getReferenceById(userStudentOld.getId());
     }
 
     public boolean deleteUserById(Long id) {
@@ -53,4 +55,10 @@ public class UserService {
         UserStudent userStudent = new UserStudent(name,emailAddress,password);
         return userRepository.saveAndFlush(userStudent);
     }
+
+    private boolean stringDataUpdated (String string){
+        return string != null && !string.equals("");
+    }
+
+
 }

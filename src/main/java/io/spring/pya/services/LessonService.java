@@ -30,11 +30,15 @@ public class LessonService {
         return lesson.orElse(null);
     }
 
-    public Lesson updateLesson(Long oldLessonId, Lesson lessonNew) {
-        lessonRepository.deleteById(oldLessonId);
-        lessonNew.setId(oldLessonId);
-        lessonRepository.save(lessonNew);
-        return getLessonById(oldLessonId);
+    public Lesson updateLesson(Long oldLessonId, Lesson newLesson) {
+        if( newLesson.getTopic() == null|| newLesson.getTopic().trim().equals("") ){
+            throw new IllegalArgumentException("The argument for Topic cannot be 'null' when updating lesson");
+        }
+        Lesson oldLesson = lessonRepository.getReferenceById(oldLessonId);
+        oldLesson.setLessonContent(newLesson.getLessonContent());
+        oldLesson.setTopic(newLesson.getTopic());
+        lessonRepository.save(oldLesson);
+        return lessonRepository.getReferenceById(oldLessonId);
     }
 
     public boolean deleteLessonById(Long id) {

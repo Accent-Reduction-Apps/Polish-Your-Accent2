@@ -36,7 +36,7 @@ export default function App() {
                 <Route path='/' element={<Layout isAuthorized={isAuthorizedState} onLogout={handleLogout} />}>
                     <Route index element={<Home/>}/>
                     <Route path='about' element={<About/>}/>
-                    <Route path='teaminfo' element={<TeamSlotherin/>}/>
+                    <Route path='teamInfo' element={<TeamSlotherin/>}/>
                     <Route path='registration' element={<RegisterHere/>}/>
                     <Route path='logout' element={<Logout/>}/>
                     <Route path='demo' element={<Lessons/>}/>
