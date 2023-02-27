@@ -11,8 +11,8 @@ public class Lesson {
     @Column(name = "lesson_id", nullable = false)
     private Long id;
 
-    @Size(max = 255)
-    @Column(name = "lessonContent", columnDefinition = "text")
+
+    @Column(name = "text", columnDefinition = "text")
     private String lessonContent;
 
     @Size(max = 255)
