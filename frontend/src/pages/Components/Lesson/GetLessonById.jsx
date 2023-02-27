@@ -20,7 +20,7 @@ const GetLessonById = (props) => {
         getData();
     }, []);
 
-    const fetchData = async() => {
+    const fetchData = async () => {
         setIsLoading(true);
         setError(null);
 
@@ -28,23 +28,18 @@ const GetLessonById = (props) => {
             const response = await fetch(
                 `http://localhost:8080/lessons/${id}`
             );
-            //todo - to samo co w getLessons
 
             if (!response.ok) {
                 throw new Error(response.statusText);
             }
 
-            // todo info o błędzie dla użytkownika apki
-
-            const json = await response.json();
-            return json;
+            return await response.json();
             // setLesson(json);
         } catch (e) {
             setError(e.message);
         } finally {
             setIsLoading(false);
         }
-// todo osobny komponent do deskryptywnego renderowania info o błędzie
     }
 
     if (isLoading) {
@@ -54,14 +49,13 @@ const GetLessonById = (props) => {
     if (error) {
         return <p>An error occurred: {error}</p>;
     }
-    //console.log(lesson.text);
     return (
         <div className='bg-warning p-3'>
             <h2 className={'details'}>LESSON</h2>
             <p>Lesson Id: {lesson.id}</p>
             <p>Topic: {lesson.topic}</p>
             <p>Text: {lesson.text}</p>
-            <YTVideo videoId={videoId} />;
+            <YTVideo videoId={videoId}/>;
         </div>
     );
 };

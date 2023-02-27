@@ -77,8 +77,7 @@ const Layout = ({children}) => {
                         </Nav.Link>
                         {extraButtons}
                         <Navbar.Text>
-                            <div className='navtitle'> > current
-                                authorization: {isUserAuthorized ? 'true' : 'false'}</div>
+                            <div className='navtitle'> auth: {isUserAuthorized ? '1' : '0'}</div>
                         </Navbar.Text>
                     </Nav>
 

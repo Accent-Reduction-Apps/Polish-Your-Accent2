@@ -15,13 +15,11 @@ const GetLessons = () => {
         }
         getData();
     }, []);
-// todo rozdzielić get i render
-    // serwis z adresami  / CICD - vide repo tasks od Konrada
+
     const fetchData = async () => {
 
         const response = await fetch('http://localhost:8080/lessons');
-        const data = await response.json();
-        return data;
+        return await response.json();
     }
 
     if (isLoading) {
