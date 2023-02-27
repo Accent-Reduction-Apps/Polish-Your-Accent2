@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from 'react-router';
-import YTVideo from './YTVideo';
-import '../styles/GetLessons.css';
+import YTVideo from '../../MediaControl/Video/YouTube/YTVideo';
+import '../../../styles/GetLessons.css';
 
 const GetLessonById = (props) => {
     const videoId = 'rGIJ8I3hPts';
@@ -20,7 +20,7 @@ const GetLessonById = (props) => {
         getData();
     }, []);
 
-    const fetchData = async() => {
+    const fetchData = async () => {
         setIsLoading(true);
         setError(null);
 
@@ -33,15 +33,13 @@ const GetLessonById = (props) => {
                 throw new Error(response.statusText);
             }
 
-            const json = await response.json();
-            return json;
+            return await response.json();
             // setLesson(json);
         } catch (e) {
             setError(e.message);
         } finally {
             setIsLoading(false);
         }
-
     }
 
     if (isLoading) {
@@ -51,14 +49,13 @@ const GetLessonById = (props) => {
     if (error) {
         return <p>An error occurred: {error}</p>;
     }
-    //console.log(lesson.text);
     return (
         <div className='bg-warning p-3'>
             <h2 className={'details'}>LESSON</h2>
             <p>Lesson Id: {lesson.id}</p>
             <p>Topic: {lesson.topic}</p>
             <p>Text: {lesson.text}</p>
-            <YTVideo videoId={videoId} />;
+            <YTVideo videoId={videoId}/>;
         </div>
     );
 };

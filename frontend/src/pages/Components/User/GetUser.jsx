@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import '../GetUser.css';
+import '../../../styles/GetUser.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {useForm} from "react-hook-form";
@@ -44,7 +44,7 @@ const GetUser = () => {
     if (isLoading) {
         return <p>Loading...</p>;
     }
-
+// todo :#Sebastian save na  account details -> walidacja -> komunikat co trzeba zmienić
     if (error) {
         return <p>An error occurred: {error}</p>;
     }
@@ -114,7 +114,7 @@ const GetUser = () => {
 
 
         </div>
-    // <RegistrationAlert ref={this.registrationAlert}/> TODO windows popup
+    // <RegistrationAlert ref={this.registrationAlert}/> TODO windows popup #Sebastian
 
 
     );

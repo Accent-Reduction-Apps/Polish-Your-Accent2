@@ -1,6 +1,6 @@
 import React from 'react';
-import '../resources/Common.css'
- import MRI from '../resources/speaking-MRI-square.gif';
+import '../../../styles/Common.css'
+ import MRI from '../../../resources/image/speaking-MRI-square.gif';
 
 export default function About() {
     return (

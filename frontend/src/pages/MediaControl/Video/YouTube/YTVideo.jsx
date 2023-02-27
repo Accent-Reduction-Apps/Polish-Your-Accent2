@@ -1,6 +1,6 @@
 import React from 'react';
 import YouTube from 'react-youtube';
-import '../styles/YTVideo.css';
+import '../../../../styles/YTVideo.css';
 
 const YTVideo = ({ videoId }) => {
     const opts = {

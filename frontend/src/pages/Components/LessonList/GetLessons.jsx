@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
-import '../styles/GetLessons.css';
+import '../../../styles/GetLessons.css';
 
 const GetLessons = () => {
     const [lessons, setLessons] = useState([]);
@@ -19,8 +19,7 @@ const GetLessons = () => {
     const fetchData = async () => {
 
         const response = await fetch('http://localhost:8080/lessons');
-        const data = await response.json();
-        return data;
+        return await response.json();
     }
 
     if (isLoading) {

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FaFacebook, FaLinkedin, FaTwitter} from 'react-icons/fa';
-import '../styles/Footer.css';
+import '../../styles/Footer.css';
 
 const Footer = () => {
     const [time, setTime] = useState(new Date());
