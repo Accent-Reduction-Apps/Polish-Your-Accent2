@@ -1,4 +1,4 @@
-import {Outlet, Link, useNavigate} from 'react-router-dom';
+import {Outlet, Link} from 'react-router-dom';
 import React, {useContext, useEffect, useState} from 'react';
 import {Navbar, Nav, Container, Button, Stack} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,8 +11,6 @@ import {AuthorizationContext} from "../../auxiliary/AuthorizationContext";
 const Layout = ({children}) => {
 
     const [isUserAuthorized, setIsUserAuthorized] = useContext(AuthorizationContext);
-    const navigate = useNavigate();
-
 
     const [isAuthorized, setAuthorized] = useState(window.$authorized);
     useEffect(() => {
@@ -30,9 +28,6 @@ const Layout = ({children}) => {
 
     const extraButtons = isUserAuthorized ? (
         <>
-            <Nav.Link as={Link} to='/c'>
-                <Button variant='outline-warning'>?</Button>
-            </Nav.Link>
             <Nav.Link as={Link} to='/demo'>
                 <Button variant='outline-warning'>Lessons</Button>
             </Nav.Link>
