@@ -12,7 +12,7 @@ public class Lesson {
     private Long id;
 
     @Size(max = 255)
-    @Column(name = "text")
+    @Column(name = "lessonContent", columnDefinition = "text")
     private String lessonContent;
 
     @Size(max = 255)
