@@ -16,6 +16,8 @@ import Logout from "./pages/Components/Logout/Logout";
 import Auxiliary from "./pages/Components/Auxiliary/Auxiliary";
 import './styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Signin from "./pages/Navigation/Signin";
+import Profile from "./security/components/profile.component";
 
 document.title = 'Polish Your Accent';
 
@@ -31,6 +33,9 @@ export default function App() {
                     <Route path='teaminfo' element={<TeamSlotherin/>}/>
                     <Route path='registration' element={<RegisterHere/>}/>
                     <Route path='logout' element={<Logout/>}/>
+                    <Route path='signin' element={<Signin/>}/>
+                    <Route path='signup' element={<Signup/>}/>
+                    <Route path='profile' element={<Profile/>}/>
                     <Route path='demo' element={<Lessons/>}/>
                     <Route exact path='/lessons' element={<GetLessons/>}/>
                     <Route path='/lesson/:lessonId' element={<GetLessonById/>}/>
