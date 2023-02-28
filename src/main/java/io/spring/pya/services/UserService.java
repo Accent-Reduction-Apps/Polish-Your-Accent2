@@ -37,8 +37,8 @@ public class UserService implements UserDetailsService {
     public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
 
         if (stringDataUpdated(userStudentNew.getUsername())) userStudentOld.setUsername(userStudentNew.getUsername());
-        if (stringDataUpdated(userStudentNew.getEmailAddress()))
-            userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
+        if (stringDataUpdated(userStudentNew.getEmail()))
+            userStudentOld.setEmail(userStudentNew.getEmail());
         if (stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
 
         userRepository.save(userStudentOld);

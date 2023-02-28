@@ -35,7 +35,7 @@ public class InitService {
             testUser = userRepository.findByUsername(name).get();
         }
         testUser.setUsername(name);
-        testUser.setEmailAddress(name + "@email.com");
+        testUser.setEmail(name + "@email.com");
         testUser.setPassword(passwordEncoder.encode(name));
         testUser.setEnabled(true);
         testUser.setCredentialsNonExpired(true);
