@@ -132,3 +132,19 @@ label {
     display: block;
     margin-top: 10px;
 }
+
+.signuplink {
+    font-weight: normal;
+    text-decoration: none;
+    color: burlywood;
+}
+
+.signuplink:hover {
+    text-decoration: none;
+    font-weight: 900;
+    cursor: grabbing;
+    text-decoration: dashed;
+    color: orange;
+    font-stretch: extra-expanded;
+
+}

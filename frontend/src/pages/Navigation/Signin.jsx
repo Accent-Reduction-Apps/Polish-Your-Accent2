@@ -6,7 +6,8 @@ import '../../styles/Common.css'
 import AuthService from '../../security/auth/authservice';
 
 import { withRouter } from '../../security/common/with-router';
-import {Button} from "react-bootstrap";
+import {Button, Col} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 const required = value => {
     if (!value) {
@@ -17,6 +18,8 @@ const required = value => {
         );
     }
 };
+
+
 
 class Signin extends Component {
     constructor(props) {
@@ -82,7 +85,18 @@ class Signin extends Component {
         }
     }
 
+
     render() {
+        let SignupLink = (
+            <Col>
+                <p className="text-center">
+
+                    <Link to="/signup" className="signuplink">
+                        ...or create account
+                    </Link>
+                </p>
+            </Col>
+        );
         return (
             <div  className='bg-warning p-3'>
                 <div className="card card-container">
@@ -122,7 +136,7 @@ class Signin extends Component {
                             />
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group text-center">
                             <br />
                             <button
                                 className="btn btn-primary btn-block"
@@ -148,6 +162,7 @@ class Signin extends Component {
                                 this.checkBtn = c;
                             }}
                         />
+                            {SignupLink}
                     </Form>
                 </div>
             </div>
