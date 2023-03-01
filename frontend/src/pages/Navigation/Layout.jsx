@@ -5,9 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import smallLogo from '../../resources/image/rsmouth2.png';
 import '../../styles/Layout.css';
 import Footer from './Footer';
-import UserDisplay from "../../auxiliary/UserDisplay";
 import Authservice from "../../security/auth/authservice";
-
 
 import {AuthorizationContext} from "../../auxiliary/AuthorizationContext";
 
@@ -18,7 +16,7 @@ function logOut() {
 const Layout = ({children}) => {
 
 
-    const [isUserAuthorized] = useContext(AuthorizationContext);
+    const [isUserAuthorized, setIsUserAuthorized] = useContext(AuthorizationContext);
 
     const [isAuthorized, setAuthorized] = useState(window.$authorized);
     useEffect(() => {
@@ -53,6 +51,9 @@ const Layout = ({children}) => {
     </Nav.Link>);
 
     let userBK = Authservice.getCurrentUser();
+    if (userBK) {
+        setIsUserAuthorized(true);
+    }
     return (
         <Container fluid key={isAuthorized}>
             <Navbar className='navi' expand='lg' variant='dark'>
@@ -85,31 +86,6 @@ const Layout = ({children}) => {
                             <Button variant='outline-warning'>Auxiliary</Button>
                         </Nav.Link>
                         {extraButtons}
-                        <Navbar.Text>
-                            <div className='navtitle'><UserDisplay/></div>
-                        </Navbar.Text>
-                        {userBK ? (
-                            <div className="navbar-nav ml-auto">
-                                <li className="nav-item">
-                                    <Link to={"/profile"} className="nav-link">
-                                        {userBK.username}
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <a href="/login" className="nav-link" onClick={logOut}>
-                                        LogOut
-                                    </a>
-                                </li>
-                            </div>
-                        ) : (
-                            <div className="navbar-nav ml-auto">
-                                <li className="nav-item">
-                                    <Link to={"/signin"} className="nav-link">
-                                        Login
-                                    </Link>
-                                </li>
-                            </div>
-                        )}
                     </Nav>
 
                 </Navbar.Collapse>
