@@ -39,8 +39,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
-//                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-//                .and()
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

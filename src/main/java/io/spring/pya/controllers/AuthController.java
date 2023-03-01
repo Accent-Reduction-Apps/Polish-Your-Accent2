@@ -23,23 +23,26 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 	private final
 	AuthenticationManager authenticationManager;
 	private final GrantedAuthorityRepository grantedAuthorityRepository;
-
 	private final
 	PasswordEncoder encoder;
-
 	private final
 	JwtUtils jwtUtils;
 
 	private final UserRepository userRepository;
 
-	public AuthController(AuthenticationManager authenticationManager, GrantedAuthorityRepository grantedAuthorityRepository, PasswordEncoder encoder, JwtUtils jwtUtils, UserRepository userRepository) {
+	public AuthController(AuthenticationManager authenticationManager,
+						  GrantedAuthorityRepository grantedAuthorityRepository,
+						  PasswordEncoder encoder,
+						  JwtUtils jwtUtils,
+						  UserRepository userRepository
+	) {
 		this.authenticationManager = authenticationManager;
 		this.grantedAuthorityRepository = grantedAuthorityRepository;
 		this.encoder = encoder;
@@ -52,10 +55,8 @@ public class AuthController {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
-
 		UserStudent userDetails = (UserStudent) authentication.getPrincipal();
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(GrantedAuthority::getAuthority)
@@ -82,15 +83,12 @@ public class AuthController {
 					.body(new MessageResponse("Error: Email is already in use!"));
 		}
 
-		// Create new user's account
 		UserStudent user = new UserStudent(signUpRequest.getUsername(),
 				signUpRequest.getEmail(),
 				encoder.encode(signUpRequest.getPassword()));
-
 		String role = signUpRequest.getRole();
 		UserRole userRole;
 		List<AppSimpleGrantedAuthority> userAuthorities;
-
 		if (role == null) {
 			userRole = UserRole.STUDENT;
 		} else {
@@ -100,10 +98,6 @@ public class AuthController {
 		userAuthorities = userRole.getGrantedAuthorities(user);
 		user.setRole(userRole.name());
 		user.setAuthorities(userAuthorities);
-		user.setEnabled(true);
-		user.setCredentialsNonExpired(true);
-		user.setAccountNonExpired(true);
-		user.setAccountNonLocked(true);
 		userRepository.save(user);
 		grantedAuthorityRepository.saveAll(userAuthorities);
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
