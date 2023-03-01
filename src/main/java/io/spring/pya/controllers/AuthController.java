@@ -10,6 +10,7 @@ import io.spring.pya.repositories.GrantedAuthorityRepository;
 import io.spring.pya.repositories.UserRepository;
 import io.spring.pya.security.UserRole;
 import io.spring.pya.security.jwt.JwtUtils;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +20,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 

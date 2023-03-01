@@ -1,11 +1,11 @@
 package io.spring.pya.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
