@@ -11,15 +11,14 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class AdminControllerTest {
-
+class UserControllerTest {
     private UserService userService;
-    private AdminController AdminController;
+    private UserController userController;
 
     @BeforeEach
     void setUp() {
         userService = mock(UserService.class);
-        AdminController = new AdminController(userService);
+        userController = new UserController(userService);
     }
 
     @Test
@@ -29,7 +28,7 @@ class AdminControllerTest {
         UserProvider.activateUserAccount(userToActivate);
         when(userService.activateUser(userToActivate.getId())).thenReturn(userActivated);
 
-        ResponseEntity<?> response = AdminController.activateUser(userToActivate.getId());
+        ResponseEntity<?> response = userController.activateUser(userToActivate.getId());
 
         verify(userService, times(1)).activateUser(userActivated.getId());
         assertEquals(response.getBody(), userActivated);
@@ -44,7 +43,7 @@ class AdminControllerTest {
         UserProvider.deactivateUserAccount(userDeactivated);
         when(userService.deactivateUser(userToDeactivate.getId())).thenReturn(userDeactivated);
 
-        ResponseEntity<?> response = AdminController.deactivateUser(userToDeactivate.getId());
+        ResponseEntity<?> response = userController.deactivateUser(userToDeactivate.getId());
 
         verify(userService, times(1)).deactivateUser(userDeactivated.getId());
         assertEquals(response.getBody(), userDeactivated);

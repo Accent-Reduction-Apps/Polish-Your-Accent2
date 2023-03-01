@@ -44,7 +44,6 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/", "/js/**", "/css/**", "/webjars/**").permitAll()
-                        .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users/**").hasAuthority(UserPermission.USERS_VIEW.getPermission())
                         .requestMatchers(HttpMethod.POST, "/users/**").hasAuthority(UserPermission.USERS_ADD.getPermission())
                         .requestMatchers(HttpMethod.PUT, "/users/**").hasAuthority(UserPermission.USERS_CHANGE.getPermission())
@@ -53,7 +52,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/lessons/**").hasAuthority(UserPermission.LESSONS_ADD.getPermission())
                         .requestMatchers(HttpMethod.PUT, "/lessons/**").hasAuthority(UserPermission.LESSONS_CHANGE.getPermission())
                         .requestMatchers(HttpMethod.DELETE, "/lessons/**").hasAuthority(UserPermission.LESSONS_DELETE.getPermission())
-                        .requestMatchers("/admin/**").hasAuthority(UserRole.ADMIN.name())
+                        .requestMatchers("**/activate").hasAuthority(UserRole.ADMIN.name())
+                        .requestMatchers("**/deactivate").hasAuthority(UserRole.ADMIN.name())
                         .anyRequest().permitAll()
                 )
                 .formLogin((form) -> {
