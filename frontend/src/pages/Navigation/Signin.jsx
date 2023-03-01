@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import '../../styles/Common.css'
 import AuthService from '../../security/auth/authservice';
-
-import { withRouter } from '../../security/common/with-router';
-import {Button, Col} from "react-bootstrap";
+import {withRouter} from '../../security/common/with-router';
+import {Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 const required = value => {
@@ -18,8 +17,6 @@ const required = value => {
         );
     }
 };
-
-
 
 class Signin extends Component {
     constructor(props) {
@@ -85,7 +82,6 @@ class Signin extends Component {
         }
     }
 
-
     render() {
         let SignupLink = (
             <Col>
@@ -98,7 +94,7 @@ class Signin extends Component {
             </Col>
         );
         return (
-            <div  className='bg-warning p-3'>
+            <div className='bg-warning p-3'>
                 <div className="card card-container">
                     <img
                         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -137,7 +133,7 @@ class Signin extends Component {
                         </div>
 
                         <div className="form-group text-center">
-                            <br />
+                            <br/>
                             <button
                                 className="btn btn-primary btn-block"
                                 disabled={this.state.loading}
@@ -157,12 +153,12 @@ class Signin extends Component {
                             </div>
                         )}
                         <CheckButton
-                            style={{ display: "none" }}
+                            style={{display: "none"}}
                             ref={c => {
                                 this.checkBtn = c;
                             }}
                         />
-                            {SignupLink}
+                        {SignupLink}
                     </Form>
                 </div>
             </div>
