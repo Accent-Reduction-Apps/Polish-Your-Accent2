@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import {AuthorizationContext} from "../../../auxiliary/AuthorizationContext";
+import Authservice from "../../../security/auth/authservice";
 import {Button} from "react-bootstrap";
 import AudioPlayer from "../../MediaControl/Audio/AudioPlayer";
 
@@ -10,6 +11,7 @@ function Logout() {
 
     function handleLogOutClick() {
         setIsUserAuthorized(false);
+        Authservice.logout();
         const audioEl = new Audio(audioOpening.default);
         audioEl.muted = true;
         audioEl.play();

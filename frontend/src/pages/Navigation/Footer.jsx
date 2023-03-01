@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {FaFacebook, FaLinkedin, FaTwitter} from 'react-icons/fa';
 import '../../styles/Footer.css';
+import Authservice from "../../security/auth/authservice";
 
 const Footer = () => {
     const [time, setTime] = useState(new Date());
@@ -20,6 +21,9 @@ const Footer = () => {
     };
     const formattedTime = time.toLocaleDateString(undefined, options);
 
+    const noauthinfo = 'not signed in...  ';
+    let authinfo = 'signed in:';
+    let authuser = Authservice.getCurrentUser();
     return (<footer className='footer'>
             <span style={{color: 'darkkhaki'}}>
                 Copyright &copy; 2023 Team Slotherin.
@@ -40,7 +44,7 @@ const Footer = () => {
 
             </span>
             <span style={{color: 'darkkhaki'}}>
-                Take your time... {formattedTime}
+                {authuser ? (<>{authinfo} {authuser.username}... </>) : (<>{noauthinfo}</>)} {formattedTime}
             </span>
         </footer>
     );

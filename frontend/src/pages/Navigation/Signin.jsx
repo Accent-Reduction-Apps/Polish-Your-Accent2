@@ -1,12 +1,13 @@
-import React, {Component} from "react";
+import React, { useState, useRef, useContext } from "react";
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import '../../styles/Common.css'
 import AuthService from '../../security/auth/authservice';
-import {withRouter} from '../../security/common/with-router';
-import {Col} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import { AuthorizationContext } from "../../auxiliary/AuthorizationContext";
+import { useNavigate } from "react-router-dom";
+import { Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const required = value => {
     if (!value) {
@@ -18,47 +19,38 @@ const required = value => {
     }
 };
 
-class Signin extends Component {
-    constructor(props) {
-        super(props);
-        this.handleLogin = this.handleLogin.bind(this);
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
+const Signin = () => {
+    const navigate = useNavigate();
+    const form = useRef(null);
+    const checkBtn = useRef(null);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+    const [isUserAuthorized, setIsUserAuthorized] = useContext(AuthorizationContext);
 
-        this.state = {
-            username: "",
-            password: "",
-            loading: false,
-            message: ""
-        };
+    const onChangeUsername = (e) => {
+        const username = e.target.value;
+        setUsername(username);
     }
 
-    onChangeUsername(e) {
-        this.setState({
-            username: e.target.value
-        });
+    const onChangePassword = (e) => {
+        const password = e.target.value;
+        setPassword(password);
     }
 
-    onChangePassword(e) {
-        this.setState({
-            password: e.target.value
-        });
-    }
-
-    handleLogin(e) {
+    const handleLogin = (e) => {
         e.preventDefault();
+        setMessage("");
+        setLoading(true);
 
-        this.setState({
-            message: "",
-            loading: true
-        });
+        form.current.validateAll();
 
-        this.form.validateAll();
-
-        if (this.checkBtn.context._errors.length === 0) {
-            AuthService.login(this.state.username, this.state.password).then(
+        if (checkBtn.current.context._errors.length === 0) {
+            AuthService.login(username, password).then(
                 () => {
-                    this.props.router.navigate("/demo");
+                    setIsUserAuthorized(true);
+                    navigate("/demo");
                     window.location.reload();
                 },
                 error => {
@@ -69,101 +61,91 @@ class Signin extends Component {
                         error.message ||
                         error.toString();
 
-                    this.setState({
-                        loading: false,
-                        message: resMessage
-                    });
+                    setLoading(false);
+                    setMessage(resMessage);
                 }
             );
         } else {
-            this.setState({
-                loading: false
-            });
+            setLoading(false);
         }
     }
 
-    render() {
-        let SignupLink = (
-            <Col>
-                <p className="text-center">
+    let SignupLink = (
+        <Col>
+            <p className="text-center">
+                <Link to="/signup" className="signuplink">
+                    ...or create account
+                </Link>
+            </p>
+        </Col>
+    );
 
-                    <Link to="/signup" className="signuplink">
-                        ...or create account
-                    </Link>
-                </p>
-            </Col>
-        );
-        return (
-            <div className='bg-warning p-3'>
-                <div className="card card-container">
-                    <img
-                        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                        alt="profile-img"
-                        className="profile-img-card"
-                    />
+    return (
+        <div className='bg-warning p-3'>
+            <div className="card card-container">
+                <img
+                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                    alt="profile-img"
+                    className="profile-img-card"
+                />
 
-                    <Form
-                        onSubmit={this.handleLogin}
-                        ref={c => {
-                            this.form = c;
-                        }}
-                    >
-                        <div className="form-group">
-                            <label htmlFor="username">Username</label>
-                            <Input
-                                type="text"
-                                className="form-control"
-                                name="username"
-                                value={this.state.username}
-                                onChange={this.onChangeUsername}
-                                validations={[required]}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <Input
-                                type="password"
-                                className="form-control"
-                                name="password"
-                                value={this.state.password}
-                                onChange={this.onChangePassword}
-                                validations={[required]}
-                            />
-                        </div>
-
-                        <div className="form-group text-center">
-                            <br/>
-                            <button
-                                className="btn btn-primary btn-block"
-                                disabled={this.state.loading}
-                            >
-                                {this.state.loading && (
-                                    <span className="spinner-border spinner-border-sm"></span>
-                                )}
-                                <span>Login</span>
-                            </button>
-                        </div>
-
-                        {this.state.message && (
-                            <div className="form-group">
-                                <div className="alert alert-danger" role="alert">
-                                    {this.state.message}
-                                </div>
-                            </div>
-                        )}
-                        <CheckButton
-                            style={{display: "none"}}
-                            ref={c => {
-                                this.checkBtn = c;
-                            }}
+                <Form
+                    onSubmit={handleLogin}
+                    ref={form}
+                >
+                    <div className="form-group">
+                        <label htmlFor="username">Username</label>
+                        <Input
+                            type="text"
+                            className="form-control"
+                            name="username"
+                            value={username}
+                            onChange={onChangeUsername}
+                            validations={[required]}
                         />
-                        {SignupLink}
-                    </Form>
-                </div>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <Input
+                            type="password"
+                            className="form-control"
+                            name="password"
+                            value={password}
+                            onChange={onChangePassword}
+                            validations={[required]}
+                        />
+                    </div>
+
+                    <div className="form-group text-center">
+                        <br />
+                        <button
+                            className="btn btn-primary btn-block"
+                            disabled={loading}
+                        >
+                            {loading && (
+                                <span className="spinner-border spinner-border-sm"></span>
+                            )}
+                            <span>Login</span>
+                        </button>
+                    </div>
+
+                    {message && (
+                        <div className="form-group">
+                            <div className="alert alert-danger" role="alert">
+                                {message}
+                            </div>
+                        </div>
+                    )}
+                    <CheckButton
+                        style={{ display: "none" }}
+                        ref={checkBtn}
+                    />
+                    {SignupLink}
+                </Form>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
-export default withRouter(Signin);
+export default Signin;
