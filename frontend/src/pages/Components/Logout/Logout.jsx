@@ -29,6 +29,7 @@ function Logout() {
         <div className='bg-warning p-3'>
             <AudioPlayer src={audioOpening}/>
             <h1>Logout</h1>
+            <h5>You are logged in as </h5>
             <p>Are you sure you want to log out?</p>
             <Button onClick={handleLogOutClick}
                     variant='danger'>YES!</Button>
