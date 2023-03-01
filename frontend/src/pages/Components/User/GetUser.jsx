@@ -11,7 +11,7 @@ const GetUser = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [state, setState] = useState();
-    const {register,handleSubmit, watch, errors } = useForm()
+    const {register, handleSubmit, watch, errors} = useForm()
     const onSubmit = (data) => {
         setUsers(data);
         editUser(data)
@@ -23,21 +23,22 @@ const GetUser = () => {
             setError(null);
 
             try {
-            const response = await fetch(`http://localhost:8080/users/${userid}`);
+                const response = await fetch(`http://localhost:8080/users/${userid}`);
 
-            if (!response.ok) {
-                throw new Error(response.statusText);
-            }
-            const json = await response.json();
-            console.log(json)
-            setUsers(json)
-            return json;
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                const json = await response.json();
+                console.log(json)
+                setUsers(json)
+                return json;
             } catch (e) {
                 setError(e.message);
             } finally {
                 setIsLoading(false);
             }
         }
+
         fetchUsers().then(json => console.log(json));
     }, []);
 
@@ -59,7 +60,6 @@ const GetUser = () => {
             body: JSON.stringify({
                 emailAddress: data.emailAddress,
                 name: data.name,
-                password: data.password,
             })
         };
         fetch(`http://localhost:8080/users/${userid}`, putNewUserDetails)
@@ -96,15 +96,6 @@ const GetUser = () => {
                         pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
                     })} name="emailAddress"/>
                 </Form.Group>
-                <Form.Group controlId="password" size="lg">
-                    <Form.Label>
-                        Password
-                    </Form.Label>
-                    <Form.Control defaultValue={users.password}
-                                  placeholder={users.password} {...register("password")}
-                                  type="password" name="password"/>
-                </Form.Group>
-
 
                 <Button className="save-button" type="submit">Save account edition</Button>
 
@@ -114,7 +105,7 @@ const GetUser = () => {
 
 
         </div>
-    // <RegistrationAlert ref={this.registrationAlert}/> TODO windows popup #Sebastian
+        // <RegistrationAlert ref={this.registrationAlert}/> TODO windows popup #Sebastian
 
 
     );
