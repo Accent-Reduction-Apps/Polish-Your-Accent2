@@ -41,3 +41,4 @@ build/
 ### log files ###
 *.log
 /scratches/
+/src/main/resources/spring.log.*.gz

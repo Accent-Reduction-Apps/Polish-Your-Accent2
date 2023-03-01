@@ -6,7 +6,7 @@ function UserDisplay() {
 
     useEffect(() => {
         async function fetchUser() {
-            const response = await axios.get('/api/user');
+            const response = await axios.get('/user');
             setUser(response.data);
         }
         fetchUser();

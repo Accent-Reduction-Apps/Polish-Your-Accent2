@@ -7,8 +7,7 @@ import '../../styles/Layout.css';
 import Footer from './Footer';
 import UserDisplay from "../../auxiliary/UserDisplay";
 import Authservice from "../../security/auth/authservice";
-import Profile from "../../security/components/profile.component";
-import Signin from "./Signin";
+
 
 import {AuthorizationContext} from "../../auxiliary/AuthorizationContext";
 
@@ -18,19 +17,8 @@ function logOut() {
 
 const Layout = ({children}) => {
 
-    // logOut() {
-    //     Authservice.logout();
-        // this.setState({
-        //     showModeratorBoard: false,
-        //     showAdminBoard: false,
-        //     currentUser: undefined,
-        // });
-    // }
 
-    // const userBK = Authservice.getCurrentUser();
-
-
-    const [isUserAuthorized, setIsUserAuthorized] = useContext(AuthorizationContext);
+    const [isUserAuthorized] = useContext(AuthorizationContext);
 
     const [isAuthorized, setAuthorized] = useState(window.$authorized);
     useEffect(() => {
@@ -51,33 +39,18 @@ const Layout = ({children}) => {
             <Nav.Link as={Link} to='/demo'>
                 <Button variant='outline-warning'>Lessons</Button>
             </Nav.Link>
-            {/*<Nav.Link as={Link} to='/teaminfo'>*/}
-            {/*    <Button variant='outline-warning'>My account</Button>*/}
-            {/*</Nav.Link>*/}
+            <Nav.Link as={Link} to='/profile'>
+                <Button variant='outline-warning'>My account</Button>
+            </Nav.Link>
             <Nav.Link as={Link} to='/logout'>
                 <Button
                     variant='outline-warning'>Log out</Button>
             </Nav.Link>
         </>
     ) : (<Nav.Link as={Link} to='/signin'>
-        {/*<Button onClick={() => setIsUserAuthorized(true)}*/}
         <Button
             variant='outline-warning'>Login</Button>
     </Nav.Link>);
-
-
-    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ na pszyjszłoś +++++++++++++++++++++
-    //
-    // const user = Authservice.getCurrentUser();
-    //
-    // if (user) {
-    //     this.setState({
-    //         currentUser: user,
-    //         showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-    //         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
-    //     });
-    // }
-
 
     let userBK = Authservice.getCurrentUser();
     return (

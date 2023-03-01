@@ -15,9 +15,9 @@ class Registration extends Component {
     handleSubmit = event => {
         event.preventDefault();
         console.log(event.target.username.value);
-        console.log(event.target.addressEmail.value);
+        console.log(event.target.emailAddress.value);
         console.log(event.target.password.value);
-        this.registerUser(event.target.username.value, event.target.addressEmail.value, event.target.password.value);
+        this.registerUser(event.target.username.value, event.target.emailAddress.value, event.target.password.value);
     }
 
     showRegistrationAlert(variant, heading, message) {
@@ -65,7 +65,7 @@ class Registration extends Component {
                             </Form.Label>
                             <Form.Control autoFocus name="username"/>
                         </Form.Group>
-                        <Form.Group controlId="addressEmail" size="lg">
+                        <Form.Group controlId="emailAddress" size="lg">
                             <Form.Label>
                                 Address Email
                             </Form.Label>
