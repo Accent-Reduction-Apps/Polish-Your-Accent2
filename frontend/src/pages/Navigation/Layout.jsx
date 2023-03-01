@@ -1,6 +1,6 @@
-import {Outlet, Link} from 'react-router-dom';
+import {Link, Outlet} from 'react-router-dom';
 import React, {useContext, useEffect, useState} from 'react';
-import {Navbar, Nav, Container, Button, Stack} from 'react-bootstrap';
+import {Button, Container, Nav, Navbar, Stack} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import smallLogo from '../../resources/image/rsmouth2.png';
 import '../../styles/Layout.css';
@@ -37,7 +37,7 @@ const Layout = ({children}) => {
             <Nav.Link as={Link} to='/demo'>
                 <Button variant='outline-warning'>Lessons</Button>
             </Nav.Link>
-            <Nav.Link as={Link} to='/profile'>
+            <Nav.Link as={Link} to='/my-account'>
                 <Button variant='outline-warning'>My account</Button>
             </Nav.Link>
             <Nav.Link as={Link} to='/logout'>
