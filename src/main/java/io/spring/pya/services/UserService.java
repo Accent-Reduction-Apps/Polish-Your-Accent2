@@ -71,20 +71,32 @@ public class UserService implements UserDetailsService {
     }
 
     public UserStudent activateUser(Long userId) {
-        UserStudent userStudent = userRepository.getReferenceById(userId);
+        UserStudent userStudent;
+        if (userRepository.findById(userId).isEmpty()) {
+            return null;
+        } else {
+            userStudent = userRepository.findById(userId).get();
+        }
         userStudent.setAccountNonExpired(true);
         userStudent.setAccountNonLocked(true);
         userStudent.setCredentialsNonExpired(true);
         userStudent.setEnabled(true);
+        userRepository.save(userStudent);
         return userStudent;
     }
 
     public UserStudent deactivateUser(Long userId) {
-        UserStudent userStudent = userRepository.getReferenceById(userId);
+        UserStudent userStudent;
+        if (userRepository.findById(userId).isEmpty()) {
+            return null;
+        } else {
+            userStudent = userRepository.findById(userId).get();
+        }
         userStudent.setAccountNonExpired(false);
         userStudent.setAccountNonLocked(false);
         userStudent.setCredentialsNonExpired(false);
         userStudent.setEnabled(false);
+        userRepository.save(userStudent);
         return userStudent;
     }
 
