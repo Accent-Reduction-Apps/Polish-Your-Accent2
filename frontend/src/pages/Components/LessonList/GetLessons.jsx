@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import '../../../styles/GetLessons.css';
+import authHeader from "../../../security/auth/auth-header";
 
 const GetLessons = () => {
     const [lessons, setLessons] = useState([]);
@@ -16,10 +17,16 @@ const GetLessons = () => {
         getData();
     }, []);
 
+    // const fetchData = async () => {
+    //
+    //     const response = await fetch('http://localhost:8080/lessons');
+    //     return await response.json();
+    // }
     const fetchData = async () => {
-
-        const response = await fetch('http://localhost:8080/lessons');
-        return await response.json();
+        const headers = authHeader();
+        const response = await fetch('http://localhost:8080/lessons', { headers });
+        const data = await response.json();
+        return data;
     }
 
     if (isLoading) {
