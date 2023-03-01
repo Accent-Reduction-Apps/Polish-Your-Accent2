@@ -53,6 +53,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/lessons/**").hasAuthority(UserPermission.LESSONS_ADD.getPermission())
                         .requestMatchers(HttpMethod.PUT, "/lessons/**").hasAuthority(UserPermission.LESSONS_CHANGE.getPermission())
                         .requestMatchers(HttpMethod.DELETE, "/lessons/**").hasAuthority(UserPermission.LESSONS_DELETE.getPermission())
+                        .requestMatchers("/admin/**").hasAuthority(UserRole.ADMIN.name())
                         .anyRequest().permitAll()
                 )
                 .formLogin((form) -> {
