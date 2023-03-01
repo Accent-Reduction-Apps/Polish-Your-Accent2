@@ -6,7 +6,7 @@ import {useForm} from "react-hook-form";
 import Authservice from "../../../security/auth/authservice";
 
 
-function GetUser() {
+export default function GetUser() {
     const user = Authservice.getCurrentUser();
     let token = user.accessToken;
     console.log(user);
@@ -27,32 +27,33 @@ function GetUser() {
     useEffect(() => {
 
         async function fetchUsers() {
-            setIsLoading(true);
+            // setIsLoading(true);
             setError(null);
 
-            try {
-                // let header = authHeader();
-                let header = {
-                    method: "GET",
-                    headers: {
-                        Authorization: 'Bearer ' + token,
-                        // accessToken: token,
-                    }
+            // try {
+            // let header = authHeader();
+            let header = {
+                method: "GET",
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                    // accessToken: token,
                 }
-                const response = await fetch(`http://localhost:8080/users/${userid}`, header);
-
-                if (!response.ok) {
-                    throw new Error(response.statusText);
-                }
-                const json = await response.json();
-                console.log(json)
-                setUsers(json)
-                return json;
-            } catch (e) {
-                setError(e.message);
-            } finally {
-                setIsLoading(false);
             }
+            const response = await fetch(`http://localhost:8080/users/${userid}`, header);
+
+            // if (!response.ok) {
+            //     throw new Error(response.statusText);
+            // }
+            const json = await response.json();
+            console.log(json)
+            setUsers(json)
+            return json;
+
+            // } catch (e) {
+            //     setError(e.message);
+            // } finally {
+            // setIsLoading(false);
+            // }
         }
 
         fetchUsers().then(json => console.log(json));
@@ -149,4 +150,3 @@ function GetUser() {
     );
 }
 
-export default GetUser;
