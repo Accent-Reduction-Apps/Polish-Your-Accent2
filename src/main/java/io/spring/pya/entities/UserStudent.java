@@ -1,6 +1,7 @@
 package io.spring.pya.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +22,8 @@ public class UserStudent implements UserDetails {
 
     @Size(max = 255)
     @Column(name = "email_address")
-    private String emailAddress;
+    @Email
+    private String email;
 
     @Size(max = 255)
     @Column(name = "name")
@@ -45,15 +47,15 @@ public class UserStudent implements UserDetails {
     private boolean enabled;
     private String role;
 
-    public UserStudent(String username, String emailAddress, String password) {
+    public UserStudent(String username, String email, String password) {
         this.username = username;
-        this.emailAddress = emailAddress;
+        this.email = email;
         this.password = password;
     }
 
-    public UserStudent(Long id, String emailAddress, String username, String password, Set<Lesson> lessons) {
+    public UserStudent(Long id, String email, String username, String password, Set<Lesson> lessons) {
         this.id = id;
-        this.emailAddress = emailAddress;
+        this.email = email;
         this.username = username;
         this.password = password;
         this.lessons = lessons;
@@ -78,12 +80,12 @@ public class UserStudent implements UserDetails {
         this.id = id;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String emailAddress) {
+        this.email = emailAddress;
     }
 
     @Override
@@ -161,7 +163,7 @@ public class UserStudent implements UserDetails {
     public String toString() {
         return "UserStudent{" +
                 "id=" + id +
-                ", emailAddress='" + emailAddress + '\'' +
+                ", emailAddress='" + email + '\'' +
                 ", name='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", lessons=" + lessons +

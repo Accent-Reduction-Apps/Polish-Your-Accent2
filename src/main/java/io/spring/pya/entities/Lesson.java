@@ -3,6 +3,7 @@ package io.spring.pya.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+
 @Entity
 @Table(name = "lessons")
 public class Lesson {

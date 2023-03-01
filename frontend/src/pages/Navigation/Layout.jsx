@@ -1,16 +1,24 @@
-import {Link, Outlet} from 'react-router-dom';
+import {Outlet, Link} from 'react-router-dom';
 import React, {useContext, useEffect, useState} from 'react';
-import {Button, Container, Nav, Navbar, Stack} from 'react-bootstrap';
+import {Navbar, Nav, Container, Button, Stack} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import smallLogo from '../../resources/image/rsmouth2.png';
 import '../../styles/Layout.css';
 import Footer from './Footer';
+import UserDisplay from "../../auxiliary/UserDisplay";
+import Authservice from "../../security/auth/authservice";
+
 
 import {AuthorizationContext} from "../../auxiliary/AuthorizationContext";
 
+function logOut() {
+    Authservice.logout();
+}
+
 const Layout = ({children}) => {
 
-    const [isUserAuthorized, setIsUserAuthorized] = useContext(AuthorizationContext);
+
+    const [isUserAuthorized] = useContext(AuthorizationContext);
 
     const [isAuthorized, setAuthorized] = useState(window.$authorized);
     useEffect(() => {
@@ -31,7 +39,7 @@ const Layout = ({children}) => {
             <Nav.Link as={Link} to='/demo'>
                 <Button variant='outline-warning'>Lessons</Button>
             </Nav.Link>
-            <Nav.Link as={Link} to='/my-account'>
+            <Nav.Link as={Link} to='/profile'>
                 <Button variant='outline-warning'>My account</Button>
             </Nav.Link>
             <Nav.Link as={Link} to='/logout'>
@@ -39,11 +47,12 @@ const Layout = ({children}) => {
                     variant='outline-warning'>Log out</Button>
             </Nav.Link>
         </>
-    ) : (<Nav.Link as={Link} to='/registration'>
-        <Button onClick={() => setIsUserAuthorized(true)}
-                variant='outline-warning'>Log in</Button>
+    ) : (<Nav.Link as={Link} to='/signin'>
+        <Button
+            variant='outline-warning'>Login</Button>
     </Nav.Link>);
 
+    let userBK = Authservice.getCurrentUser();
     return (
         <Container fluid key={isAuthorized}>
             <Navbar className='navi' expand='lg' variant='dark'>
@@ -77,8 +86,30 @@ const Layout = ({children}) => {
                         </Nav.Link>
                         {extraButtons}
                         <Navbar.Text>
-                            <div className='navtitle'> auth: {isUserAuthorized ? '1' : '0'}</div>
+                            <div className='navtitle'><UserDisplay/></div>
                         </Navbar.Text>
+                        {userBK ? (
+                            <div className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link to={"/profile"} className="nav-link">
+                                        {userBK.username}
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <a href="/login" className="nav-link" onClick={logOut}>
+                                        LogOut
+                                    </a>
+                                </li>
+                            </div>
+                        ) : (
+                            <div className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link to={"/signin"} className="nav-link">
+                                        Login
+                                    </Link>
+                                </li>
+                            </div>
+                        )}
                     </Nav>
 
                 </Navbar.Collapse>
@@ -88,6 +119,6 @@ const Layout = ({children}) => {
             <Footer/>
         </Container>
     );
-};
+}
 
 export default Layout;

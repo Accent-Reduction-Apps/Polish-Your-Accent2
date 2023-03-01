@@ -5,8 +5,8 @@ import '../../../styles/GetLessons.css';
 
 const GetLessons = () => {
     const [lessons, setLessons] = useState([]);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [error] = useState(null);
+    const [isLoading] = useState(false);
 
     useEffect(() => {
         const getData = async () => {
