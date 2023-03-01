@@ -1,7 +1,8 @@
 package io.spring.pya.controllers;
 
-import io.spring.pya.payload.response.MessageResponse;
-import io.spring.pya.repositories.UserRepository;
+import io.spring.pya.entities.UserStudent;
+import io.spring.pya.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,25 +12,25 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     public AdminController(
-            UserRepository userRepository
+            UserService userService
     ) {
 
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @PostMapping("/user/{userId}/activate")
-    public ResponseEntity<?> activateUser(@PathVariable String userId) {
-
-        return ResponseEntity.ok(new MessageResponse("User account activated successfully"));
+    public ResponseEntity<?> activateUser(@PathVariable Long userId) {
+        UserStudent activatedUser = userService.activateUser(userId);
+        return new ResponseEntity<>(activatedUser, HttpStatus.OK);
     }
 
     @PostMapping("/user/{userId}/deactivate")
-    public ResponseEntity<?> deactivateUser(@PathVariable String userId) {
-
-        return ResponseEntity.ok(new MessageResponse("User account deactivated successfully"));
+    public ResponseEntity<?> deactivateUser(@PathVariable Long userId) {
+        UserStudent deactivatedUser = userService.deactivateUSer(userId);
+        return new ResponseEntity<>(deactivatedUser, HttpStatus.OK);
     }
 }
 

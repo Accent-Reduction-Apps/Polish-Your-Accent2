@@ -66,9 +66,26 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s notfound", username)));
     }
 
-    private boolean stringDataUpdated (String string){
+    private boolean stringDataUpdated(String string) {
         return string != null && !string.equals("");
     }
 
+    public UserStudent activateUser(Long userId) {
+        UserStudent userStudent = userRepository.getReferenceById(userId);
+        userStudent.setAccountNonExpired(true);
+        userStudent.setAccountNonLocked(true);
+        userStudent.setCredentialsNonExpired(true);
+        userStudent.setEnabled(true);
+        return userStudent;
+    }
+
+    public UserStudent deactivateUSer(Long userId) {
+        UserStudent userStudent = userRepository.getReferenceById(userId);
+        userStudent.setAccountNonExpired(false);
+        userStudent.setAccountNonLocked(false);
+        userStudent.setCredentialsNonExpired(false);
+        userStudent.setEnabled(false);
+        return userStudent;
+    }
 
 }
