@@ -79,7 +79,7 @@ public class UserService implements UserDetailsService {
         return userStudent;
     }
 
-    public UserStudent deactivateUSer(Long userId) {
+    public UserStudent deactivateUser(Long userId) {
         UserStudent userStudent = userRepository.getReferenceById(userId);
         userStudent.setAccountNonExpired(false);
         userStudent.setAccountNonLocked(false);

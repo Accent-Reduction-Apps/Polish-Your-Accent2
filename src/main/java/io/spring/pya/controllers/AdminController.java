@@ -29,7 +29,7 @@ public class AdminController {
 
     @PostMapping("/user/{userId}/deactivate")
     public ResponseEntity<?> deactivateUser(@PathVariable Long userId) {
-        UserStudent deactivatedUser = userService.deactivateUSer(userId);
+        UserStudent deactivatedUser = userService.deactivateUser(userId);
         return new ResponseEntity<>(deactivatedUser, HttpStatus.OK);
     }
 }

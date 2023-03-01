@@ -26,7 +26,7 @@ class AdminControllerTest {
     void activateUser_userExists_200() {
         UserStudent userToActivate = UserProvider.createRandomUser();
         UserStudent userActivated = UserProvider.deepCopyUser(userToActivate);
-        UserProvider.activateUser(userToActivate);
+        UserProvider.activateUserAccount(userToActivate);
         when(userService.activateUser(userToActivate.getId())).thenReturn(userActivated);
 
         ResponseEntity<?> response = AdminController.activateUser(userToActivate.getId());
@@ -38,5 +38,16 @@ class AdminControllerTest {
 
     @Test
     void deactivateUser() {
+        UserStudent userToDeactivate = UserProvider.createRandomUser();
+        UserProvider.activateUserAccount(userToDeactivate);
+        UserStudent userDeactivated = UserProvider.deepCopyUser(userToDeactivate);
+        UserProvider.deactivateUserAccount(userDeactivated);
+        when(userService.deactivateUser(userToDeactivate.getId())).thenReturn(userDeactivated);
+
+        ResponseEntity<?> response = AdminController.deactivateUser(userToDeactivate.getId());
+
+        verify(userService, times(1)).deactivateUser(userDeactivated.getId());
+        assertEquals(response.getBody(), userDeactivated);
+        assertEquals(response.getStatusCode(), HttpStatusCode.valueOf(200));
     }
 }

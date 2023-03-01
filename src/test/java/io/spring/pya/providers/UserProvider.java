@@ -35,7 +35,7 @@ public class UserProvider {
         return copy;
     }
 
-    public static void activateUser(UserStudent userToActivate) {
+    public static void activateUserAccount(UserStudent userToActivate) {
         userToActivate.setEnabled(true);
         userToActivate.setCredentialsNonExpired(true);
         userToActivate.setAccountNonExpired(true);
@@ -58,4 +58,10 @@ public class UserProvider {
         return "randomUserName" + UtilRandomNumber.getRandomLong();
     }
 
+    public static void deactivateUserAccount(UserStudent userToDeactivate) {
+        userToDeactivate.setEnabled(false);
+        userToDeactivate.setCredentialsNonExpired(false);
+        userToDeactivate.setAccountNonExpired(false);
+        userToDeactivate.setAccountNonLocked(false);
+    }
 }
