@@ -63,7 +63,6 @@ function GetUser() {
             body: JSON.stringify({
                 emailAddress: data.emailAddress,
                 name: data.name,
-                password: data.password,
             })
         };
         fetch(`http://localhost:8080/users/${userid}`, putNewUserDetails)
@@ -115,19 +114,12 @@ function GetUser() {
                         pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
                     })} name="emailAddress"/>
                 </Form.Group>
-                <Form.Group controlId="password" size="lg">
-                    <Form.Label>
-                        Password
-                    </Form.Label>
-                    <Form.Control defaultValue={users.password}
-                                  placeholder={users.password} {...register("password")}
-                                  type="password" name="password"/>
-                </Form.Group>
 
                 <Button className="form-button1" type="submit">Save account edition</Button>
                 <Button className="form-button2" variant="danger" size="lg" onClick={deleteUserButton}>
                     Delete my account
                 </Button>
+
             </Form>
 
 
