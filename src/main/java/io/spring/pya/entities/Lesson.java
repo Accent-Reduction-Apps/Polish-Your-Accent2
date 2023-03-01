@@ -1,8 +1,7 @@
 package io.spring.pya.entities;
 
 import jakarta.persistence.*;
-
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
