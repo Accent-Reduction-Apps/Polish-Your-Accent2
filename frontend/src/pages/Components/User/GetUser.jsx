@@ -3,10 +3,15 @@ import '../../../styles/GetUser.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {useForm} from "react-hook-form";
+import Authservice from "../../../security/auth/authservice";
 
 
 function GetUser() {
-    let userid = 10;
+    const user = Authservice.getCurrentUser();
+    let token = user.accessToken;
+    console.log(user);
+    console.log(token);
+    let userid = user.id;
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +31,15 @@ function GetUser() {
             setError(null);
 
             try {
-                const response = await fetch(`http://localhost:8080/users/${userid}`);
+                // let header = authHeader();
+                let header = {
+                    method: "GET",
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                        // accessToken: token,
+                    }
+                }
+                const response = await fetch(`http://localhost:8080/users/${userid}`, header);
 
                 if (!response.ok) {
                     throw new Error(response.statusText);
@@ -58,6 +71,7 @@ function GetUser() {
         const putNewUserDetails = {
             method: "PUT",
             headers: {
+                Authorization: 'Bearer ' + token,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -72,7 +86,12 @@ function GetUser() {
     }
 
     let deleteUserButton = () => {
-        fetch(`http://localhost:8080/users/${userid}`, {method: 'DELETE'})
+        fetch(`http://localhost:8080/users/${userid}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: 'Bearer ' + token,
+            }
+        })
             .then(async response => {
                 const data = await response.json();
 
@@ -101,16 +120,16 @@ function GetUser() {
                     <Form.Label>
                         Name
                     </Form.Label>
-                    <Form.Control defaultValue={users.name}
-                                  placeholder={users.name}  {...register("name", {pattern: /^[a-zA-Z0-9]+$/i})}
+                    <Form.Control defaultValue={user.username}
+                                  placeholder={user.username}  {...register("name", {pattern: /^[a-zA-Z0-9]+$/i})}
                                   className="name"/>
                 </Form.Group>
                 <Form.Group controlId="emailAddress" size="lg">
                     <Form.Label>
                         Email Address
                     </Form.Label>
-                    <Form.Control defaultValue={users.emailAddress}
-                                  placeholder={users.emailAddress} {...register("emailAddress", {
+                    <Form.Control defaultValue={user.email}
+                                  placeholder={user.email} {...register("emailAddress", {
                         pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
                     })} name="emailAddress"/>
                 </Form.Group>
@@ -129,4 +148,5 @@ function GetUser() {
 
     );
 }
+
 export default GetUser;
