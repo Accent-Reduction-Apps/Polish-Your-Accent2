@@ -5,13 +5,16 @@ import Button from 'react-bootstrap/Button'
 import {useForm} from "react-hook-form";
 
 
-const GetUser = () => {
-    let userid = 2;
+function GetUser() {
+    let userid = 10;
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [state, setState] = useState();
-    const {register, handleSubmit, watch, errors} = useForm()
+    const [status, setStatus] = useState("");
+    const [errorMessage, setErrorMessage] = useState();
+    const {register, handleSubmit, watch, errors} = useForm();
+
     const onSubmit = (data) => {
         setUsers(data);
         editUser(data)
@@ -68,17 +71,32 @@ const GetUser = () => {
         console.log(state);
     }
 
+    let deleteUserButton = () => {
+        fetch(`http://localhost:8080/users/${userid}`, {method: 'DELETE'})
+            .then(async response => {
+                const data = await response.json();
 
-    function deleteUser() {
+                if (!response.ok) {
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
 
+                setStatus(`Delete successful`); //DISPLAY?
+                console.log(status);
+            })
+            .catch(error => {
+                setErrorMessage(error);
+                console.error('There was an error!', error);
+            })
     }
 
+
     return (
-        <div className="bg-warning p-3">
+        <div className="bg-warning">
 
-            <h1 className="My Account">My Account</h1>
+            <h1 className="My_Account">My Account</h1>
 
-            <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form className="form" onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group controlId="name" size="lg">
                     <Form.Label>
                         Name
@@ -97,11 +115,12 @@ const GetUser = () => {
                     })} name="emailAddress"/>
                 </Form.Group>
 
-                <Button className="save-button" type="submit">Save account edition</Button>
+                <Button className="form-button1" type="submit">Save account edition</Button>
+                <Button className="form-button2" variant="danger" size="lg" onClick={deleteUserButton}>
+                    Delete my account
+                </Button>
 
             </Form>
-            <Button onSubmit={handleSubmit(deleteUser)} className="delete-button" type="submit">Delete My
-                Account</Button>
 
 
         </div>
@@ -109,5 +128,5 @@ const GetUser = () => {
 
 
     );
-};
+}
 export default GetUser;

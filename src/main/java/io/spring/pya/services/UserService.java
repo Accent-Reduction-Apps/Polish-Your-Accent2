@@ -3,13 +3,16 @@ package io.spring.pya.services;
 
 import io.spring.pya.entities.UserStudent;
 import io.spring.pya.repositories.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
 
@@ -19,7 +22,7 @@ public class UserService {
 
 
     public void addUser(UserStudent userStudent) {
-    userRepository.saveAndFlush(userStudent);
+        userRepository.saveAndFlush(userStudent);
     }
 
     public List<UserStudent> getAllUsers() {
@@ -33,9 +36,10 @@ public class UserService {
 
     public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
 
-        if(stringDataUpdated(userStudentNew.getName())) userStudentOld.setName(userStudentNew.getName());
-        if(stringDataUpdated(userStudentNew.getEmailAddress())) userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
-        if(stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
+        if (stringDataUpdated(userStudentNew.getUsername())) userStudentOld.setUsername(userStudentNew.getUsername());
+        if (stringDataUpdated(userStudentNew.getEmailAddress()))
+            userStudentOld.setEmailAddress(userStudentNew.getEmailAddress());
+        if (stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
 
         userRepository.save(userStudentOld);
         return userRepository.getReferenceById(userStudentOld.getId());
@@ -52,8 +56,14 @@ public class UserService {
 
 
     public UserStudent createNewStudent(String emailAddress, String password, String name) {
-        UserStudent userStudent = new UserStudent(name,emailAddress,password);
+        UserStudent userStudent = new UserStudent(name, emailAddress, password);
         return userRepository.saveAndFlush(userStudent);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s notfound", username)));
     }
 
     private boolean stringDataUpdated (String string){
