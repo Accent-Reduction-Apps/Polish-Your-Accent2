@@ -18,7 +18,7 @@ import './styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Signin from "./pages/Navigation/Signin";
 import Signup from "./pages/Navigation/Signup";
-import Profile from "./security/components/profile.component";
+import Profile from "./security/components/user-info";
 
 document.title = 'Polish Your Accent';
 
