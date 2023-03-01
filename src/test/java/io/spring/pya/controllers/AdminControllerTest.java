@@ -1,10 +1,15 @@
 package io.spring.pya.controllers;
 
+import io.spring.pya.entities.UserStudent;
+import io.spring.pya.providers.UserProvider;
 import io.spring.pya.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 class AdminControllerTest {
 
@@ -18,7 +23,17 @@ class AdminControllerTest {
     }
 
     @Test
-    void activateUser() {
+    void activateUser_userExists_200() {
+        UserStudent userToActivate = UserProvider.createRandomUser();
+        UserStudent userActivated = UserProvider.deepCopyUser(userToActivate);
+        UserProvider.activateUser(userToActivate);
+        when(userService.activateUser(userToActivate.getId())).thenReturn(userActivated);
+
+        ResponseEntity<?> response = AdminController.activateUser(userToActivate.getId());
+
+        verify(userService, times(1)).activateUser(userActivated.getId());
+        assertEquals(response.getBody(), userActivated);
+        assertEquals(response.getStatusCode(), HttpStatusCode.valueOf(200));
     }
 
     @Test
