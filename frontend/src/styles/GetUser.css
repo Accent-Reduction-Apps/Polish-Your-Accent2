@@ -12,7 +12,7 @@
     text-align: center;
 }
 
-.form-button1 {
+.form-button1, .form-button2 {
     position: relative;
     border: none;
     color: white;
@@ -23,23 +23,16 @@
     font-size: 16px;
     width: 300px;
     margin: 30px;
+}
+
+.form-button1 {
     bottom: 3px;
-    left: -60px;
+    left: -200px;
 }
 
 .form-button2 {
-    position: relative;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    width: 300px;
-    margin: 30px;
     bottom: 115px;
-    left: 50%;
+    left: 200px;
 }
 
 .btn {
@@ -48,13 +41,13 @@
 }
 
 .form {
-    /*position: fixed;*/
+    /*position: flex;*/
     position: relative;
-    left: 25%;
-    width: 600px;
+    left: auto;
+    /*width: 600px;*/
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    align-items: center;
 }
 
 .form-label {
