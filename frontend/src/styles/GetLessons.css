@@ -4,13 +4,15 @@
 .lesson-table {
     border-collapse: collapse;
     margin: 0 auto;
+    width: 80%;
 }
 
 .lesson-table-header {
-    text-align: left;
+    text-align: center;
     padding: 10px;
     background-color: #852222;
     color: #ffdab9;
+    font-size: xx-large;
 }
 
 .lesson-table-row-odd {
@@ -29,6 +31,7 @@
 .lesson-table-link-odd {
     text-decoration: none;
     color: goldenrod;
+    text-align: center;
 }
 
 .lesson-table-link-even {
@@ -43,4 +46,9 @@
 .lesson-table-link-even:hover {
     color: black;
     font-weight: bolder;
+}
+
+.lesson-table-text {
+    font-size: x-large;
+    text-align: center;
 }

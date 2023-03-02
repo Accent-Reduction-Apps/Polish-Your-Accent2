@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from 'react-router';
-import YTVideo from '../../MediaControl/Video/YouTube/YTVideo';
 import '../../../styles/GetLessons.css';
 import authHeader from "../../../security/auth/auth-header";
 import {Link} from "react-router-dom";
-import {Button, Nav} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 
 const GetLessonById = (props) => {
     const lessonId = useLocation();
@@ -59,11 +58,11 @@ const GetLessonById = (props) => {
     };
 
     return (
-        <div className='bg-warning p-3'>
+        <div className='p-3'>
             {lessonParsed()}
             <Link as={Link} to='/demo'>
                 <Button variant='outline-dark'>Back to list</Button>
-            </Link><br /><br />
+            </Link><br/><br/>
         </div>
     );
 };

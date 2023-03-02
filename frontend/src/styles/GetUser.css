@@ -1,7 +1,5 @@
 .my-account {
-    background-color: blueviolet;
     min-height: 300px;
-
     text-align: center;
     align-items: center;
     gap: 2rem;
@@ -41,10 +39,8 @@
 }
 
 .form {
-    /*position: flex;*/
     position: relative;
     left: auto;
-    /*width: 600px;*/
     display: flex;
     flex-direction: column;
     align-items: center;

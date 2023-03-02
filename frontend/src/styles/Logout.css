@@ -1,0 +1,10 @@
+.bg-site-logout {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.confirmLogout {
+    width: 5%;
+}

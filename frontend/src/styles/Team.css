@@ -1,0 +1,35 @@
+.d-flex {
+    display: flex;
+    /*align-items: center;*/
+    align-content: center;
+    text-align: center;
+    top: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+}
+
+.team {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    top: 0;
+    left: 0;
+}
+
+.member {
+    font-size: xx-large;
+    position: inherit;
+    left: 0;
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: fit-content;
+
+}
