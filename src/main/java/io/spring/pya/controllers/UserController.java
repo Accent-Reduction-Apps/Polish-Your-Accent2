@@ -62,7 +62,9 @@ public class UserController {
         return ResponseEntity.ok(newStudent);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, allowedHeaders = {"Origin", "Content-Type", "Accept"})
     @PostMapping("/{userId}/activate")
+
     public ResponseEntity<?> activateUser(@PathVariable Long userId) {
         UserStudent activatedUser = userService.activateUser(userId);
         if (activatedUser != null) {
@@ -72,7 +74,9 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, allowedHeaders = {"Origin", "Content-Type", "Accept"})
     @PostMapping("/{userId}/deactivate")
+
     public ResponseEntity<?> deactivateUser(@PathVariable Long userId) {
         UserStudent deactivatedUser = userService.deactivateUser(userId);
         if (deactivatedUser != null) {
