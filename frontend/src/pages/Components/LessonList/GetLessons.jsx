@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 import '../../../styles/GetLessons.css';
 import authHeader from "../../../security/auth/auth-header";
-import {Container, Table} from "react-bootstrap";
 
 const GetLessons = () => {
     const [lessons, setLessons] = useState([]);
@@ -18,11 +17,6 @@ const GetLessons = () => {
         getData();
     }, []);
 
-    // const fetchData = async () => {
-    //
-    //     const response = await fetch('http://localhost:8080/lessons');
-    //     return await response.json();
-    // }
     const fetchData = async () => {
         const headers = authHeader();
         const response = await fetch('http://localhost:8080/lessons', { headers });
