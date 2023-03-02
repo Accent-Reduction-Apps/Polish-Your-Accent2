@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button'
 import {useForm} from "react-hook-form";
 import Authservice from "../../../security/auth/authservice";
 
-
 export default function GetUser() {
     const user = Authservice.getCurrentUser();
     let token = user.accessToken;
@@ -26,38 +25,40 @@ export default function GetUser() {
     }
     useEffect(() => {
 
-        async function fetchUsers() {
-            // setIsLoading(true);
-            setError(null);
+            async function fetchUsers() {
+                setIsLoading(true);
+                setError(null);
 
-            // try {
-            // let header = authHeader();
-            let header = {
-                method: "GET",
-                headers: {
-                    Authorization: 'Bearer ' + token,
-                    // accessToken: token,
+                try {
+                    let header = {
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + token,
+                        }
+                    }
+                    const response = await fetch(`http://localhost:8080/users/${userid}`, header);
+                    const json = response.json();
+                    console.log(json)
+                    setUsers(json)
+                    return json;
+
+
+                } catch
+                    (e) {
+                    setError(e.message);
+                    Authservice.logout();
+                    window.location = '/';
+                } finally {
+                    setIsLoading(false);
                 }
             }
-            const response = await fetch(`http://localhost:8080/users/${userid}`, header);
 
-            // if (!response.ok) {
-            //     throw new Error(response.statusText);
-            // }
-            const json = await response.json();
-            console.log(json)
-            setUsers(json)
-            return json;
-
-            // } catch (e) {
-            //     setError(e.message);
-            // } finally {
-            // setIsLoading(false);
-            // }
+            fetchUsers().then(json => console.log(json));
         }
-
-        fetchUsers().then(json => console.log(json));
-    }, []);
+        ,
+        []
+    )
+    ;
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -68,7 +69,7 @@ export default function GetUser() {
     }
 
 
-    function editUser(data) {
+    async function editUser(data) {
         const putNewUserDetails = {
             method: "PUT",
             headers: {
@@ -76,14 +77,19 @@ export default function GetUser() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                emailAddress: data.emailAddress,
-                name: data.name,
+                email: data.email,
+                username: data.username,
             })
         };
-        fetch(`http://localhost:8080/users/${userid}`, putNewUserDetails)
-            .then(response => response.json())
-            .then(state => setState(state))//TODO Add event handle and error handle
-        console.log(state);
+        const resp = fetch(`http://localhost:8080/users/${userid}`, putNewUserDetails)
+            .then(response =>
+                response.json())
+            .then(state => setState(state))
+        //TODO Add event handle and error handle
+
+        // console.log(state);
+        // console.log(response);
+
     }
 
     let deleteUserButton = () => {
@@ -117,22 +123,22 @@ export default function GetUser() {
             <h1 className="My_Account">My Account</h1>
 
             <Form className="form" onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group controlId="name" size="lg">
+                <Form.Group controlId="username" size="lg">
                     <Form.Label>
                         Name
                     </Form.Label>
                     <Form.Control defaultValue={user.username}
-                                  placeholder={user.username}  {...register("name", {pattern: /^[a-zA-Z0-9]+$/i})}
-                                  className="name"/>
+                                  placeholder={user.username}  {...register("username", {pattern: /^[a-zA-Z0-9]+$/i})}
+                                  className="username"/>
                 </Form.Group>
-                <Form.Group controlId="emailAddress" size="lg">
+                <Form.Group controlId="email" size="lg">
                     <Form.Label>
                         Email Address
                     </Form.Label>
                     <Form.Control defaultValue={user.email}
-                                  placeholder={user.email} {...register("emailAddress", {
+                                  placeholder={user.email} {...register("email", {
                         pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
-                    })} name="emailAddress"/>
+                    })} name="email"/>
                 </Form.Group>
 
                 <Button className="form-button1" type="submit">Save account edition</Button>
