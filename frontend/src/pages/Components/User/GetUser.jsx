@@ -112,7 +112,7 @@ export default function GetUser() {
 
 
     return (
-        <div className="bg-warning">
+        <div className="bg-site p-3">
 
             <h1 className="My_Account">My Account</h1>
 
