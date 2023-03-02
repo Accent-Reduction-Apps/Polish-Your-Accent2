@@ -1,5 +1,4 @@
 import axios from 'axios';
-import authHeader from "../auth/auth-header";
 
 const API_URL = 'http://localhost:8080/user/';
 
@@ -8,8 +7,6 @@ class AdmnService {
         // const headers = authHeader();
         let reqaddr = API_URL + userId + '/deactivate';
         let user = JSON.parse(localStorage.getItem('user'));
-        console.log(reqaddr);
-        console.log('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
         let headers = new Headers;
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
