@@ -80,7 +80,7 @@ const Signin = () => {
     );
 
     return (
-        <div className='bg-site p-3'>
+        <div className='bg-site-log p-3'>
             <div className="card card-container">
                 <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
