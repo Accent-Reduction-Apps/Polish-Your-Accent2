@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 import '../../../styles/GetLessons.css';
 import authHeader from "../../../security/auth/auth-header";
-import {Container, Table} from "react-bootstrap";
 
 const GetLessons = () => {
     const [lessons, setLessons] = useState([]);
@@ -39,7 +38,7 @@ const GetLessons = () => {
     }
 
     return (
-        <div className='bg-warning p-3'>
+        <div className='bg-site p-3'>
             <table className="lesson-table">
                 <thead>
                 <tr>
