@@ -1,58 +1,46 @@
-/*table {*/
-/*    width: 100%;*/
-/*    border-collapse: collapse;*/
-/*    background-color: #333;*/
-/*}*/
 
-/*thead tr {*/
-/*    background-color: #666;*/
-/*}*/
+/*-========================================*/
 
-/*th {*/
-/*    padding: 10px;*/
-/*    border: 1px solid #999;*/
-/*    color: #fff;*/
-/*}*/
-
-/*td {*/
-/*    padding: 10px;*/
-/*    border: 1px solid #999;*/
-/*    color: #fff;*/
-/*    text-align: center;*/
-/*}*/
-table {
-    width: 100%;
-    overflow-x: auto;
-    display: block;
+.lesson-table {
+    border-collapse: collapse;
+    margin: 0 auto;
 }
 
-/*thead, tbody, tr, td, th {*/
-/*    display: block;*/
-/*}*/
-
-tr {
-    width: 100%;
-    float: left;
-}
-
-thead tr {
-    width: 100%;
-    background-color: #f9f9f9;
-}
-
-tbody {
-    height: calc(100vh - 125px);
-    overflow-y: auto;
-}
-
-tbody tr:nth-child(odd) {
-    background-color: #f2f2f2;
-}
-
-td, th {
+.lesson-table-header {
+    text-align: left;
     padding: 10px;
-    width: 25%;
+    background-color: #852222;
+    color: #ffdab9;
 }
- .details {
-     color: red;
- }
+
+.lesson-table-row-odd {
+    background-color: #921a1a;
+}
+
+.lesson-table-row-even {
+    background-color: #f6cf64;
+}
+
+.lesson-table-cell {
+    text-align: left;
+    padding: 10px;
+}
+
+.lesson-table-link-odd {
+    text-decoration: none;
+    color: goldenrod;
+}
+
+.lesson-table-link-even {
+    text-decoration: none;
+    color: maroon;
+}
+
+.lesson-table-link-odd:hover {
+    color: white;
+}
+
+.lesson-table-link-even:hover {
+    color: black;
+    font-weight: bolder;
+}
