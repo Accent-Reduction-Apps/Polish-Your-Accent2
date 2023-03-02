@@ -86,9 +86,7 @@ export default function GetUser() {
                 response.json())
             .then(state => setState(state))
         //TODO Add event handle and error handle
-        if (resp.status.equals("200")) {
-            console.log("LOGOUT")
-        }
+
         // console.log(state);
         // console.log(response);
 
