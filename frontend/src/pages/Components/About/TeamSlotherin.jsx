@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Slotherin from '../../../resources/image/Slotherin.jpg'
@@ -14,7 +14,7 @@ function TeamSlotherin() {
                         <Alert.Heading>Team Slotherin</Alert.Heading>
                         <p>Dawid</p>
                         <p>Mateusz</p>
-                        <p>Sebastiam</p>
+                        <p>Sebastian</p>
                         <p>Marcin</p>
                         <hr />
                         <div className='d-flex justify-content-end'>
