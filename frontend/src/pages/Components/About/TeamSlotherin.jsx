@@ -1,29 +1,26 @@
-import React, {useState} from 'react';
-import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
-import Slotherin from '../../../resources/image/Slotherin.jpg'
+import React from 'react';
+import '../../../styles/Team.css'
 
 function TeamSlotherin() {
-    const [show, setShow] = useState(true);
 
     return (
         <>
-            <Alert show={show} variant='warning'>
-                <div className='d-flex align-items-center'>
-                    <div className='col-md-4'>
 
-                        <h1></h1>
-                        <p>Dawid Deszcz</p>
-                        <p>Mateusz Szuwalski</p>
-                        <p>Sebastian Sosin</p>
-                        <p>Marcin Gąsior</p>
+            <div className='d-flex align-items-center'>
+                <div className='col-md-4 content'>
 
+                    <h1>TEAM Polish Your English </h1>
+                    <div className="team">
+                        <p className="member">Dawid Deszcz</p>
+                        <p className="member">Mateusz Szuwalski</p>
+                        <p className="member">Sebastian Sosin</p>
+                        <p className="member">Marcin Gąsior</p>
                     </div>
 
                 </div>
-            </Alert>
 
-            {!show && <Button onClick={() => setShow(true)}>acoto</Button>}
+            </div>
+
         </>
     );
 }
