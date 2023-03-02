@@ -1,4 +1,4 @@
-bodu {
+body {
     font-family: "Montserrat", sans-serif;
 }
 
@@ -147,4 +147,10 @@ label {
     color: orange;
     font-stretch: extra-expanded;
 
+}
+
+.bg-site {
+    background-color: #fff3cd;
+    width: 100%;
+    height: 100%;
 }
