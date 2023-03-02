@@ -55,7 +55,7 @@ const Layout = ({children}) => {
         setIsUserAuthorized(true);
     }
     return (
-        <Container fluid key={isAuthorized}>
+        <Container className="main-nav" fluid key={isAuthorized}>
             <Navbar className='navi' expand='lg' variant='dark'>
                 <Navbar.Brand className='navbrand' href='/'>
                     <Stack direction='horizontal' gap={3} className='navtitle'>
