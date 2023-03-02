@@ -24,7 +24,7 @@ public class InitService {
     }
 
     public void addTestUsers() {
-        addTestUser("testUser", UserRole.STUDENT);
+        addTestUser("testUser", UserRole.ADMIN);
     }
 
     public void addTestUser(String name, UserRole role) {
