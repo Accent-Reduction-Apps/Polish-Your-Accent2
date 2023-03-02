@@ -1,5 +1,6 @@
 package io.spring.pya.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -39,7 +40,8 @@ public class UserStudent implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "user_lessons_lesson_id"))
     private Set<Lesson> lessons = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "userStudent", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userStudent", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<AppSimpleGrantedAuthority> authorities;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
