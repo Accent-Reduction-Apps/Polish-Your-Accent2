@@ -102,7 +102,9 @@ export default function GetUser() {
                 }
 
                 setStatus(`Delete successful`); //DISPLAY?
-                console.log(status);
+                console.log(status)
+                Authservice.logout();
+                window.location = '/';
             })
             .catch(error => {
                 setErrorMessage(error);
