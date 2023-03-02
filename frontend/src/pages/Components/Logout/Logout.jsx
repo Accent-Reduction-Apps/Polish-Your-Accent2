@@ -17,9 +17,9 @@ function Logout() {
         audioEl.play();
 
         setTimeout(function () {
-            window.location = '/';
+            window.location = '/about';
             console.log('bye!');
-        }, 3456);
+        }, 3);
     }
 
     const [, setIsUserAuthorized] = useContext(AuthorizationContext);
