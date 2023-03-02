@@ -86,9 +86,7 @@ export default function GetUser() {
                 response.json())
             .then(state => setState(state))
         //TODO Add event handle and error handle
-        if (resp.status.equals("200")) {
-            console.log("LOGOUT")
-        }
+
         // console.log(state);
         // console.log(response);
 
@@ -125,22 +123,22 @@ export default function GetUser() {
             <h1 className="My_Account">My Account</h1>
 
             <Form className="form" onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group controlId="name" size="lg">
+                <Form.Group controlId="username" size="lg">
                     <Form.Label>
                         Name
                     </Form.Label>
                     <Form.Control defaultValue={user.username}
-                                  placeholder={users.username}  {...register("username", {pattern: /^[a-zA-Z0-9]+$/i})}
-                                  className="name"/>
+                                  placeholder={user.username}  {...register("username", {pattern: /^[a-zA-Z0-9]+$/i})}
+                                  className="username"/>
                 </Form.Group>
-                <Form.Group controlId="emailAddress" size="lg">
+                <Form.Group controlId="email" size="lg">
                     <Form.Label>
                         Email Address
                     </Form.Label>
                     <Form.Control defaultValue={user.email}
-                                  placeholder={users.email} {...register("email", {
+                                  placeholder={user.email} {...register("email", {
                         pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
-                    })} name="emailAddress"/>
+                    })} name="email"/>
                 </Form.Group>
 
                 <Button className="form-button1" type="submit">Save account edition</Button>
