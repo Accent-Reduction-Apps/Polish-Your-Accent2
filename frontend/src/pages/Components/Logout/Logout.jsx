@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import '../../../styles/Logout.css'
 import {AuthorizationContext} from "../../../auxiliary/AuthorizationContext";
 import Authservice from "../../../security/auth/authservice";
 import {Button} from "react-bootstrap";
@@ -24,12 +25,12 @@ function Logout() {
 
     const [, setIsUserAuthorized] = useContext(AuthorizationContext);
     return (
-        <div className='bg-warning p-3'>
+        <div className='bg-site-logout p-3'>
             <AudioPlayer src={audioOpening}/>
             <h1>Logout</h1>
             <h5>You are logged in as </h5>
             <p>Are you sure you want to log out?</p>
-            <Button onClick={handleLogOutClick}
+            <Button className="confirmLogout" onClick={handleLogOutClick}
                     variant='danger'>YES!</Button>
         </div>
     );
