@@ -76,8 +76,8 @@ export default function GetUser() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                emailAddress: data.emailAddress,
-                name: data.name,
+                email: data.email,
+                username: data.username,
             })
         };
         fetch(`http://localhost:8080/users/${userid}`, putNewUserDetails)
@@ -122,7 +122,7 @@ export default function GetUser() {
                         Name
                     </Form.Label>
                     <Form.Control defaultValue={user.username}
-                                  placeholder={user.username}  {...register("name", {pattern: /^[a-zA-Z0-9]+$/i})}
+                                  placeholder={user.username}  {...register("username", {pattern: /^[a-zA-Z0-9]+$/i})}
                                   className="name"/>
                 </Form.Group>
                 <Form.Group controlId="emailAddress" size="lg">
@@ -130,7 +130,7 @@ export default function GetUser() {
                         Email Address
                     </Form.Label>
                     <Form.Control defaultValue={user.email}
-                                  placeholder={user.email} {...register("emailAddress", {
+                                  placeholder={user.email} {...register("email", {
                         pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
                     })} name="emailAddress"/>
                 </Form.Group>
