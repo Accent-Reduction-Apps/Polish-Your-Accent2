@@ -41,7 +41,11 @@ public class UserStudent implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "user_lessons_lesson_id"))
     private Set<Lesson> lessons = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "userStudent", fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(mappedBy = "userStudent",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.REMOVE, orphanRemoval = true
+    )
     private List<AppSimpleGrantedAuthority> authorities;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
