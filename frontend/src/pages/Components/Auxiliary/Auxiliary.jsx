@@ -79,7 +79,7 @@ const OpenAIChat = () => {
     };
 
     return (
-        <Container className="my-5">
+        <Container className="bg-site my-5">
             <h1 className="text-maroon text-center">OpenAI Chat</h1>
             <Card className="my-3">
                 <Card.Body>

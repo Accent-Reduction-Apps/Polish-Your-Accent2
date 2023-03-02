@@ -2,6 +2,7 @@ package io.spring.pya.controllers;
 
 
 import io.spring.pya.entities.UserStudent;
+import io.spring.pya.exceptions.ResourceNotFoundException;
 import io.spring.pya.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,10 +57,29 @@ public class UserController {
     @PostMapping("/registerStudent")
     public ResponseEntity<UserStudent> sendRequestNewStudentAccountCreate(@RequestParam("password") String password,
                                                                           @RequestParam("email") String email,
-                                                                          @RequestParam("name") String name)
-    {
+                                                                          @RequestParam("name") String name) {
         UserStudent newStudent = userService.createNewStudent(email, password, name);
         return ResponseEntity.ok(newStudent);
+    }
+
+    @PostMapping("/{userId}/activate")
+    public ResponseEntity<?> activateUser(@PathVariable Long userId) {
+        UserStudent activatedUser = userService.activateUser(userId);
+        if (activatedUser != null) {
+            return new ResponseEntity<>(activatedUser, HttpStatus.OK);
+        } else {
+            throw new ResourceNotFoundException("User", userId);
+        }
+    }
+
+    @PostMapping("/{userId}/deactivate")
+    public ResponseEntity<?> deactivateUser(@PathVariable Long userId) {
+        UserStudent deactivatedUser = userService.deactivateUser(userId);
+        if (deactivatedUser != null) {
+            return new ResponseEntity<>(deactivatedUser, HttpStatus.OK);
+        } else {
+            throw new ResourceNotFoundException("User", userId);
+        }
     }
 
 }

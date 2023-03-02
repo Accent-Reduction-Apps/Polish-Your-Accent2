@@ -1,13 +1,12 @@
-import React, { useState, useRef, useContext } from "react";
+import React, {useContext, useRef, useState} from "react";
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import '../../styles/Common.css'
 import AuthService from '../../security/auth/authservice';
-import { AuthorizationContext } from "../../auxiliary/AuthorizationContext";
-import { useNavigate } from "react-router-dom";
-import { Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {AuthorizationContext} from "../../auxiliary/AuthorizationContext";
+import {Link, useNavigate} from "react-router-dom";
+import {Col} from "react-bootstrap";
 
 const required = value => {
     if (!value) {
@@ -81,7 +80,7 @@ const Signin = () => {
     );
 
     return (
-        <div className='bg-warning p-3'>
+        <div className='bg-site p-3'>
             <div className="card card-container">
                 <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -118,7 +117,7 @@ const Signin = () => {
                     </div>
 
                     <div className="form-group text-center">
-                        <br />
+                        <br/>
                         <button
                             className="btn btn-primary btn-block"
                             disabled={loading}
@@ -138,7 +137,7 @@ const Signin = () => {
                         </div>
                     )}
                     <CheckButton
-                        style={{ display: "none" }}
+                        style={{display: "none"}}
                         ref={checkBtn}
                     />
                     {SignupLink}
