@@ -1,5 +1,6 @@
 package io.spring.pya.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,6 +29,7 @@ public class UserStudent implements UserDetails {
     private String username;
 
     @Size(max = 255)
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
