@@ -3,9 +3,10 @@ import {useLocation} from 'react-router';
 import YTVideo from '../../MediaControl/Video/YouTube/YTVideo';
 import '../../../styles/GetLessons.css';
 import authHeader from "../../../security/auth/auth-header";
+import {Link} from "react-router-dom";
+import {Button, Nav} from "react-bootstrap";
 
 const GetLessonById = (props) => {
-    const videoId = 'rGIJ8I3hPts';
     const lessonId = useLocation();
     const id = lessonId.state.id;
     const [lesson, setLesson] = useState({});
@@ -59,12 +60,10 @@ const GetLessonById = (props) => {
 
     return (
         <div className='bg-warning p-3'>
-            <h2 className={'details'}>LESSON</h2>
-            <p>Lesson Id: {lesson.id}</p>
-            <p>Topic: {lesson.topic}</p>
             {lessonParsed()}
-            {/*<p>TEST: {lesson}</p>*/}
-            {/*<YTVideo videoId={videoId}/>;*/}
+            <Link as={Link} to='/demo'>
+                <Button variant='outline-dark'>Back to list</Button>
+            </Link><br /><br />
         </div>
     );
 };
