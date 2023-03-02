@@ -36,7 +36,6 @@ const GetLessonById = (props) => {
             }
 
             return await response.json();
-            // setLesson(json);
         } catch (e) {
             setError(e.message);
         } finally {
@@ -51,13 +50,21 @@ const GetLessonById = (props) => {
     if (error) {
         return <p>An error occurred: {error}</p>;
     }
+    const lessonInHtml = lesson.lessonContent;
+    const lessonParsed = () => {
+        return (
+            <div dangerouslySetInnerHTML={{ __html: lessonInHtml }}></div>
+        );
+    };
+
     return (
         <div className='bg-warning p-3'>
             <h2 className={'details'}>LESSON</h2>
             <p>Lesson Id: {lesson.id}</p>
             <p>Topic: {lesson.topic}</p>
-            <p>Text: {lesson.text}</p>
-            <YTVideo videoId={videoId}/>;
+            {lessonParsed()}
+            {/*<p>TEST: {lesson}</p>*/}
+            {/*<YTVideo videoId={videoId}/>;*/}
         </div>
     );
 };
