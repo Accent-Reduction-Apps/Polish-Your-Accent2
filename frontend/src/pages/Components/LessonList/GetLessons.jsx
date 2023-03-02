@@ -51,12 +51,14 @@ const GetLessons = () => {
                 {lessons.map((item, index) => (
                     <tr key={item.id} className={index % 2 === 0 ? 'lesson-table-row-even' : 'lesson-table-row-odd'}>
                         <td className="lesson-table-cell">
-                            <Link className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'} to={`/lesson/${item.id}`} state={item}>
+                            <Link className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
+                                  to={`/lesson/${item.id}`} state={item}>
                                 {item.id}
                             </Link>
                         </td>
-                        <td className="lesson-table-cell">
-                            <Link className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'} to={`/lesson/${item.id}`} state={item}>
+                        <td className="lesson-table-cell lesson-table-text">
+                            <Link className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
+                                  to={`/lesson/${item.id}`} state={item}>
                                 {item.topic}
                             </Link>
                         </td>
