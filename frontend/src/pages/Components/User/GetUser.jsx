@@ -47,7 +47,7 @@ export default function GetUser() {
                     (e) {
                     setError(e.message);
                     Authservice.logout();
-                    window.location = '/';
+                    window.location = '/about';
                 } finally {
                     setIsLoading(false);
                 }
@@ -87,8 +87,6 @@ export default function GetUser() {
             .then(state => setState(state))
         //TODO Add event handle and error handle
 
-        // console.log(state);
-        // console.log(response);
 
     }
 
@@ -110,7 +108,7 @@ export default function GetUser() {
                 setStatus(`Delete successful`); //DISPLAY?
                 console.log(status)
                 Authservice.logout();
-                window.location = '/';
+                window.location = '/about';
             })
             .catch(error => {
                 setErrorMessage(error);
@@ -152,7 +150,6 @@ export default function GetUser() {
 
 
         </div>
-        // <RegistrationAlert ref={this.registrationAlert}/> TODO windows popup #Sebastian
 
 
     );
