@@ -17,11 +17,6 @@ const GetLessons = () => {
         getData();
     }, []);
 
-    // const fetchData = async () => {
-    //
-    //     const response = await fetch('http://localhost:8080/lessons');
-    //     return await response.json();
-    // }
     const fetchData = async () => {
         const headers = authHeader();
         const response = await fetch('http://localhost:8080/lessons', { headers });

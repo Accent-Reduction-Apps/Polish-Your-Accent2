@@ -19,6 +19,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Signin from "./pages/Navigation/Signin";
 import Signup from "./pages/Navigation/Signup";
 import Profile from "./security/components/user-info";
+import AdmView from "./security/components/AdmView";
 
 document.title = 'Polish Your Accent';
 
@@ -41,6 +42,7 @@ export default function App() {
                     <Route exact path='/lessons' element={<GetLessons/>}/>
                     <Route path='/lesson/:lessonId' element={<GetLessonById/>}/>
                     <Route path='/my-account' element={<GetUser/>}/>
+                    <Route path='/admn' element={<AdmView/>}/>
                     <Route path='/auxiliary' element={<Auxiliary/>}/>
                     <Route path='*' element={<NoPage/>}/>
                     <Route errorElement={<ErrorPage/>}/>
