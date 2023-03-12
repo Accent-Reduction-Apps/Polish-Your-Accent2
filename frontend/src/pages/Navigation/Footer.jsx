@@ -5,12 +5,28 @@ import Authservice from "../../security/auth/authservice";
 
 const Footer = () => {
     const [time, setTime] = useState(new Date());
+    const [serverStatus, setServerStatus] = useState('');
 
     useEffect(() => {
         const intervalFooter = setInterval(() => {
             setTime(new Date());
         }, 1000);
         return () => clearInterval(intervalFooter);
+    }, []);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            fetch('http://localhost:8080/actuator/health')
+                .then(response => response.json())
+                .then(data => {
+                    setServerStatus(data.status === 'UP' ? ' Server OK' : ' Server down');
+                })
+                .catch(error => {
+                    setServerStatus(' Server down');
+                });
+        }, 3000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
     const options = {
@@ -25,8 +41,9 @@ const Footer = () => {
     let authinfo = 'signed in:';
     let authuser = Authservice.getCurrentUser();
     return (<footer className='footer'>
-            <span style={{color: 'darkkhaki'}}>
-                Copyright &copy; 2023 Team Slotherin.
+            <span style={{color: 'khaki'}}>
+                &copy; 2023 Team Slotherin.
+                <a style={{color: 'darkkhaki'}}>{serverStatus}</a>
             </span>
             <span style={{display: 'flex', alignItems: 'center'}}>
 
@@ -46,6 +63,9 @@ const Footer = () => {
             <span style={{color: 'darkkhaki'}}>
                 {authuser ? (<>{authinfo} {authuser.username}... </>) : (<>{noauthinfo}</>)} {formattedTime}
             </span>
+            {/*<span style={{color: 'khaki'}}>*/}
+            {/*    {serverStatus}*/}
+            {/*</span>*/}
         </footer>
     );
 };
