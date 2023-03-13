@@ -1,28 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-
 import '../../../styles/GetLessons.css';
 import authHeader from "../../../security/auth/auth-header";
+import Authservice from "../../../security/auth/authservice";
 
 const GetLessons = () => {
+    const user = Authservice.getCurrentUser();
+    const userid = user.id;
     const [lessons, setLessons] = useState([]);
     const [error] = useState(null);
     const [isLoading] = useState(false);
+    const [lessonsarray, setLessonsArray] = useState([]);
 
     useEffect(() => {
-        const getData = async () => {
-            const lessons = await fetchData();
-            setLessons(lessons);
-        }
-        getData();
-    }, []);
+        const fetchData = async () => {
+            const headers = authHeader();
+            const userResponse = await fetch(`http://localhost:8080/users/${userid}`, { headers });
+            const user = await userResponse.json();
+            const lessonsIds = user && user.lessons && user.lessons.map(lesson => lesson.id);
+            setLessonsArray(lessonsIds || []);
 
-    const fetchData = async () => {
-        const headers = authHeader();
-        const response = await fetch('http://localhost:8080/lessons', { headers });
-        const data = await response.json();
-        return data;
-    }
+            const lessonsResponse = await fetch('http://localhost:8080/lessons', { headers });
+            const data = await lessonsResponse.json();
+            setLessons(data);
+        };
+        fetchData();
+    }, []);
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -40,6 +43,7 @@ const GetLessons = () => {
                     <th className="lesson-table-header"></th>
                     <th className="lesson-table-header"><span> PLEASE SELECT A LESSON TO LEARN</span>
                     </th>
+                    <th className="lesson-table-header" style={{color: 'khaki', fontSize: '1rem'}}>status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,8 +57,15 @@ const GetLessons = () => {
                         </td>
                         <td className="lesson-table-cell lesson-table-text">
                             <Link className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
-                                  to={`/lesson/${item.id}`} state={item}>
+                                  to={`/lesson/${item.id}`} state={item} style={{textAlign: "center"}}>
                                 {item.topic}
+                            </Link>
+                        </td>
+                        <td className="lesson-table-cell">
+                            <Link className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
+                                  to={`/lesson/${item.id}`} state={item}>
+                                {lessonsarray.includes(item.id) ? (<>completed</>) : <>waiting</>}
+
                             </Link>
                         </td>
                     </tr>
