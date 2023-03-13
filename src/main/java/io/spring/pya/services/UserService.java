@@ -44,7 +44,6 @@ public class UserService implements UserDetailsService {
         if (stringDataUpdated(userStudentNew.getEmail()))
             userStudentOld.setEmail(userStudentNew.getEmail());
         if (stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
-        if (setDataUpdated(userStudentNew.getLessons())) userStudentOld.setLessons(userStudentNew.getLessons());
 
         userRepository.save(userStudentOld);
         return userRepository.getReferenceById(userStudentOld.getId());
@@ -73,10 +72,6 @@ public class UserService implements UserDetailsService {
 
     private boolean stringDataUpdated(String string) {
         return string != null && !string.equals("");
-    }
-
-    private boolean setDataUpdated(Set<Lesson> userLessonsSet) {
-        return userLessonsSet != null && !userLessonsSet.isEmpty();
     }
 
     public UserStudent activateUser(Long userId) {
