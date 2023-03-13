@@ -4,6 +4,7 @@ package io.spring.pya.controllers;
 import io.spring.pya.entities.UserStudent;
 import io.spring.pya.exceptions.ResourceNotFoundException;
 import io.spring.pya.services.UserService;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +53,21 @@ public class UserController {
     public boolean deleteUser(@PathVariable("userID") Long id){
         return userService.deleteUserById(id);
     }
+
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
+    @PatchMapping("/addReadLesson")
+    public Object addReadLessonToLessonsSet(@RequestParam("lesson_id") Long lesson_id,
+                                            @RequestParam("userStudent_id") Long userStudent_id) {
+
+        UserStudent userStudentOld = userService.getUserById(userStudent_id);
+
+        if(userStudentOld!= null){
+            return userService.updateUserLessonList(userStudentOld, lesson_id);
+        }else{
+            return String.format("No user found with id %d", userStudent_id);
+        }
+    }
+
 
     @ResponseStatus(code = HttpStatus.ACCEPTED)
     @PostMapping("/registerStudent")
