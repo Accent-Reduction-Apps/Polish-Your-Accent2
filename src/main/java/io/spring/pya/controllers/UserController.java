@@ -59,10 +59,12 @@ public class UserController {
     public Object addReadLessonToLessonsSet(@RequestParam("lesson_id") Long lesson_id,
                                             @RequestParam("userStudent_id") Long userStudent_id) {
 
-        UserStudent userStudentOld = userService.getUserById(userStudent_id);
 
-        if(userStudentOld!= null){
-            return userService.updateUserLessonList(userStudentOld, lesson_id);
+        UserStudent userStudent = userService.getUserById(userStudent_id);
+
+        if(userStudent!= null){
+            return userService.updateUserLessonList(userStudent, lesson_id);
+
         }else{
             return String.format("No user found with id %d", userStudent_id);
         }
