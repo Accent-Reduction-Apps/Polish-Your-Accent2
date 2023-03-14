@@ -78,16 +78,16 @@ const GetLessonById = (props) => {
     return (
         <div className="p-3">
             {lessonParsed()}
-            <div className="d-flex justify-content-center">
-                <div className="mr-8">
-                    <Link to="/demo">
-                        <Button variant="primary">Back to list</Button>
-                    </Link>
-                </div>
-                <div className="ml-8">
-                    <Button variant="info" onClick={markLessonComplete}>
+            <div className="btn-label d-flex justify-content-center">
+                <div className="ml-8 btn-complete-lesson">
+                    <Button variant="success" onClick={markLessonComplete}>
                         Press to complete the lesson
                     </Button>
+                </div>
+                <div className="mr-8 btn-back-to-list">
+                    <Link to="/demo">
+                        <Button variant="secondary">Back to list</Button>
+                    </Link>
                 </div>
             </div>
             <br />
