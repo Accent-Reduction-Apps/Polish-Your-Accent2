@@ -40,11 +40,11 @@ public class UserService implements UserDetailsService {
 
     public UserStudent updateUser(UserStudent userStudentOld, UserStudent userStudentNew) {
 
-        if (stringDataUpdated(userStudentNew.getUsername())) userStudentOld.setUsername(userStudentNew.getUsername());
-        if (stringDataUpdated(userStudentNew.getEmail()))
+        if (containsNotEmptyString(userStudentNew.getUsername())) userStudentOld.setUsername(userStudentNew.getUsername());
+        if (containsNotEmptyString(userStudentNew.getEmail()))
             userStudentOld.setEmail(userStudentNew.getEmail());
-        if (stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
-        if (setDataUpdated(userStudentNew.getLessons())) userStudentOld.setLessons(userStudentNew.getLessons());
+        if (containsNotEmptyString(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
+        if (containsNotEmptySet(userStudentNew.getLessons())) userStudentOld.setLessons(userStudentNew.getLessons());
 
         userRepository.save(userStudentOld);
         return userRepository.getReferenceById(userStudentOld.getId());
@@ -71,13 +71,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s notfound", username)));
     }
 
-    private boolean stringDataUpdated(String string) {
-        return string != null && !string.equals("");
-    }
 
-    private boolean setDataUpdated(Set<Lesson> userLessonsSet) {
-        return userLessonsSet != null && !userLessonsSet.isEmpty();
-    }
 
     public UserStudent activateUser(Long userId) {
         UserStudent userStudent;
@@ -114,5 +108,13 @@ public class UserService implements UserDetailsService {
         Lesson newCompletedLesson = lessonRepository.getReferenceById(lesson_id);
         userLessonsSet.add(newCompletedLesson);
         return userRepository.saveAndFlush(userStudent);
+    }
+
+    private boolean containsNotEmptyString(String string) {
+        return string != null && !string.equals("");
+    }
+
+    private boolean containsNotEmptySet(Set<Lesson> userLessonsSet) {
+        return userLessonsSet != null && !userLessonsSet.isEmpty();
     }
 }
