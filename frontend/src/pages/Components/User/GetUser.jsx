@@ -4,9 +4,29 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {useForm} from "react-hook-form";
 import Authservice from "../../../security/auth/authservice";
+import {Link} from "react-router-dom";
 
 export default function GetUser() {
     const user = Authservice.getCurrentUser();
+    const AdminButton = (user && user.roles && user.roles.includes('ADMIN'))
+        ? (
+            <div>
+                <Link to="/admn">
+                    <Button className='form-button3' variant='secondary' size='lg'>
+                        Manage access
+                    </Button>
+                </Link>
+            </div>
+        )
+        : (
+            <div className="centered-container">
+                <p>
+                    Beware, and make no changes unless thou art sure.<br/>
+                    Hasty actions bring regret and sorrow.<br/>
+                    Consider well before thou dost alter aught, and success shall be thy reward.
+                </p>
+            </div>
+        );
     let token = user.accessToken;
     console.log(user);
     console.log(token);
@@ -17,7 +37,9 @@ export default function GetUser() {
     const [state, setState] = useState();
     const [status, setStatus] = useState("");
     const [errorMessage, setErrorMessage] = useState();
-    const {register, handleSubmit, watch, errors} = useForm();
+    const {
+        register, handleSubmit, watch, errors
+    } = useForm();
 
     const onSubmit = (data) => {
         setUsers(data);
@@ -86,10 +108,7 @@ export default function GetUser() {
                 response.json())
             .then(state => setState(state))
         //TODO Add event handle and error handle
-
-
     }
-
     let deleteUserButton = () => {
         fetch(`http://localhost:8080/users/${userid}`, {
             method: 'DELETE',
@@ -140,18 +159,13 @@ export default function GetUser() {
                         pattern: /(^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)/i
                     })} name="email"/>
                 </Form.Group>
-
                 <Button className="form-button1" type="submit">Save account edition</Button>
                 <Button className="form-button2" variant="danger" size="lg" onClick={deleteUserButton}>
                     Delete my account
                 </Button>
-
+                {AdminButton}
             </Form>
-
-
         </div>
-
-
     );
 }
 

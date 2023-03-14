@@ -10,28 +10,28 @@
     text-align: center;
 }
 
-.form-button1, .form-button2 {
+.form-button1, .form-button2, .form-button3 {
     position: relative;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 15px 12px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     width: 300px;
-    margin: 30px;
+    margin: 10px;
 }
 
-.form-button1 {
-    bottom: 3px;
-    left: -200px;
-}
+/*.form-button1 {*/
+/*    bottom: 3px;*/
+/*    left: -200px;*/
+/*}*/
 
-.form-button2 {
-    bottom: 115px;
-    left: 200px;
-}
+/*.form-button2 {*/
+/*    bottom: 115px;*/
+/*    left: 200px;*/
+/*}*/
 
 .btn {
     flex-direction: row;
@@ -52,4 +52,10 @@
 
 .h1 {
     text-align: center;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
