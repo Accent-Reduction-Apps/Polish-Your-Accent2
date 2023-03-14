@@ -1,0 +1,14 @@
+.centered-container {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.button-container {
+    color: darkred;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
