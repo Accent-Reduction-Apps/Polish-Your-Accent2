@@ -48,6 +48,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/users/**").hasAuthority(UserPermission.USERS_ADD.getPermission())
                         .requestMatchers(HttpMethod.PUT, "/users/**").hasAuthority(UserPermission.USERS_CHANGE.getPermission())
                         .requestMatchers(HttpMethod.DELETE, "/users/**").hasAuthority(UserPermission.USERS_DELETE.getPermission())
+                        .requestMatchers(HttpMethod.PATCH, "/users/**").hasAuthority(UserPermission.USERS_CHANGE.getPermission())
                         .requestMatchers(HttpMethod.GET, "/lessons/**").hasAuthority(UserPermission.LESSONS_VIEW.getPermission())
                         .requestMatchers(HttpMethod.POST, "/lessons/**").hasAuthority(UserPermission.LESSONS_ADD.getPermission())
                         .requestMatchers(HttpMethod.PUT, "/lessons/**").hasAuthority(UserPermission.LESSONS_CHANGE.getPermission())
