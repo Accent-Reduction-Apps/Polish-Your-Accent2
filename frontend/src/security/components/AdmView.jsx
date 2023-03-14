@@ -10,11 +10,12 @@ const Admin = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        const headers = authHeader();
         const fetchData = async () => {
             setIsLoading(true);
             try {
                 const headers = authHeader();
-                const response = await fetch('http://localhost:8080/users');
+                const response = await fetch('http://localhost:8080/users', {headers});
                 if (!response.ok) {
                     throw new Error(`HTTP Error: ${response.status}`);
                 }
