@@ -54,6 +54,21 @@ public class UserController {
     }
 
     @ResponseStatus(code = HttpStatus.ACCEPTED)
+    @PatchMapping("/addReadLesson")
+    public Object addReadLessonToLessonsSet(@RequestParam("lesson_id") Long lesson_id,
+                                            @RequestParam("userStudent_id") Long userStudent_id) {
+
+        UserStudent userStudent = userService.getUserById(userStudent_id);
+
+        if(userStudent!= null){
+            return userService.updateUserLessonList(userStudent, lesson_id);
+        }else{
+            return String.format("No user found with id %d", userStudent_id);
+        }
+    }
+
+
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
     @PostMapping("/registerStudent")
     public ResponseEntity<UserStudent> sendRequestNewStudentAccountCreate(@RequestParam("password") String password,
                                                                           @RequestParam("email") String email,
