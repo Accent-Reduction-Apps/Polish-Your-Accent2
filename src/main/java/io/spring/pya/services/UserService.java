@@ -109,13 +109,10 @@ public class UserService implements UserDetailsService {
         return userStudent;
     }
 
-    public UserStudent updateUserLessonList(UserStudent userStudentOld, Long lesson_id) {
-        Set<Lesson> userLessonsSet = userStudentOld.getLessons();
+    public UserStudent updateUserLessonList(UserStudent userStudent, Long lesson_id) {
+        Set<Lesson> userLessonsSet = userStudent.getLessons();
         Lesson newCompletedLesson = lessonRepository.getReferenceById(lesson_id);
         userLessonsSet.add(newCompletedLesson);
-
-        userStudentOld.setLessons(userLessonsSet);
-
-        return userRepository.saveAndFlush(userStudentOld);
+        return userRepository.saveAndFlush(userStudent);
     }
 }
