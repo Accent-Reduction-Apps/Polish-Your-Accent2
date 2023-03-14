@@ -12,8 +12,8 @@ function TeamSlotherin() {
                     <h1>TEAM Polish Your English </h1>
                     <div className="team">
                         <p className="member">Dawid Deszcz</p>
-                        <p className="member">Marcin Szuwalski</p>
-                        <p className="member">Sebastan Sosin</p>
+                        <p className="member">Mateusz Szuwalski</p>
+                        <p className="member">Sebastian Sosin</p>
                         <p className="member">Marcin Gąsior</p>
                     </div>
 

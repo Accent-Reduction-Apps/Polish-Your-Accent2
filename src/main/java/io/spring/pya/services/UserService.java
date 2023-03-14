@@ -43,8 +43,10 @@ public class UserService implements UserDetailsService {
         if (containsNotEmptyString(userStudentNew.getUsername())) userStudentOld.setUsername(userStudentNew.getUsername());
         if (containsNotEmptyString(userStudentNew.getEmail()))
             userStudentOld.setEmail(userStudentNew.getEmail());
+
         if (containsNotEmptyString(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
         if (containsNotEmptySet(userStudentNew.getLessons())) userStudentOld.setLessons(userStudentNew.getLessons());
+
 
         userRepository.save(userStudentOld);
         return userRepository.getReferenceById(userStudentOld.getId());
@@ -72,6 +74,10 @@ public class UserService implements UserDetailsService {
     }
 
 
+
+    private boolean setDataUpdated(Set<Lesson> userLessonsSet) {
+        return userLessonsSet != null && !userLessonsSet.isEmpty();
+    }
 
     public UserStudent activateUser(Long userId) {
         UserStudent userStudent;
@@ -103,6 +109,7 @@ public class UserService implements UserDetailsService {
         return userStudent;
     }
 
+
     public UserStudent updateUserLessonList(UserStudent userStudent, Long lesson_id) {
         Set<Lesson> userLessonsSet = userStudent.getLessons();
         Lesson newCompletedLesson = lessonRepository.getReferenceById(lesson_id);
@@ -116,5 +123,6 @@ public class UserService implements UserDetailsService {
 
     private boolean containsNotEmptySet(Set<Lesson> userLessonsSet) {
         return userLessonsSet != null && !userLessonsSet.isEmpty();
+
     }
 }
