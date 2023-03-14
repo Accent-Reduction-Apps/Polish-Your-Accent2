@@ -19,7 +19,7 @@ export default function GetUser() {
             </div>
         )
         : (
-            <div className="centered-container">
+            <div>
                 <p>
                     Beware, and make no changes unless thou art sure.<br/>
                     Hasty actions bring regret and sorrow.<br/>
