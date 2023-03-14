@@ -1,7 +1,9 @@
 package io.spring.pya.services;
 
 
+import io.spring.pya.entities.Lesson;
 import io.spring.pya.entities.UserStudent;
+import io.spring.pya.repositories.LessonRepository;
 import io.spring.pya.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,14 +12,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final LessonRepository lessonRepository;
 
-
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, LessonRepository lessonRepository) {
         this.userRepository = userRepository;
+        this.lessonRepository = lessonRepository;
     }
 
 
@@ -40,6 +44,7 @@ public class UserService implements UserDetailsService {
         if (stringDataUpdated(userStudentNew.getEmail()))
             userStudentOld.setEmail(userStudentNew.getEmail());
         if (stringDataUpdated(userStudentNew.getPassword())) userStudentOld.setPassword(userStudentNew.getPassword());
+        if (setDataUpdated(userStudentNew.getLessons())) userStudentOld.setLessons(userStudentNew.getLessons());
 
         userRepository.save(userStudentOld);
         return userRepository.getReferenceById(userStudentOld.getId());
@@ -68,6 +73,10 @@ public class UserService implements UserDetailsService {
 
     private boolean stringDataUpdated(String string) {
         return string != null && !string.equals("");
+    }
+
+    private boolean setDataUpdated(Set<Lesson> userLessonsSet) {
+        return userLessonsSet != null && !userLessonsSet.isEmpty();
     }
 
     public UserStudent activateUser(Long userId) {
@@ -100,4 +109,13 @@ public class UserService implements UserDetailsService {
         return userStudent;
     }
 
+    public UserStudent updateUserLessonList(UserStudent userStudentOld, Long lesson_id) {
+        Set<Lesson> userLessonsSet = userStudentOld.getLessons();
+        Lesson newCompletedLesson = lessonRepository.getReferenceById(lesson_id);
+        userLessonsSet.add(newCompletedLesson);
+
+        userStudentOld.setLessons(userLessonsSet);
+
+        return userRepository.saveAndFlush(userStudentOld);
+    }
 }
