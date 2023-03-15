@@ -68,3 +68,11 @@
     top: 100px !important;
     min-height: 150px;
 }
+
+.color-lightgreen {
+    color: lightgreen;
+}
+
+.color-darkgreen {
+    color: darkgreen;
+}
