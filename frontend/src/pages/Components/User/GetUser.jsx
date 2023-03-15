@@ -26,7 +26,7 @@ export default function GetUser() {
         ? (
             <div>
                 <Link to="/admn">
-                    <Button className='form-button3' variant='secondary' size='lg'>
+                    <Button className='form-button3' size='lg'>
                         Manage access
                     </Button>
                 </Link>
