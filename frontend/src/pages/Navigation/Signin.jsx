@@ -72,7 +72,7 @@ const Signin = () => {
     let SignupLink = (
         <Col>
             <p className="text-center">
-                <Link to="/signup" className="signuplink">
+                <Link to="/signup" className="signup-link">
                     ...or create account
                 </Link>
             </p>
@@ -116,16 +116,16 @@ const Signin = () => {
                         />
                     </div>
 
-                    <div className="form-group text-center">
-                        <br/>
+                    <div className="form-group text-center login-btn-label">
                         <button
-                            className="btn btn-primary btn-block"
+                            className="btn btn-login btn-block"
                             disabled={loading}
                         >
                             {loading && (
                                 <span className="spinner-border spinner-border-sm"></span>
                             )}
-                            <span>Login</span>
+                            Login
+                            {/*<span>Login</span>*/}
                         </button>
                     </div>
 
@@ -140,7 +140,8 @@ const Signin = () => {
                         style={{display: "none"}}
                         ref={checkBtn}
                     />
-                    {SignupLink}
+                    <p className="create-account-label">{SignupLink}</p>
+
                 </Form>
             </div>
         </div>
