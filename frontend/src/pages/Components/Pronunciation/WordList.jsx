@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import WordButton from './WordButton';
 import useTTS from './useTTS';
 import styles from '../../../styles/WordList.module.css';
@@ -33,7 +33,7 @@ const WordList = () => {
         'Miscellaneous',
         'Jewelry',
         'Recipe',
-        'Thingamajicr'
+        'Thingamajig'
     ];
 
     const apiKey = process.env.REACT_APP_GOOGLE_TTS_API_KEY;
