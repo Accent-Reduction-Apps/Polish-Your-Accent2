@@ -21,9 +21,20 @@
     font-size: 16px;
     width: 300px;
     margin: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(40, 40, 03, 0.51), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.form-button1:hover, .form-button2:hover, .form-button3:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px maroon, 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .form-button3 {
+    background-color: maroon;
+}
+
+.form-button3:hover {
     background-color: maroon;
 }
 
