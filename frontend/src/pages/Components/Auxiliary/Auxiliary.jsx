@@ -32,6 +32,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Form, Button, Card } from 'react-bootstrap';
 import '../../../styles/Common.css';
+import WordList from "../Pronunciation/WordList";
 
 const OpenAIChat = () => {
     const [inputText, setInputText] = useState('');
@@ -71,7 +72,7 @@ const OpenAIChat = () => {
             setConversation([...conversation, { question: inputText, answer: completionText }]);
         } catch (error) {
             console.error(error);
-            setError('An error occurred. Please try again.');
+            setError('A GPT chat error occurred. Please try again.');
         }
 
         setInputText('');
@@ -106,6 +107,7 @@ const OpenAIChat = () => {
                 )}
             </Form>
             {error && <div className="text-danger">{error}</div>}
+            <WordList />
         </Container>
     );
 };
