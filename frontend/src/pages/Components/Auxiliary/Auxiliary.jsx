@@ -28,9 +28,9 @@
 //     );
 // }
 //
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { Container, Form, Button, Card } from 'react-bootstrap';
+import {Card, Container, Form} from 'react-bootstrap';
 import '../../../styles/Common.css';
 import WordList from "../Pronunciation/WordList";
 
@@ -94,17 +94,17 @@ const OpenAIChat = () => {
             </Card>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formInputText">
-                    <Form.Control type="text" placeholder="Enter text" value={inputText} onChange={handleInputChange} />
+                    <Form.Control type="text" placeholder="Enter text" value={inputText} onChange={handleInputChange}/>
                 </Form.Group>
-                {isLoading ? (
-                    <Button variant="orange" disabled>
-                        Loading...
-                    </Button>
-                ) : (
-                    <Button variant="orange" type="submit">
-                        Submit
-                    </Button>
-                )}
+                {/*{isLoading ? (*/}
+                {/*    <Button variant="orange" disabled>*/}
+                {/*        Loading...*/}
+                {/*    </Button>*/}
+                {/*) : (*/}
+                {/*    <Button variant="orange" type="submit">*/}
+                {/*        Submit*/}
+                {/*    </Button>*/}
+                {/*)}*/}
             </Form>
             {error && <div className="text-danger">{error}</div>}
             <WordList />
