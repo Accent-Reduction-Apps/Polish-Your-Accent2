@@ -70,53 +70,54 @@ const GetLessons = () => {
                     />
                 </Form.Group>
             </Form>
-                <Table className="lesson-table" striped bordered hover>
-                    <thead>
-                    <tr style={{color: 'crimson', background: 'darkkhaki'}}>
-                        <th className="lesson-table-header" style={{color: 'darkolivegreen'}}>#</th>
-                        <th className="lesson-table-header" style={{color: 'darkolivegreen'}}><span> PLEASE SELECT A LESSON TO LEARN</span>
-                        </th>
-                        <th className="lesson-table-header" style={{fontSize: '1rem', color: 'darkolivegreen'}}>lesson
-                            status
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {lessons.filter(item => item.topic.toLowerCase().includes(searchTerm.toLowerCase())).map((item, index) => {
-                        if (statusFilter === "all" || (statusFilter === "waiting" && !lessonsarray.includes(item.id))) {
-                            return (
-                                <tr key={item.id}
-                                    className={index % 2 === 0 ? 'lesson-table-row-even' : 'lesson-table-row-odd'}>
-                                    <td className="lesson-table-cell">
-                                        <Link
-                                            className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
-                                            to={`/lesson/${item.id}`} state={item}>
-                                            {item.id}
-                                        </Link>
-                                    </td>
-                                    <td className="lesson-table-cell lesson-table-text">
-                                        <Link
-                                            className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
-                                            to={`/lesson/${item.id}`} state={item} style={{textAlign: "center"}}>
-                                            {item.topic}
-                                        </Link>
-                                    </td>
-                                    <td className="lesson-table-cell">
-                                        <Link
-                                            className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
-                                            to={`/lesson/${item.id}`} state={item}>
-                                            {lessonsarray.includes(item.id) ? (<>COMPLETED</>) : <>waiting</>}
-                                        </Link>
-                                    </td>
-                                </tr>
-                            );
-                        } else {
-                            return null;
-                        }
-                    })}
-                    </tbody>
-                </Table>
+            <Table className="lesson-table" striped bordered hover>
+                <thead>
+                <tr style={{color: 'crimson', background: 'darkkhaki'}}>
+                    <th className="lesson-table-header" style={{color: 'darkolivegreen'}}>#</th>
+                    <th className="lesson-table-header" style={{color: 'darkolivegreen'}}><span> PLEASE SELECT A LESSON TO LEARN</span>
+                    </th>
+                    <th className="lesson-table-header" style={{fontSize: '1rem', color: 'darkolivegreen'}}>lesson
+                        status
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {lessons.filter(item => item.topic.toLowerCase().includes(searchTerm.toLowerCase())).map((item, index) => {
+                    if (statusFilter === "all" || (statusFilter === "waiting" && !lessonsarray.includes(item.id))) {
+                        return (
+                            <tr key={item.id}
+                                className={index % 2 === 0 ? 'lesson-table-row-even' : 'lesson-table-row-odd'}>
+                                <td className="lesson-table-cell">
+                                    <Link
+                                        className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
+                                        to={`/lesson/${item.id}`} state={item}>
+                                        {item.id}
+                                    </Link>
+                                </td>
+                                <td className="lesson-table-cell lesson-table-text">
+                                    <Link
+                                        className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
+                                        to={`/lesson/${item.id}`} state={item} style={{textAlign: "center"}}>
+                                        {item.topic}
+                                    </Link>
+                                </td>
+                                <td className="lesson-table-cell">
+                                    <Link
+                                        className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
+                                        to={`/lesson/${item.id}`} state={item}>
+                                        {lessonsarray.includes(item.id) ? (
+                                            <p className={index % 2 === 0 ? "color-darkgreen" : "color-lightgreen"}>COMPLETED</p>) : <>waiting</>}
+                                    </Link>
+                                </td>
+                            </tr>
+                        );
+                    } else {
+                        return null;
+                    }
+                })}
+                </tbody>
+            </Table>
         </Container>
-);
+    );
 }
 export default GetLessons;
