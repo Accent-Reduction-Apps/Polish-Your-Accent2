@@ -105,7 +105,7 @@ const GetLessons = () => {
                                         <Link
                                             className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
                                             to={`/lesson/${item.id}`} state={item}>
-                                            {lessonsarray.includes(item.id) ? (<>completed</>) : <>waiting</>}
+                                            {lessonsarray.includes(item.id) ? (<>COMPLETED</>) : <>waiting</>}
                                         </Link>
                                     </td>
                                 </tr>
