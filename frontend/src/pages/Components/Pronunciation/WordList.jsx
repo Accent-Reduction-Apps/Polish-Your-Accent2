@@ -28,14 +28,12 @@ const WordList = () => {
         'February',
         'Anemone',
         'Pronunciation',
-        'Unfuckable',
         'Architecture',
         'Vulnerable',
-        'Cocksucker',
         'Miscellaneous',
         'Jewelry',
         'Recipe',
-        'Motherfucker'
+        'Thingamajicr'
     ];
 
     const apiKey = process.env.REACT_APP_GOOGLE_TTS_API_KEY;
