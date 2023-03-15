@@ -57,19 +57,16 @@ const Layout = ({children}) => {
     return (
         <Container className="main-nav" fluid key={isAuthorized}>
             <Navbar className='navi' expand='lg' variant='dark'>
-                <Navbar.Brand className='navbrand' href='/'>
-                    <Stack direction='horizontal' gap={3} className='navtitle'>
+                <Navbar.Brand className='nav-brand' href='/'>
+                    <Stack direction='horizontal' gap={3} className='nav-title'>
                         <span className='me-1'/>
-                        <span className='border border-4 rounded'>
-                    <img
-
-                        src={smallLogo}
-                        width='29'
-                        height='39'
-                        className="d-inline-block align-items-center"
-                        alt="logo"
-                    />
-                    </span>
+                        <img
+                            src={smallLogo}
+                            width='37'
+                            height='47'
+                            className="d-inline-block border border-4 rounded"
+                            alt="logo"
+                        />
                         POLISH YOUR ACCENT
                     </Stack>
                 </Navbar.Brand>
