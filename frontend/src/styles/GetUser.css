@@ -23,19 +23,17 @@
     margin: 10px;
 }
 
-/*.form-button1 {*/
-/*    bottom: 3px;*/
-/*    left: -200px;*/
-/*}*/
+.form-button3 {
+    background-color: maroon;
+}
 
-/*.form-button2 {*/
-/*    bottom: 115px;*/
-/*    left: 200px;*/
-/*}*/
-
-.btn {
-    flex-direction: row;
-
+.my-account-btn {
+    position: relative;
+    top: 30px;
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    align-items: center;
 }
 
 .form {
