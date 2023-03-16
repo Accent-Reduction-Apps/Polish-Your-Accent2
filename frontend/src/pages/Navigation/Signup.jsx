@@ -90,7 +90,6 @@ export default class Register extends Component {
             successful: false
         });
 
-
         this.form.validateAll();
 
         if (this.checkBtn.context._errors.length === 0) {
@@ -164,7 +163,6 @@ export default class Register extends Component {
                                     />
                                 </div>
 
-
                                 <div className="form-group">
                                     <label htmlFor="password">Password</label>
                                     <Input
@@ -183,7 +181,7 @@ export default class Register extends Component {
                                             className="alert alert-danger"
                                             role="alert"
                                         >
-                                            {this.state.message}
+                                            {"Error: Username is already taken!"}
                                         </div>
                                     </div>
                                 ) : (<div></div>)
@@ -198,23 +196,13 @@ export default class Register extends Component {
                         {this.state.message && this.state.successful ? (
                             <div className="form-group">
                                 <div
-                                    className={
-                                        this.state.successful
-                                            ? "alert alert-success"
-                                            : ""
-                                    }
-                                    role={
-                                        this.state.successful
-                                            ? "alert"
-                                            : ""
-                                    }
+                                    className="alert alert-success"
+                                    role="alert"
                                 >
-                                    {}
-                                    {this.state.message}
+                                    {"User registered successfully!"}
                                 </div>
                             </div>
                         ) : (<div></div>)}
-
 
                         <CheckButton
                             style={{display: "none"}}
