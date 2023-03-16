@@ -56,7 +56,7 @@ const GetLessonById = (props) => {
             if (!response.ok) {
                 throw new Error(response.statusText);
             }
-            window.location.href = '/demo';
+            window.location.href = '/lessons';
         } catch (e) {
             setError(`An error occurred: ${e.message}`);
         }
@@ -85,7 +85,7 @@ const GetLessonById = (props) => {
                     </Button>
                 </div>
                 <div className="mr-8 btn-back-to-list">
-                    <Link to="/demo">
+                    <Link to="/lessons">
                         <Button variant="secondary">Back to list</Button>
                     </Link>
                 </div>

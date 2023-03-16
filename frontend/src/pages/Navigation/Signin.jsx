@@ -49,7 +49,7 @@ const Signin = () => {
             AuthService.login(username, password).then(
                 () => {
                     setIsUserAuthorized(true);
-                    navigate("/demo");
+                    navigate("/lessons");
                     window.location.reload();
                 },
                 error => {

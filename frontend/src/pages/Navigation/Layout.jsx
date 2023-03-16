@@ -8,11 +8,6 @@ import Footer from './Footer';
 import Authservice from "../../security/auth/authservice";
 
 import {AuthorizationContext} from "../../auxiliary/AuthorizationContext";
-
-function logOut() {
-    Authservice.logout();
-}
-
 const Layout = ({children}) => {
 
 
@@ -34,7 +29,7 @@ const Layout = ({children}) => {
 
     const extraButtons = isUserAuthorized ? (
         <>
-            <Nav.Link as={Link} to='/demo'>
+            <Nav.Link as={Link} to='/lessons'>
                 <Button variant='outline-warning'>Lessons</Button>
             </Nav.Link>
             <Nav.Link as={Link} to='/my-account'>
@@ -84,7 +79,7 @@ const Layout = ({children}) => {
                                     <Button variant='outline-warning'>Team</Button>
                                 </Nav.Link>
                                 <Nav.Link as={Link} to='/auxiliary'>
-                                    <Button variant='outline-warning'>Auxiliary</Button>
+                                    <Button variant='outline-warning'>Practice</Button>
                                 </Nav.Link>
                                 {extraButtons}
                             </Nav>
