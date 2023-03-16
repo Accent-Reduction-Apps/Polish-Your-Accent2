@@ -4,6 +4,7 @@ import {AuthorizationContext} from "../../../auxiliary/AuthorizationContext";
 import Authservice from "../../../security/auth/authservice";
 import {Button} from "react-bootstrap";
 import AudioPlayer from "../../MediaControl/Audio/AudioPlayer";
+import {LANGUAGES} from "../../../resources/languages";
 
 function Logout() {
 
@@ -27,11 +28,9 @@ function Logout() {
     return (
         <div className='bg-site-logout p-3'>
             <AudioPlayer src={audioOpening}/>
-            <h1>Logout</h1>
-            <h5>You are logged in as </h5>
-            <p>Are you sure you want to log out?</p>
+            <h1>{LANGUAGES.pl.SureToQuit}</h1>
             <Button className="confirmLogout" onClick={handleLogOutClick}
-                    variant='danger'>YES!</Button>
+                    variant='danger'>{LANGUAGES.pl.Yes}</Button>
         </div>
     );
 }

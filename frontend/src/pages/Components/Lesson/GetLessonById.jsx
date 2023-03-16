@@ -4,6 +4,7 @@ import {Button} from 'react-bootstrap';
 import '../../../styles/GetLessons.css';
 import authHeader from '../../../security/auth/auth-header';
 import Authservice from "../../../security/auth/authservice";
+import {LANGUAGES} from "../../../resources/languages";
 
 const fetchData = async (id) => {
     try {
@@ -81,12 +82,12 @@ const GetLessonById = (props) => {
             <div className="btn-label d-flex justify-content-center">
                 <div className="ml-8 ">
                     <Button className="btn-complete-lesson" variant={"success"} onClick={markLessonComplete}>
-                        Press to complete the lesson
+                        {LANGUAGES.pl.CompleteLesson}
                     </Button>
                 </div>
                 <div className="mr-8">
                     <Link to="/lessons">
-                        <Button className="btn-back-to-list" variant="secondary">Back to list</Button>
+                        <Button className="btn-back-to-list" variant="secondary">{LANGUAGES.pl.BackToLessonsList}</Button>
                     </Link>
                 </div>
             </div>

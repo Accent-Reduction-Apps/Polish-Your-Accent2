@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import {useForm} from "react-hook-form";
 import Authservice from "../../../security/auth/authservice";
 import {Link} from "react-router-dom";
+import {LANGUAGES} from "../../../resources/languages";
 
 export default function GetUser() {
     const user = Authservice.getCurrentUser();
@@ -27,7 +28,7 @@ export default function GetUser() {
             <div>
                 <Link to="/admin">
                     <Button className='form-button3' size='lg'>
-                        Manage access
+                        {LANGUAGES.pl.ManageUsers}
                     </Button>
                 </Link>
             </div>
@@ -117,14 +118,14 @@ export default function GetUser() {
                     return Promise.reject(error);
                 }
 
-                setStatus(`Delete successful`); //DISPLAY?
+                setStatus(LANGUAGES.pl.SuccessfulDelete); //DISPLAY?
                 console.log(status)
                 Authservice.logout();
                 window.location = '/about';
             })
             .catch(error => {
                 setErrorMessage(error);
-                console.error('There was an error!', error);
+                console.error(LANGUAGES.pl.Error, error);
             })
     }
 
@@ -132,12 +133,12 @@ export default function GetUser() {
     return (
         <div className="bg-site p-3">
 
-            <h1 className="My_Account">My Account</h1>
+            <h1 className="My_Account">{LANGUAGES.pl.MyAccount}</h1>
 
             <Form className="form" onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group controlId="username" size="lg">
                     <Form.Label>
-                        Name
+                        {LANGUAGES.pl.Username}
                     </Form.Label>
                     <Form.Control defaultValue={user.username}
                                   placeholder={user.username}  {...register("username", {pattern: /^[a-zA-Z0-9]+$/i})}
@@ -145,7 +146,7 @@ export default function GetUser() {
                 </Form.Group>
                 <Form.Group controlId="email" size="lg">
                     <Form.Label>
-                        Email Address
+                        {LANGUAGES.pl.EmailAddress}
                     </Form.Label>
                     <Form.Control defaultValue={user.email}
                                   placeholder={user.email} {...register("email", {
@@ -153,9 +154,9 @@ export default function GetUser() {
                     })} name="email"/>
                 </Form.Group>
                 <div className="my-account-btn">
-                    <Button className="form-button1" type="submit">Save account edition</Button>
+                    <Button className="form-button1" type="submit">{LANGUAGES.pl.SaveChanges}</Button>
                     <Button className="form-button2" variant="danger" size="lg" onClick={deleteUserButton}>
-                        Delete my account
+                        {LANGUAGES.pl.DeleteAccount}
                     </Button>
                     {AdminButton}
                 </div>

@@ -33,6 +33,7 @@ import axios from 'axios';
 import {Card, Container, Form} from 'react-bootstrap';
 import '../../../styles/Common.css';
 import WordList from "../Pronunciation/WordList";
+import {LANGUAGES} from "../../../resources/languages";
 
 const OpenAIChat = () => {
     const [inputText, setInputText] = useState('');
@@ -94,7 +95,7 @@ const OpenAIChat = () => {
             </Card>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formInputText">
-                    <Form.Control type="text" placeholder="Enter text" value={inputText} onChange={handleInputChange}/>
+                    <Form.Control type="text" placeholder={LANGUAGES.pl.EnterText} value={inputText} onChange={handleInputChange}/>
                 </Form.Group>
                 {/*{isLoading ? (*/}
                 {/*    <Button variant="orange" disabled>*/}

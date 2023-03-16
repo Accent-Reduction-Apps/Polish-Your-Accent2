@@ -4,6 +4,7 @@ import {Container, Form, Table} from 'react-bootstrap';
 import '../../../styles/GetLessons.css';
 import authHeader from "../../../security/auth/auth-header";
 import Authservice from "../../../security/auth/authservice";
+import {LANGUAGES} from "../../../resources/languages";
 
 const GetLessons = () => {
     const user = Authservice.getCurrentUser();
@@ -43,7 +44,7 @@ const GetLessons = () => {
         <Container className='bg-site p-3 d-flex flex-column justify-content-center align-items-center'>
             <Form className="d-flex justify-content-center align-items-center mb-3">
                 <Form.Group controlId="searchTerm" className="m-0 mr-2">
-                    <Form.Control type="text" placeholder="Search lessons..." value={searchTerm}
+                    <Form.Control type="text" placeholder={LANGUAGES.pl.SearchLessons} value={searchTerm}
                                   onChange={handleSearchChange}/>
                 </Form.Group>
                 <Form.Group controlId="lessonStatus" className="m-2">
@@ -52,7 +53,7 @@ const GetLessons = () => {
                         inline
                         type="radio"
                         name="status"
-                        label={<span className="text-dark">All lessons</span>}
+                        label={<span className="text-dark">{LANGUAGES.pl.AllLessons}</span>}
                         checked={statusFilter === "all"}
                         onChange={() => setStatusFilter("all")}
                         style={{"--bg-color": "lightcoral", "--active-bg-color": "red"}}
@@ -63,9 +64,9 @@ const GetLessons = () => {
                         inline
                         type="radio"
                         name="status"
-                        label={<span className="text-dark">Waiting only</span>}
-                        checked={statusFilter === "waiting"}
-                        onChange={() => setStatusFilter("waiting")}
+                        label={<span className="text-dark">{LANGUAGES.pl.NotCompleted}</span>}
+                        checked={statusFilter === LANGUAGES.pl.NotCompleted}
+                        onChange={() => setStatusFilter(LANGUAGES.pl.NotCompleted)}
                         style={{"--bg-color": "gold", "--active-bg-color": "darkgoldenrod"}}
                     />
                 </Form.Group>
@@ -74,16 +75,14 @@ const GetLessons = () => {
                 <thead>
                 <tr style={{color: 'crimson', background: 'darkkhaki'}}>
                     <th className="lesson-table-header" style={{color: 'darkolivegreen'}}>#</th>
-                    <th className="lesson-table-header" style={{color: 'darkolivegreen'}}><span> PLEASE SELECT A LESSON TO LEARN</span>
+                    <th className="lesson-table-header" style={{color: 'darkolivegreen'}}><span> {LANGUAGES.pl.SelectLesson}</span>
                     </th>
-                    <th className="lesson-table-header" style={{fontSize: '1rem', color: 'darkolivegreen'}}>lesson
-                        status
-                    </th>
+                    <th className="lesson-table-header" style={{fontSize: '1rem', color: 'darkolivegreen'}}>{LANGUAGES.pl.LessonsStatus}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {lessons.filter(item => item.topic.toLowerCase().includes(searchTerm.toLowerCase())).map((item, index) => {
-                    if (statusFilter === "all" || (statusFilter === "waiting" && !lessonsarray.includes(item.id))) {
+                    if (statusFilter === "all" || (statusFilter === LANGUAGES.pl.NotCompleted && !lessonsarray.includes(item.id))) {
                         return (
                             <tr key={item.id}
                                 className={index % 2 === 0 ? 'lesson-table-row-even' : 'lesson-table-row-odd'}>
@@ -106,7 +105,7 @@ const GetLessons = () => {
                                         className={index % 2 === 0 ? 'lesson-table-link-even' : 'lesson-table-link-odd'}
                                         to={`/lesson/${item.id}`} state={item}>
                                         {lessonsarray.includes(item.id) ? (
-                                            <p className={index % 2 === 0 ? "color-darkgreen" : "color-lightgreen"}>COMPLETED</p>) : <>waiting</>}
+                                            <p className={index % 2 === 0 ? "color-darkgreen" : "color-lightgreen"}>{LANGUAGES.pl.Completed}</p>) : <>{LANGUAGES.pl.NotCompleted}</>}
                                     </Link>
                                 </td>
                             </tr>

@@ -6,6 +6,7 @@ import smallLogo from '../../resources/image/rsmouth2.png';
 import '../../styles/Layout.css';
 import Footer from './Footer';
 import Authservice from "../../security/auth/authservice";
+import {LANGUAGES} from '../../resources/languages';
 
 import {AuthorizationContext} from "../../auxiliary/AuthorizationContext";
 const Layout = ({children}) => {
@@ -30,19 +31,19 @@ const Layout = ({children}) => {
     const extraButtons = isUserAuthorized ? (
         <>
             <Nav.Link as={Link} to='/lessons'>
-                <Button variant='outline-warning'>Lessons</Button>
+                <Button variant='outline-warning'>{LANGUAGES.pl.Lessons}</Button>
             </Nav.Link>
             <Nav.Link as={Link} to='/my-account'>
-                <Button variant='outline-warning'>My account</Button>
+                <Button variant='outline-warning'>{LANGUAGES.pl.MyAccount}</Button>
             </Nav.Link>
             <Nav.Link as={Link} to='/logout'>
                 <Button
-                    variant='outline-warning'>Log out</Button>
+                    variant='outline-warning'>{LANGUAGES.pl.LogOut}</Button>
             </Nav.Link>
         </>
     ) : (<Nav.Link as={Link} to='/signin'>
         <Button
-            variant='outline-warning'>Login</Button>
+            variant='outline-warning'>{LANGUAGES.pl.LogIn}</Button>
     </Nav.Link>);
 
     let userBK = Authservice.getCurrentUser();
@@ -73,13 +74,13 @@ const Layout = ({children}) => {
                         <Navbar.Collapse id='navbar-nav'>
                             <Nav className='mr-auto'>
                                 <Nav.Link as={Link} to='/about'>
-                                    <Button variant='outline-warning'>About</Button>
+                                    <Button variant='outline-warning' >{LANGUAGES.pl.About}</Button>
                                 </Nav.Link>
                                 <Nav.Link as={Link} to='/teaminfo'>
-                                    <Button variant='outline-warning'>Team</Button>
+                                    <Button variant='outline-warning'>{LANGUAGES.pl.Team}</Button>
                                 </Nav.Link>
                                 <Nav.Link as={Link} to='/auxiliary'>
-                                    <Button variant='outline-warning'>Practice</Button>
+                                    <Button variant='outline-warning'>{LANGUAGES.pl.Practice}</Button>
                                 </Nav.Link>
                                 {extraButtons}
                             </Nav>

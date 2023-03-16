@@ -7,6 +7,7 @@ import AuthService from '../../security/auth/authservice';
 import {AuthorizationContext} from "../../auxiliary/AuthorizationContext";
 import {Link, useNavigate} from "react-router-dom";
 import {Col} from "react-bootstrap";
+import {LANGUAGES} from "../../resources/languages";
 
 const required = value => {
     if (!value) {
@@ -73,7 +74,7 @@ const Signin = () => {
         <Col>
             <p className="text-center">
                 <Link to="/signup" className="signup-link">
-                    ...or create account
+                    {LANGUAGES.pl.CreateAccount}
                 </Link>
             </p>
         </Col>
@@ -93,7 +94,7 @@ const Signin = () => {
                     ref={form}
                 >
                     <div className="form-group">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">{LANGUAGES.pl.Username}</label>
                         <Input
                             type="text"
                             className="form-control"
@@ -105,7 +106,7 @@ const Signin = () => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">{LANGUAGES.pl.Password}</label>
                         <Input
                             type="password"
                             className="form-control"
@@ -124,7 +125,7 @@ const Signin = () => {
                             {loading && (
                                 <span className="spinner-border spinner-border-sm"></span>
                             )}
-                            Login
+                            {LANGUAGES.pl.LogIn}
                         </button>
                     </div>
 
