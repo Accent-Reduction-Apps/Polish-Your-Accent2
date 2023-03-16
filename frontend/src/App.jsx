@@ -3,7 +3,6 @@ import {AuthorizationContext} from "./auxiliary/AuthorizationContext";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './pages/Components/Landing/Home';
 import Layout from './pages/Navigation/Layout';
-import Lessons from './pages/Components/LessonList/Lessons';
 import About from './pages/Components/About/About';
 import TeamSlotherin from './pages/Components/About/TeamSlotherin';
 import NoPage from './pages/ErrorPages/NoPage';
@@ -38,11 +37,10 @@ export default function App() {
                     <Route path='signin' element={<Signin/>}/>
                     <Route path='signup' element={<Signup/>}/>
                     <Route path='profile' element={<Profile/>}/>
-                    <Route path='demo' element={<Lessons/>}/>
                     <Route exact path='/lessons' element={<GetLessons/>}/>
                     <Route path='/lesson/:lessonId' element={<GetLessonById/>}/>
                     <Route path='/my-account' element={<GetUser/>}/>
-                    <Route path='/admn' element={<AdmView/>}/>
+                    <Route path='/admin' element={<AdmView/>}/>
                     <Route path='/auxiliary' element={<Auxiliary/>}/>
                     <Route path='*' element={<NoPage/>}/>
                     <Route errorElement={<ErrorPage/>}/>

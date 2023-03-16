@@ -11,7 +11,7 @@ export default function GetUser() {
     const AdminButton = (user && user.roles && user.roles.includes('ADMIN'))
         ? (
             <div>
-                <Link to="/admn">
+                <Link to="/admin">
                     <Button className='form-button3' variant='secondary' size='lg'>
                         Manage access
                     </Button>
