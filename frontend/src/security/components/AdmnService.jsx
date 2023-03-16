@@ -11,7 +11,7 @@ class AdmnService {
             const response = await axios.post(API_URL + userId + '/activate', {}, {headers});
             return response.data;
         } catch (error) {
-            throw new Error(`${LANGUAGES.ErrorsMessages.failedToActivateUser} ${userId}: ${error.message}`);
+            throw new Error(`${LANGUAGES.pl.ErrorsMessages.failedToActivateUser} ${userId}: ${error.message}`);
         }
     }
 
@@ -21,7 +21,7 @@ class AdmnService {
             const response = await axios.post(API_URL + userId + '/deactivate', {}, {headers});
             return response.data;
         } catch (error) {
-            throw new Error(`${LANGUAGES.ErrorsMessages.failedToDeactivateUser} ${userId}: ${error.message}`);
+            throw new Error(`${LANGUAGES.pl.ErrorsMessages.failedToDeactivateUser} ${userId}: ${error.message}`);
         }
     }
 }

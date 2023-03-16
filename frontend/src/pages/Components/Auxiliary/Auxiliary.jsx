@@ -73,7 +73,7 @@ const OpenAIChat = () => {
             setConversation([...conversation, { question: inputText, answer: completionText }]);
         } catch (error) {
             console.error(error);
-            setError(LANGUAGES.ErrorsMessages.ChatGPT);
+            setError(LANGUAGES.pl.ErrorsMessages.ChatGPT);
         }
 
         setInputText('');
