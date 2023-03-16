@@ -117,6 +117,14 @@ const Signin = () => {
                         />
                     </div>
 
+                    {message && (
+                        <div className="form-group">
+                            <div className="alert alert-danger" role="alert">
+                                {message}
+                            </div>
+                        </div>
+                    )}
+
                     <div className="form-group text-center login-btn-label">
                         <button
                             className="btn btn-login btn-block"
@@ -129,13 +137,7 @@ const Signin = () => {
                         </button>
                     </div>
 
-                    {message && (
-                        <div className="form-group">
-                            <div className="alert alert-danger" role="alert">
-                                {message}
-                            </div>
-                        </div>
-                    )}
+
                     <CheckButton
                         style={{display: "none"}}
                         ref={checkBtn}
