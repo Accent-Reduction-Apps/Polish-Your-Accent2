@@ -1,1 +1,0 @@
-ALTER TABLE lessons ALTER COLUMN text TYPE TEXT;

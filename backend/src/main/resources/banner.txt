@@ -1,0 +1,16 @@
+
+${Ansi.GREEN}          we did it not because it's easy
+${Ansi.BRIGHT_YELLOW}${AnsiStyle.BOLD}
+    8 888888888o  `8.`8888.      ,8'    .8.
+    8 8888    `88. `8.`8888.    ,8'    .888.
+    8 8888     `88  `8.`8888.  ,8'    :88888.
+    8 8888     ,88   `8.`8888.,8'    . `88888.
+    8 8888.   ,88'    `8.`88888'    .8. `88888.
+    8 888888888P'      `8. 8888    .8`8. `88888.
+    8 8888              `8 8888   .8' `8. `88888.
+    8 8888               8 8888  .8'   `8. `88888.
+    8 8888               8 8888 .888888888. `88888.
+    8 8888               8 8888.8'       `8. `88888.
+
+${AnsiStyle.BOLD}${Ansi.GREEN}      ... but because we thought it would be easy
+${AnsiStyle.NORMAL}   ${Ansi.WHITE}

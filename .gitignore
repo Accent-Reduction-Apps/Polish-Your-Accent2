@@ -1,6 +1,6 @@
 HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
+!backend/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -35,10 +35,10 @@ build/
 /frontend/public/manifest.json
 /frontend/public/logo192.png
 /frontend/public/favicon.ico
-/src/main/resources/application.propertiesMS
+/backend/src/main/resources/application.propertiesMS
 
 
 ### log files ###
 *.log
 /scratches/
-/src/main/resources/spring.log.*.gz
+/backend/src/main/resources/spring.log.*.gz
