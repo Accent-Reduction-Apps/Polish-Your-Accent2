@@ -4,6 +4,7 @@ package io.spring.pya.controllers;
 import io.spring.pya.entities.UserStudent;
 import io.spring.pya.exceptions.ResourceNotFoundException;
 import io.spring.pya.services.UserService;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +55,23 @@ public class UserController {
     }
 
     @ResponseStatus(code = HttpStatus.ACCEPTED)
+    @PatchMapping("/addReadLesson")
+    public Object addReadLessonToLessonsSet(@RequestParam("lesson_id") Long lesson_id,
+                                            @RequestParam("userStudent_id") Long userStudent_id) {
+
+
+        UserStudent userStudent = userService.getUserById(userStudent_id);
+
+        if(userStudent!= null){
+            return userService.updateUserLessonList(userStudent, lesson_id);
+
+        }else{
+            return String.format("No user found with id %d", userStudent_id);
+        }
+    }
+
+
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
     @PostMapping("/registerStudent")
     public ResponseEntity<UserStudent> sendRequestNewStudentAccountCreate(@RequestParam("password") String password,
                                                                           @RequestParam("email") String email,
@@ -62,7 +80,6 @@ public class UserController {
         return ResponseEntity.ok(newStudent);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, allowedHeaders = {"Origin", "Content-Type", "Accept"})
     @PostMapping("/{userId}/activate")
 
     public ResponseEntity<?> activateUser(@PathVariable Long userId) {
@@ -74,7 +91,6 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, allowedHeaders = {"Origin", "Content-Type", "Accept"})
     @PostMapping("/{userId}/deactivate")
 
     public ResponseEntity<?> deactivateUser(@PathVariable Long userId) {
