@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import {Link, useLocation} from 'react-router-dom';
+import {Button} from 'react-bootstrap';
 import '../../../styles/GetLessons.css';
 import authHeader from '../../../security/auth/auth-header';
 import Authservice from "../../../security/auth/authservice";
@@ -84,9 +84,9 @@ const GetLessonById = (props) => {
                         Press to complete the lesson
                     </Button>
                 </div>
-                <div className="mr-8 btn-back-to-list">
+                <div className="mr-8">
                     <Link to="/lessons">
-                        <Button variant="secondary">Back to list</Button>
+                        <Button className="btn-back-to-list" variant="secondary">Back to list</Button>
                     </Link>
                 </div>
             </div>
