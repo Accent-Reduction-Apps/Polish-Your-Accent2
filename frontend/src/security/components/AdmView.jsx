@@ -4,6 +4,7 @@ import '../../styles/AdmView.css';
 import authHeader from '../../security/auth/auth-header';
 import AdmnService from './AdmnService';
 import {Link} from "react-router-dom";
+import {LANGUAGES} from "../../resources/languages";
 
 const Admin = () => {
     const [users, setUsers] = useState([]);
@@ -65,7 +66,7 @@ const Admin = () => {
 
     return (
         <>
-            <div className='title-site'><h3>MANAGE ACCESS</h3></div>
+            <div className='title-site'><h3>{LANGUAGES.pl.ManageUsers}</h3></div>
             <div className="centered-container">
                 <div className="admin-table-background p-3">
                     <table className="user-table">
@@ -73,16 +74,16 @@ const Admin = () => {
                         <tr>
                             <th className="user-table-header"></th>
                             <th className="user-table-header">
-                                <span> USER</span>
+                                <span>{LANGUAGES.pl.User}</span>
                             </th>
                             <th className="user-table-header">
-                                <span> EMAIL</span>
+                                <span>{LANGUAGES.pl.EmailAddress}</span>
                             </th>
                         <th className="user-table-header">
-                            <span> STATUS</span>
+                            <span> {LANGUAGES.pl.UserStatus}</span>
                         </th>
                         <th className="user-table-header">
-                            <span> SWITCH</span>
+                            <span>{LANGUAGES.pl.SwitchUserStatus}</span>
                         </th>
                     </tr>
                     </thead>
@@ -94,9 +95,9 @@ const Admin = () => {
                             <td>{item.email}</td>
                             <td className="user-table-cell">
                                 {item.enabled ? (
-                                    <>is already activated</>
+                                    <>{LANGUAGES.pl.UserIsActived}</>
                                 ) : (
-                                    <>is not yet active</>
+                                    <>{LANGUAGES.pl.UserIsDeactivated}</>
                                 )}
                             </td>
                             <td className="user-table-cell">
@@ -107,7 +108,7 @@ const Admin = () => {
                                                 handleToggleUser(item.id, item.enabled)
                                             }
                                     >
-                                        DISABLE
+                                        {LANGUAGES.pl.Deactivate}
                                     </Button>
                                 ) : (
                                     <Button
@@ -116,7 +117,7 @@ const Admin = () => {
                                             handleToggleUser(item.id, item.enabled)
                                         }
                                     >
-                                        ENABLE!
+                                        {LANGUAGES.pl.Activate}
                                     </Button>
                                 )}
                             </td>
@@ -129,7 +130,7 @@ const Admin = () => {
             <div className="button-container">
             <Link to="/my-account">
                 <Button className='back-btn' variant='secondary' size='lg'>
-                    back to My account
+                    {LANGUAGES.pl.GetBackTPrevView}
                 </Button>
             </Link>
             </div>

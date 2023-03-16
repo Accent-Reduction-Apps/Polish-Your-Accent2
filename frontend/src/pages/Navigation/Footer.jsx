@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {FaFacebook, FaLinkedin, FaTwitter} from 'react-icons/fa';
 import '../../styles/Footer.css';
 import Authservice from "../../security/auth/authservice";
+import {LANGUAGES} from "../../resources/languages";
 
 const Footer = () => {
     const [time, setTime] = useState(new Date());
@@ -19,7 +20,7 @@ const Footer = () => {
             fetch('http://localhost:8080/actuator/health')
                 .then(response => response.json())
                 .then(data => {
-                    setServerStatus(data.status === 'UP' ? ' Server OK' : ' Server down');
+                    setServerStatus(data.status === 'UP' ? LANGUAGES.pl.ServerUp : LANGUAGES.pl.ServerDown);
                 })
                 .catch(error => {
                     setServerStatus(' Server down');
@@ -35,10 +36,10 @@ const Footer = () => {
         minute: '2-digit',
         hour12: false
     };
-    const formattedTime = time.toLocaleDateString(undefined, options);
+    const formattedTime = time.toLocaleDateString('pl-PL', options);
 
-    const noauthinfo = 'not signed in...  ';
-    let authinfo = 'signed in:';
+    const noauthinfo = LANGUAGES.pl.NotSignedIn;
+    let authinfo = LANGUAGES.pl.SignedIn;
     let authuser = Authservice.getCurrentUser();
     return (<footer className='footer'>
             <span style={{color: 'khaki'}}>
