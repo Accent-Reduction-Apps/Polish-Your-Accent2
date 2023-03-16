@@ -62,7 +62,7 @@ export const LANGUAGES = {
             "UserNotRegisteredMsg" : "Wystąpił błąd",
             "GenericErrorTitle" : "Błąd",
             "GenericErrorMsg" : "Coś poszło nie tak",
-            "InvalidPassword" : "hasło musi posiadać więcej niż 6 znaków i nie mniej niż 40"
+            "InvalidPassword" : "Hasło musi posiadać więcej niż 6 znaków i nie mniej niż 40"
         }
     },
 
