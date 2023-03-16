@@ -174,30 +174,37 @@ export default class Register extends Component {
                                     />
                                 </div>
 
-
+                                {this.state.message && !this.state.successful ? (
+                                    <div className="form-group">
+                                        <div
+                                            className="alert alert-danger"
+                                            role="alert"
+                                        >
+                                            {"Error: Username is already taken!"}
+                                        </div>
+                                    </div>
+                                ) : (<div></div>)
+                                }
 
                                 <div className="form-group login-btn-label text-center">
                                     <button className="btn btn-login btn-block">Sign Up</button>
                                 </div>
                             </div>
                         )}
-                        {this.state.message && (
+
+                        {this.state.message && this.state.successful ? (
                             <div className="form-group">
                                 <div
-                                    className={
-                                        this.state.successful
-                                            ? "alert alert-success"
-                                            : "alert alert-danger"
-                                    }
+                                    className="alert alert-success"
                                     role="alert"
                                 >
-                                    {this.state.message}
+                                    {"User registered successfully!"}
                                 </div>
                             </div>
-                        )}
+                        ) : (<div></div>)}
 
                         <CheckButton
-                            style={{ display: "none" }}
+                            style={{display: "none"}}
                             ref={c => {
                                 this.checkBtn = c;
                             }}
