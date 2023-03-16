@@ -17,7 +17,7 @@ const fetchData = async (id) => {
 
         return await response.json();
     } catch (e) {
-        throw new Error(`An error occurred: ${e.message}`);
+        throw new Error(`${LANGUAGES.pl.Error} ${e.message}`);
     }
 };
 
@@ -59,7 +59,7 @@ const GetLessonById = (props) => {
             }
             window.location.href = '/lessons';
         } catch (e) {
-            setError(`An error occurred: ${e.message}`);
+            setError(`${LANGUAGES.pl.Error}: ${e.message}`);
         }
     };
 

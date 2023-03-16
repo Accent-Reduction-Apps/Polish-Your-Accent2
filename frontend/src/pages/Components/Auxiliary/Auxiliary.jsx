@@ -73,7 +73,7 @@ const OpenAIChat = () => {
             setConversation([...conversation, { question: inputText, answer: completionText }]);
         } catch (error) {
             console.error(error);
-            setError('A GPT chat error occurred. Please try again.');
+            setError(LANGUAGES.ErrorsMessages.ChatGPT);
         }
 
         setInputText('');

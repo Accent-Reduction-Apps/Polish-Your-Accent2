@@ -43,5 +43,11 @@ export const LANGUAGES = {
         "Activate" : "Aktywuj",
         "Deactivate" : "Dezaktywuj",
         "GetBackTPrevView" : "Wróć",
+    },
+    'ErrorsMessages' : {
+        'ChatGPT' : "Brak odpowiedzi Chatu, spróbuj ponownie póżniej",
+        "failedToActivateUser" : "Nie udało się aktywować użytkownika",
+        "failedToDeactivateUser" : "Nie udało się deaktywować użytkownika",
+
     }
 }
