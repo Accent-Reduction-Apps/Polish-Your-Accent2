@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useLocation} from 'react-router-dom';
-import {Button} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import '../../../styles/GetLessons.css';
 import authHeader from '../../../security/auth/auth-header';
 import Authservice from "../../../security/auth/authservice";
@@ -56,7 +56,7 @@ const GetLessonById = (props) => {
             if (!response.ok) {
                 throw new Error(response.statusText);
             }
-            window.location.href = '/demo';
+            window.location.href = '/lessons';
         } catch (e) {
             setError(`An error occurred: ${e.message}`);
         }
@@ -84,13 +84,13 @@ const GetLessonById = (props) => {
                         Press to complete the lesson
                     </Button>
                 </div>
-                <div className="mr-8 ">
-                    <Link to="/demo">
-                        <Button className="btn-back-to-list">Back to list</Button>
+                <div className="mr-8 btn-back-to-list">
+                    <Link to="/lessons">
+                        <Button variant="secondary">Back to list</Button>
                     </Link>
                 </div>
             </div>
-            <br/>
+            <br />
             <br />
         </div>
     );

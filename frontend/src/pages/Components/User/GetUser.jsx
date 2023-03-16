@@ -25,7 +25,7 @@ export default function GetUser() {
     const AdminButton = (user && user.roles && user.roles.includes('ADMIN'))
         ? (
             <div>
-                <Link to="/admn">
+                <Link to="/admin">
                     <Button className='form-button3' size='lg'>
                         Manage access
                     </Button>
@@ -110,7 +110,6 @@ export default function GetUser() {
             .then(state => setState(state))
         //TODO Add event handle and error handle
     }
-
     let deleteUserButton = () => {
         fetch(`http://localhost:8080/users/${userid}`, {
             method: 'DELETE',
