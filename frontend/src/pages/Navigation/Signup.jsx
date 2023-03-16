@@ -46,6 +46,7 @@ const vpassword = value => {
     }
 };
 
+
 export default class Register extends Component {
     constructor(props) {
         super(props);
@@ -88,6 +89,7 @@ export default class Register extends Component {
             message: "",
             successful: false
         });
+
 
         this.form.validateAll();
 
@@ -162,6 +164,7 @@ export default class Register extends Component {
                                     />
                                 </div>
 
+
                                 <div className="form-group">
                                     <label htmlFor="password">Password</label>
                                     <Input
@@ -174,28 +177,47 @@ export default class Register extends Component {
                                     />
                                 </div>
 
+                                {this.state.message && !this.state.successful ? (
+                                    <div className="form-group">
+                                        <div
+                                            className="alert alert-danger"
+                                            role="alert"
+                                        >
+                                            {this.state.message}
+                                        </div>
+                                    </div>
+                                ) : (<div></div>)
+                                }
+
                                 <div className="form-group login-btn-label text-center">
                                     <button className="btn btn-login btn-block">Sign Up</button>
                                 </div>
                             </div>
                         )}
 
-                        {this.state.message && (
+                        {this.state.message && this.state.successful ? (
                             <div className="form-group">
                                 <div
                                     className={
                                         this.state.successful
                                             ? "alert alert-success"
-                                            : "alert alert-danger"
+                                            : ""
                                     }
-                                    role="alert"
+                                    role={
+                                        this.state.successful
+                                            ? "alert"
+                                            : ""
+                                    }
                                 >
+                                    {}
                                     {this.state.message}
                                 </div>
                             </div>
-                        )}
+                        ) : (<div></div>)}
+
+
                         <CheckButton
-                            style={{ display: "none" }}
+                            style={{display: "none"}}
                             ref={c => {
                                 this.checkBtn = c;
                             }}
