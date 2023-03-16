@@ -57,8 +57,12 @@ const Layout = ({children}) => {
     return (
         <Container className="main-nav" fluid key={isAuthorized}>
             <Navbar className='navi' expand='lg' variant='dark'>
-                <Navbar.Brand className='nav-brand' href='/'>
+
+                <Navbar.Brand className='nav-brand' href='/about'>
                     <Stack direction='horizontal' gap={3} className='nav-title'>
+                <Navbar.Brand className='navbrand' href='/about'>
+                    <Stack direction='horizontal' gap={3} className='navtitle'>
+                    
                         <span className='me-1'/>
                         <img
                             src={smallLogo}
