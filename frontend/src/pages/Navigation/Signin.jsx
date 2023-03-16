@@ -117,7 +117,23 @@ const Signin = () => {
                         />
                     </div>
 
-                    {message && (
+                    {message && (message === "Bad credentials") && (
+                        <div className="form-group">
+                            <div className="alert alert-danger" role="alert">
+                                {"Wprowadzone dane są nieprawidłowe"} //TODO DO PODMIANY
+                            </div>
+                        </div>
+                    )}
+
+                    {message && (message === "User account is locked") && (
+                        <div className="form-group">
+                            <div className="alert alert-danger" role="alert">
+                                {"Konto użytkownika jest zablokowane"} //TODO DO PODMIANY
+                            </div>
+                        </div>
+                    )}
+
+                    {message && (message !== "Bad credentials" && message !== "User account is locked") && (
                         <div className="form-group">
                             <div className="alert alert-danger" role="alert">
                                 {message}
