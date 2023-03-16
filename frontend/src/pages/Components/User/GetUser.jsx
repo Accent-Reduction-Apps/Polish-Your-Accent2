@@ -32,15 +32,7 @@ export default function GetUser() {
                 </Link>
             </div>
         )
-        : (
-            <div>
-                <p>
-                    Beware, and make no changes unless thou art sure.<br/>
-                    Hasty actions bring regret and sorrow.<br/>
-                    Consider well before thou dost alter aught, and success shall be thy reward.
-                </p>
-            </div>
-        );
+        : (<div></div>);
 
     const onSubmit = (data) => {
         setUsers(data);
