@@ -60,36 +60,37 @@ const Layout = ({children}) => {
 
                 <Navbar.Brand className='nav-brand' href='/about'>
                     <Stack direction='horizontal' gap={3} className='nav-title'>
-                <Navbar.Brand className='navbrand' href='/about'>
-                    <Stack direction='horizontal' gap={3} className='navtitle'>
-                    
-                        <span className='me-1'/>
-                        <img
-                            src={smallLogo}
-                            width='37'
-                            height='47'
-                            className="d-inline-block border border-4 rounded"
-                            alt="logo"
-                        />
-                        POLISH YOUR ACCENT
+                        <Navbar.Brand className='navbrand' href='/about'>
+                            <Stack direction='horizontal' gap={3} className='navtitle'>
+
+                                <span className='me-1'/>
+                                <img
+                                    src={smallLogo}
+                                    width='37'
+                                    height='47'
+                                    className="d-inline-block border border-4 rounded"
+                                    alt="logo"
+                                />
+                                POLISH YOUR ACCENT
+                            </Stack>
+                        </Navbar.Brand>
+                        <Navbar.Toggle aria-controls='navbar-nav light'/>
+                        <Navbar.Collapse id='navbar-nav'>
+                            <Nav className='mr-auto'>
+                                <Nav.Link as={Link} to='/about'>
+                                    <Button variant='outline-warning'>About</Button>
+                                </Nav.Link>
+                                <Nav.Link as={Link} to='/teaminfo'>
+                                    <Button variant='outline-warning'>Team</Button>
+                                </Nav.Link>
+                                <Nav.Link as={Link} to='/auxiliary'>
+                                    <Button variant='outline-warning'>Auxiliary</Button>
+                                </Nav.Link>
+                                {extraButtons}
+                            </Nav>
+                        </Navbar.Collapse>
                     </Stack>
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls='navbar-nav light'/>
-                <Navbar.Collapse id='navbar-nav'>
-                    <Nav className='mr-auto'>
-                        <Nav.Link as={Link} to='/about'>
-                            <Button variant='outline-warning'>About</Button>
-                        </Nav.Link>
-                        <Nav.Link as={Link} to='/teaminfo'>
-                            <Button variant='outline-warning'>Team</Button>
-                        </Nav.Link>
-                        <Nav.Link as={Link} to='/auxiliary'>
-                            <Button variant='outline-warning'>Auxiliary</Button>
-                        </Nav.Link>
-                        {extraButtons}
-                    </Nav>
-
-                </Navbar.Collapse>
             </Navbar>
             {children}
             <Outlet className='bg-warning p-3'/>
