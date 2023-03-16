@@ -125,7 +125,6 @@ const Signin = () => {
                                 <span className="spinner-border spinner-border-sm"></span>
                             )}
                             Login
-                            {/*<span>Login</span>*/}
                         </button>
                     </div>
 
