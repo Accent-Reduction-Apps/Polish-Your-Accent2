@@ -174,27 +174,27 @@ export default class Register extends Component {
                                     />
                                 </div>
 
-                                {this.state.message && (
-                                    <div className="form-group">
-                                        <div
-                                            className={
-                                                this.state.successful
-                                                    ? "alert alert-success"
-                                                    : "alert alert-danger"
-                                            }
-                                            role="alert"
-                                        >
-                                            {this.state.message}
-                                        </div>
-                                    </div>
-                                )}
+
 
                                 <div className="form-group login-btn-label text-center">
                                     <button className="btn btn-login btn-block">Sign Up</button>
                                 </div>
                             </div>
                         )}
-
+                        {this.state.message && (
+                            <div className="form-group">
+                                <div
+                                    className={
+                                        this.state.successful
+                                            ? "alert alert-success"
+                                            : "alert alert-danger"
+                                    }
+                                    role="alert"
+                                >
+                                    {this.state.message}
+                                </div>
+                            </div>
+                        )}
 
                         <CheckButton
                             style={{ display: "none" }}
