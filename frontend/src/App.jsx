@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {AuthorizationContext} from "./auxiliary/AuthorizationContext";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Home from './pages/Components/Landing/Home';
 import Layout from './pages/Navigation/Layout';
 import About from './pages/Components/About/About';
 import TeamSlotherin from './pages/Components/About/TeamSlotherin';
@@ -29,7 +28,7 @@ export default function App() {
         <Router>
             <Routes>
                 <Route path='/' element={<Layout/>}>
-                    <Route index element={<Home/>}/>
+                    <Route index element={<About/>}/>
                     <Route path='about' element={<About/>}/>
                     <Route path='teaminfo' element={<TeamSlotherin/>}/>
                     <Route path='registration' element={<RegisterHere/>}/>

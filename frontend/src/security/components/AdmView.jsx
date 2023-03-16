@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import {Button} from 'react-bootstrap';
 import '../../styles/AdmView.css';
 import authHeader from '../../security/auth/auth-header';
 import AdmnService from './AdmnService';
@@ -65,19 +65,19 @@ const Admin = () => {
 
     return (
         <>
-            <div className='button-container'><h3>MANAGE ACCESS</h3></div>
-        <div className="centered-container">
-            <div className="bg-warning p-3">
-                <table className="user-table">
-                    <thead>
-                    <tr>
-                        <th className="user-table-header"></th>
-                        <th className="user-table-header">
-                            <span> USER</span>
-                        </th>
-                        <th className="user-table-header">
-                            <span> EMAIL</span>
-                        </th>
+            <div className='title-site'><h3>MANAGE ACCESS</h3></div>
+            <div className="centered-container">
+                <div className="admin-table-background p-3">
+                    <table className="user-table">
+                        <thead>
+                        <tr>
+                            <th className="user-table-header"></th>
+                            <th className="user-table-header">
+                                <span> USER</span>
+                            </th>
+                            <th className="user-table-header">
+                                <span> EMAIL</span>
+                            </th>
                         <th className="user-table-header">
                             <span> STATUS</span>
                         </th>
@@ -101,11 +101,11 @@ const Admin = () => {
                             </td>
                             <td className="user-table-cell">
                                 {item.enabled ? (
-                                    <Button
-                                        variant="danger"
-                                        onClick={() =>
-                                            handleToggleUser(item.id, item.enabled)
-                                        }
+                                    <Button className="disable-btn"
+                                            variant="danger"
+                                            onClick={() =>
+                                                handleToggleUser(item.id, item.enabled)
+                                            }
                                     >
                                         DISABLE
                                     </Button>
@@ -128,7 +128,7 @@ const Admin = () => {
         </div>
             <div className="button-container">
             <Link to="/my-account">
-                <Button className='form-button3' variant='secondary' size='lg'>
+                <Button className='back-btn' variant='secondary' size='lg'>
                     back to My account
                 </Button>
             </Link>

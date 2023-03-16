@@ -122,7 +122,7 @@ export default class Register extends Component {
 
     render() {
         return (
-            <div className=" bg-site-log col-md-12">
+            <div className=" bg-site-log p-3">
                 <div className="card card-container">
                     <img
                         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -174,8 +174,8 @@ export default class Register extends Component {
                                     />
                                 </div>
 
-                                <div className="form-group text-center">
-                                    <button className="btn btn-primary btn-block">Sign Up</button>
+                                <div className="form-group login-btn-label text-center">
+                                    <button className="btn btn-login btn-block">Sign Up</button>
                                 </div>
                             </div>
                         )}

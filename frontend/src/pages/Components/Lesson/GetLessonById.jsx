@@ -79,8 +79,8 @@ const GetLessonById = (props) => {
         <div className="p-3">
             {lessonParsed()}
             <div className="btn-label d-flex justify-content-center">
-                <div className="ml-8 btn-complete-lesson">
-                    <Button variant="success" onClick={markLessonComplete}>
+                <div className="ml-8 ">
+                    <Button className="btn-complete-lesson" variant={"success"} onClick={markLessonComplete}>
                         Press to complete the lesson
                     </Button>
                 </div>

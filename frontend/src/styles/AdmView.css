@@ -1,14 +1,52 @@
-.centered-container {
-    color: black;
+.title-site {
+    color: maroon;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+}
+
+.centered-container {
+    padding: 2%;
+    color: maroon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 10%;
 }
 
 .button-container {
-    color: darkred;
+    color: maroon;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    top: 60px;
+
+}
+
+.disable-btn {
+    background-color: maroon;
+}
+
+.back-btn {
+    position: relative;
+    border: none;
+    background-color: maroon;
+    color: white;
+    padding: 15px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 300px;
+    margin: 10px;
+}
+
+.admin-table-background {
+    width: 50%;
+    min-width: 300px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
 }
