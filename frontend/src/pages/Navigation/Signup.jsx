@@ -41,7 +41,7 @@ const vpassword = value => {
     if (value.length < 6 || value.length > 40) {
         return (
             <div className="alert alert-danger" role="alert">
-                The password must be between 6 and 40 characters.
+                {LANGUAGES.pl.RegistrationAlerts.InvalidPassword}
             </div>
         );
     }
@@ -176,7 +176,7 @@ export default class Register extends Component {
                                 </div>
 
                                 <div className="form-group login-btn-label text-center">
-                                    <button className="btn btn-login btn-block">{LANGUAGES.pl.LogIn}</button>
+                                    <button className="btn btn-login btn-block">{LANGUAGES.pl.Register}</button>
                                 </div>
                             </div>
                         )}

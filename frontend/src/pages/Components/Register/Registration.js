@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 
 import '../../../styles/Registration.css';
 import RegistrationAlert from "./RegistrationAlert";
+import {LANGUAGES} from "../../../resources/languages";
 
 class Registration extends Component {
     constructor(props) {
@@ -41,14 +42,14 @@ class Registration extends Component {
             })
         }).then(function (response) {
             if (response.status === 200) {
-                this.showRegistrationAlert("success", "User registered!", "You can now log in using your credentials.")
+                this.showRegistrationAlert("success", LANGUAGES.pl.RegistrationAlerts.UserRegisteredTitle, LANGUAGES.pl.RegistrationAlerts.UserAlreadyExistsMsg)
             } else if (response.status === 422) {
-                this.showRegistrationAlert("danger", "User already exists", "Please choose a different name.");
+                this.showRegistrationAlert("danger", LANGUAGES.pl.RegistrationAlerts.UserAlreadyExistsTitle, LANGUAGES.pl.RegistrationAlerts.UserAlreadyExistsMsg);
             } else {
-                this.showRegistrationAlert("danger", "User not registered!", "Something went wrong.");
+                this.showRegistrationAlert("danger", LANGUAGES.pl.RegistrationAlerts.UserNotRegisteredTitle, LANGUAGES.pl.RegistrationAlerts.UserRegisteredMsg);
             }
         }.bind(this)).catch(function (error) {
-            this.showRegistrationAlert("danger", "Error", "Something went wrong.");
+            this.showRegistrationAlert("danger", LANGUAGES.pl.RegistrationAlerts.GenericErrorTitle, LANGUAGES.pl.RegistrationAlerts.GenericErrorMsg);
         }.bind(this));
     }
     
@@ -77,7 +78,7 @@ class Registration extends Component {
                             </Form.Label>
                             <Form.Control type="password" name="password"/>
                         </Form.Group>
-                        <Button type="submit">Register</Button>
+                        <Button type="submit">{LANGUAGES.pl.Register}</Button>
                     </Form>
                 </div>
                 <RegistrationAlert ref={this.registrationAlert}/>

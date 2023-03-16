@@ -43,6 +43,7 @@ export const LANGUAGES = {
         "Activate" : "Aktywuj",
         "Deactivate" : "Dezaktywuj",
         "GetBackTPrevView" : "Wróć",
+        "Register" : "Załóż konto",
         "ErrorsMessages" : {
             "ChatGPT" : "Brak odpowiedzi Chatu, spróbuj ponownie póżniej",
             "failedToActivateUser" : "Nie udało się aktywować użytkownika",
@@ -51,6 +52,17 @@ export const LANGUAGES = {
         "ValidationMessages" : {
             "FieldRequired" : "To pole jest wymagane",
             "InvalidMail" : "Niepoprawny mail",
+        },
+        "RegistrationAlerts" : {
+            "UserRegisteredTitle" : "Założono nowe konto",
+            "UserRegisteredMsg" : "Możesz się zalogować używając podanych danych",
+            "UserAlreadyExistsTitle" : "Użytkownik już istnieje",
+            "UserAlreadyExistsMsg" : "Wybierz inną nazwę użytkownika",
+            "UserNotRegisteredTitle" : "Nie założono nowego konta",
+            "UserNotRegisteredMsg" : "Wystąpił błąd",
+            "GenericErrorTitle" : "Błąd",
+            "GenericErrorMsg" : "Coś poszło nie tak",
+            "InvalidPassword" : "hasło musi posiadać więcej niż 6 znaków i nie mniej niż 40"
         }
     },
 
