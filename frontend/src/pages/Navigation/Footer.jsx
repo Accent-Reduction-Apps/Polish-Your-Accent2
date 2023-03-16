@@ -36,7 +36,7 @@ const Footer = () => {
         minute: '2-digit',
         hour12: false
     };
-    const formattedTime = time.toLocaleDateString(undefined, options);
+    const formattedTime = time.toLocaleDateString('pl-PL', options);
 
     const noauthinfo = LANGUAGES.pl.NotSignedIn;
     let authinfo = LANGUAGES.pl.SignedIn;
